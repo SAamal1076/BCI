@@ -1,0 +1,44 @@
+median RMS of the edge error in the window (uV); response RMS in the same sub-band for scale
+
+dry-like: sub-band 1 (6-90 Hz)
+variant       A     B     C
+window_s                   
+0.2       19.37  4.00  0.84
+0.4       13.70  3.22  0.78
+1.0        9.49  2.36  0.72
+2.0        6.69  1.62  0.98
+  response RMS: {0.2: 1.52, 0.4: 1.49, 1.0: 1.49, 2.0: 1.46}
+dry-like: sub-band 2 (14-90 Hz)
+variant       A     B     C
+window_s                   
+0.2       12.43  2.99  0.72
+0.4        9.33  2.46  0.68
+1.0        6.01  1.65  0.65
+2.0        4.13  1.21  0.78
+  response RMS: {0.2: 0.78, 0.4: 0.76, 1.0: 0.76, 2.0: 0.76}
+
+wet-like: sub-band 1 (6-90 Hz)
+variant      A     B     C
+window_s                  
+0.2       5.51  3.89  0.74
+0.4       4.27  2.97  0.70
+1.0       2.67  1.91  0.64
+2.0       1.92  1.44  0.88
+  response RMS: {0.2: 1.49, 0.4: 1.49, 1.0: 1.48, 2.0: 1.46}
+wet-like: sub-band 2 (14-90 Hz)
+variant      A     B     C
+window_s                  
+0.2       3.64  2.87  0.63
+0.4       2.67  2.14  0.61
+1.0       1.64  1.41  0.58
+2.0       1.22  1.07  0.70
+  response RMS: {0.2: 0.76, 0.4: 0.76, 1.0: 0.76, 2.0: 0.76}
+
+first and last 0.1 s of a 1 s window, sub-band 1:
+scenario variant  error_rms_first_0.1s_uv  error_rms_last_0.1s_uv  mains_left_uv
+dry-like       A                    17.83                   20.00          47.38
+dry-like       B                     0.99                    5.66           0.00
+dry-like       C                     0.90                    0.65           0.00
+wet-like       A                     4.68                    4.31           8.49
+wet-like       B                     0.86                    4.14           0.00
+wet-like       C                     0.77                    0.61           0.00

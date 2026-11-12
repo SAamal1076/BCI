@@ -94,11 +94,28 @@ Open points, to be decided by the author and dated here before the milestone con
   factor (before M4).
 - **Filters of the decoding pipeline** must pass an edge-transient test on synthetic epochs before use (before M1).
 
+## Fixed before M1 (approved 12 Nov 2026, before any accuracy was computed)
+
+Details and sources: `docs/milestones/M1_plan.md`.
+
+- **H1, final wording.** For the same person, method and window length, accuracy is lower with the dry
+  headband than with the wet one. Primary cases: FBCCA with a-priori weights and ensemble TRCA, at 1 s and at
+  2 s. The gap as a function of window length and the "time cost of dry electrodes" are reported without a
+  directional claim. The test (crossover analysis, subjects) is fixed before M2.
+- **Baselines.** CCA, FBCCA, TRCA and ensemble TRCA; 5 harmonics; reference filter bank (Chebyshev type I,
+  sub-bands from 6, 14, 22, 30, 38 Hz to 90 Hz); a-priori weights `n^(-1.25) + 0.25` with 5 sub-bands. Nothing
+  is tuned on these data. Results with the weights published for this dataset are reported separately.
+- **Project pipeline from M2 on (variant B):** samples from the start of the epoch to the end of the window,
+  least-squares mains removal on that segment, zero-phase filter bank, then the window is kept. No sample
+  after the end of the window is used.
+- **ITR:** `T_sel` = window + 0.5 s gaze shift. ITR is computed per subject and averaged; it is set to 0 when
+  accuracy is at or below chance.
+- **Reproduction gate:** G1 to G5 of the M1 plan (0.05 in accuracy on the wearable data, 10 % on the BETA peak ITR).
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M1 | Filters, filter-bank and method parameters; tolerance of the reproduction gate; gaze-shift time; wording of H1. |
 | M2 | Use of the lockbox; cross-subject models; calibration curve; threshold of H2; family for the Holm correction. |
 | M3 | Network, test-time adaptation settings, compute budget, seeds. |
 | M4 | Time-on-task and impedance analyses (H5). |

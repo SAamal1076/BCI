@@ -1,8 +1,9 @@
 # M1 plan: reproduce the standard methods and their published results
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** Written from the two
-dataset papers and from the public reference implementation only; no decoding has been done on any data.
-Anything done differently will be listed under "Deviations" in `M1_baselines.md`.*
+*Proposed on 12 Nov 2026 and **approved by the author the same day**, as written, before anything was run. The
+approval includes the proposed wording of H1 and the gaze-shift time of 0.5 s. Written from the two dataset
+papers and from the public reference implementation only. Anything done differently is listed under
+"Deviations" in `M1_baselines.md`.*
 
 ## Purpose
 

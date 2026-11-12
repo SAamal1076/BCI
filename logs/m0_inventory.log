@@ -1,0 +1,85 @@
+files: 106, total 973.9 MB, MD5 different from figshare: 0
+subjects: 102; shapes: ['8x710x2x10x12']; dtypes: ['double']
+non-finite values: 0; amplitude range: -375000.0 to 357836.5
+value step: 0.04470349 to 0.04470349; share of sample-to-sample differences on that grid: 1.0000 to 1.0000
+trials: 24480; exact duplicates: 0 groups
+median over subjects of the per-subject medians, and totals of the flags (of 12240 trials per index):
+            ptp_bp  rms_bp  line50  hf_rms  lf_rms     dc_abs  artefact_trials  flat_channel_trials  saturated_trials
+eeg_index                                                                                                            
+1          111.707  14.502  66.991   5.856  54.593  70449.265             4289                    0                 1
+2           90.123  12.616  12.036   4.816  28.240   8603.451             1574                    0                 0
+impedance (kOhm):
+                                  0        1
+impedance_index                1.00     2.00
+n_values                    8160.00  8160.00
+mean_all_values              261.67    19.63
+median_all_values            146.50    15.45
+min                            4.71     1.00
+max                        19904.99   119.58
+mean_of_subject_means        261.67    19.63
+sd_of_subject_means          290.28    12.15
+sem_of_subject_means          28.74     1.20
+median_of_subject_medians    139.10    16.80
+subjects_mean_below_40         5.00    94.00
+subjects_mean_below_500       92.00   102.00
+share_values_above_1000        0.03     0.00
+Subjects_Information columns: ['subject', 'Gender', 'Age', 'Handedness', 'Dry electrode headband comfort', 'Dry electrode wearing time when pain occurs(/h)', 'Wet electrode headband comfort', 'Wet electrode wearing time when pain occurs(/h)', 'Only consider comfort, headband preference', 'Comprehensive consideration of comfort and convenience (needs assistance from others, conductive paste, shampoo, etc.)headband preference', 'Headband to wear first']
+      group variable      level  value
+        all        n            102.00
+        all    first        Dry  53.00
+        all    first        Wet  49.00
+        all      sex     Female  38.00
+        all      sex       Male  64.00
+        all      age       mean  30.03
+        all      age         sd   8.29
+        all      age        min   8.00
+        all      age     median  31.00
+        all      age        max  52.00
+        all      age n_under_18   7.00
+development        n             68.00
+development    first        Dry  35.00
+development    first        Wet  33.00
+development      sex     Female  26.00
+development      sex       Male  42.00
+development      age       mean  29.91
+development      age         sd   8.47
+development      age        min   8.00
+development      age     median  30.50
+development      age        max  52.00
+development      age n_under_18   4.00
+    lockbox        n             34.00
+    lockbox    first        Dry  18.00
+    lockbox    first        Wet  16.00
+    lockbox      sex     Female  12.00
+    lockbox      sex       Male  22.00
+    lockbox      age       mean  30.26
+    lockbox      age         sd   8.04
+    lockbox      age        min   8.00
+    lockbox      age     median  32.00
+    lockbox      age        max  44.00
+    lockbox      age n_under_18   3.00
+dry/wet evidence (E1: value = mean kOhm; E2: value = number of subjects, last column = median ratio index2/index1; E3: value = rho, reference = p):
+evidence                                                 item    value  reference  relative_difference
+      E1    impedance index 1 mean vs paper dry (261.67 kOhm) 261.6749   261.6700               0.0000
+      E1     impedance index 1 mean vs paper wet (19.63 kOhm) 261.6749    19.6300              12.3304
+      E1    impedance index 2 mean vs paper dry (261.67 kOhm)  19.6317   261.6700              -0.9250
+      E1     impedance index 2 mean vs paper wet (19.63 kOhm)  19.6317    19.6300               0.0001
+      E2 ptp_bp: subjects with EEG index 2 > index 1 (of 102)  25.0000   102.0000               0.8203
+      E2 rms_bp: subjects with EEG index 2 > index 1 (of 102)  34.0000   102.0000               0.8777
+      E2 line50: subjects with EEG index 2 > index 1 (of 102)  13.0000   102.0000               0.2088
+      E2 hf_rms: subjects with EEG index 2 > index 1 (of 102)  24.0000   102.0000               0.8040
+      E2 lf_rms: subjects with EEG index 2 > index 1 (of 102)  26.0000   102.0000               0.6572
+      E2 dc_abs: subjects with EEG index 2 > index 1 (of 102)   2.0000   102.0000               0.1162
+      E3  Spearman impedance index 1 vs line50 of EEG index 1   0.7446     0.0000                  NaN
+      E3  Spearman impedance index 1 vs line50 of EEG index 2   0.1226     0.2195                  NaN
+      E3  Spearman impedance index 2 vs line50 of EEG index 1   0.3689     0.0001                  NaN
+      E3  Spearman impedance index 2 vs line50 of EEG index 2   0.1038     0.2991                  NaN
+      E3  Spearman impedance index 1 vs hf_rms of EEG index 1   0.4826     0.0000                  NaN
+      E3  Spearman impedance index 1 vs hf_rms of EEG index 2   0.1353     0.1752                  NaN
+      E3  Spearman impedance index 2 vs hf_rms of EEG index 1   0.2527     0.0104                  NaN
+      E3  Spearman impedance index 2 vs hf_rms of EEG index 2  -0.0180     0.8576                  NaN
+criterion  passed                                                                                                detail
+       C1    True                                              102 files, shapes ['8x710x2x10x12'], 0 non-finite values
+      C2a    True mean impedance: index 1 = 261.67 kOhm (+0.0% vs paper dry), index 2 = 19.63 kOhm (+0.0% vs paper wet)
+      C2b    True                                                           headband worn first: {'Dry': 53, 'Wet': 49}
+done in 48 s

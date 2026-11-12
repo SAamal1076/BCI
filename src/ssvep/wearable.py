@@ -32,6 +32,12 @@ TARGET_FREQS = np.array([9.25, 11.25, 13.25, 9.75, 11.75, 13.75,
                          10.25, 12.25, 14.25, 10.75, 12.75, 14.75])
 TARGET_PHASES = np.pi * np.array([0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 1.0, 1.0, 1.0, 1.5, 1.5, 1.5])
 
+# Electrode type along the first axis of load_subject(). Settled in M0 (audit, section 3): position 1 of the
+# files is the DRY headband and position 2 the WET one, in the EEG files and in Impedance.mat. This is the
+# opposite of the label printed in the dataset readme and paper ("1: wet, 2: dry").
+DRY, WET = 0, 1
+ELECTRODE_NAMES = ("dry", "wet")
+
 # Subjects. The lockbox rule was fixed before any data was opened (docs/analysis_plan.md).
 SUBJECTS = tuple(range(1, 103))
 LOCKBOX = tuple(s for s in SUBJECTS if s % 3 == 0)        # S003, S006, ..., S102 (34)

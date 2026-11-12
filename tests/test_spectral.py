@@ -40,7 +40,7 @@ def test_offset_and_drift_bias_the_raw_estimate_and_preprocessing_removes_the_bi
     raw = sp.amplitude(x[WIN], 9.25, FS)[0]
     clean = sp.amplitude(sp.preprocess_descriptive(x, FS)[WIN], 9.25, FS)[0]
     assert abs(raw - 2.0) > 1.0          # raw: wrong by more than 50 %
-    assert abs(clean - 2.0) < 0.05       # after BP3-90+notch: within 2.5 %
+    assert abs(clean - 2.0) < 0.05       # after preprocessing: within 2.5 %
 
 
 def _gain_and_phase_error(f):
@@ -49,22 +49,39 @@ def _gain_and_phase_error(f):
     return abs(c), abs(wrap(sp.sine_phase(c) - 0.3))
 
 
-def test_preprocessing_is_zero_phase_and_flat_at_the_fundamental_and_second_harmonic():
-    for f in (9.25, 11.25, 14.75, 18.5, 22.5, 29.5):          # all f and 2f of the 12 targets lie in 9.25-29.5 Hz
+def test_preprocessing_is_zero_phase_and_flat_from_the_fundamental_to_45_hz():
+    for f in (9.25, 11.25, 14.75, 18.5, 22.5, 29.5, 33.75, 44.25, 45.0):
         gain, phase_error = _gain_and_phase_error(f)
-        assert abs(gain - 1.0) < 0.005 and phase_error < 0.005
+        assert abs(gain - 1.0) < 0.01 and phase_error < 0.01
 
 
-def test_notch_attenuates_higher_harmonics_close_to_50_hz():
-    # Documented limit of BP3-90+notch: harmonics near the mains frequency are attenuated (phase is kept).
-    assert 0.95 < _gain_and_phase_error(45.0)[0] < 0.98       # 4th harmonic of 11.25 Hz: about -4 %
-    assert 0.45 < _gain_and_phase_error(49.0)[0] < 0.55       # 4th harmonic of 12.25 Hz: about -50 %
-    assert _gain_and_phase_error(45.0)[1] < 0.005
+def _mains_case(phase, f_mains=50.03, modulation=0.2):
+    """2 uV response at 14.75 Hz + 67 uV of mains (not exactly 50 Hz, amplitude drifting) + offset + drift."""
+    response = 2.0 * np.sin(2 * np.pi * 14.75 * TE + 0.5)
+    envelope = 1.0 + modulation * (TE - TE.mean()) / (TE[-1] - TE[0]) * 2.0
+    mains = 67.0 * envelope * np.sin(2 * np.pi * f_mains * TE + phase)
+    return response, response + mains + 1000.0 + 40.0 * TE
 
 
-def test_notch_removes_mains_interference():
-    y = sp.preprocess_descriptive(30.0 * np.sin(2 * np.pi * 50.0 * TE + 0.4), FS)[WIN]
-    assert sp.amplitude(y, 50.0, FS)[0] < 0.3          # 30 uV of mains reduced by more than 40 dB
+def test_mains_removal_leaves_no_transient_in_the_response_window():
+    for phase in np.linspace(0, 2 * np.pi, 8, endpoint=False):
+        response, x = _mains_case(phase)
+        y = sp.preprocess_descriptive(x, FS)
+        assert np.abs(y - sp.bandpass(response, FS, 3.0, 90.0))[WIN].max() < 0.1       # uV, of 67 uV of mains
+        c = np.abs(sp.fourier_coef(y[WIN], [9.25, 14.75], FS))
+        assert c[0] < 0.01 and abs(c[1] - 2.0) < 0.01
+
+
+def test_iir_notch_of_the_first_plan_leaves_an_edge_transient():
+    # Reason for deviation D1: mean removal + band-pass + IIR notch, as first planned.
+    worst_residual, worst_spurious = 0.0, 0.0
+    for phase in np.linspace(0, 2 * np.pi, 8, endpoint=False):
+        response, x = _mains_case(phase)
+        y = sp.notch(sp.bandpass(x - x.mean(), FS, 3.0, 90.0), FS)
+        worst_residual = max(worst_residual, np.abs(y - sp.bandpass(response, FS, 3.0, 90.0))[WIN].max())
+        worst_spurious = max(worst_spurious, sp.amplitude(y[WIN], 9.25, FS)[0])
+    assert worst_residual > 5.0          # several microvolts left at the end of the response window
+    assert worst_spurious > 0.05         # and a spurious component at a stimulus frequency
 
 
 def test_snr_of_pure_noise_is_about_minus_one_and_a_half_db():

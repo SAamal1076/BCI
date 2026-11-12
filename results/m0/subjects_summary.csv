@@ -1,0 +1,76 @@
+group,variable,level,value
+all,n,,102.0
+all,first,Dry,53.0
+all,first,Wet,49.0
+all,sex,Female,38.0
+all,sex,Male,64.0
+all,handedness,Left,3.0
+all,handedness,Right,99.0
+all,dry_comfort,Comfortable and painless,21.0
+all,dry_comfort,Painful and uncomfortable,20.0
+all,dry_comfort,Painful but acceptable,14.0
+all,dry_comfort,Slightly painful,47.0
+all,wet_comfort,Comfortable and painless,85.0
+all,wet_comfort,Painful but acceptable,3.0
+all,wet_comfort,Slightly painful,14.0
+all,pref_comfort,Dry,6.0
+all,pref_comfort,Either,11.0
+all,pref_comfort,Wet,85.0
+all,pref_overall,Dry,14.0
+all,pref_overall,Either,18.0
+all,pref_overall,Wet,70.0
+all,age,mean,30.03
+all,age,sd,8.29
+all,age,min,8.0
+all,age,median,31.0
+all,age,max,52.0
+all,age,n_under_18,7.0
+development,n,,68.0
+development,first,Dry,35.0
+development,first,Wet,33.0
+development,sex,Female,26.0
+development,sex,Male,42.0
+development,handedness,Left,3.0
+development,handedness,Right,65.0
+development,dry_comfort,Comfortable and painless,16.0
+development,dry_comfort,Painful and uncomfortable,13.0
+development,dry_comfort,Painful but acceptable,11.0
+development,dry_comfort,Slightly painful,28.0
+development,wet_comfort,Comfortable and painless,57.0
+development,wet_comfort,Painful but acceptable,3.0
+development,wet_comfort,Slightly painful,8.0
+development,pref_comfort,Dry,6.0
+development,pref_comfort,Either,7.0
+development,pref_comfort,Wet,55.0
+development,pref_overall,Dry,9.0
+development,pref_overall,Either,12.0
+development,pref_overall,Wet,47.0
+development,age,mean,29.91
+development,age,sd,8.47
+development,age,min,8.0
+development,age,median,30.5
+development,age,max,52.0
+development,age,n_under_18,4.0
+lockbox,n,,34.0
+lockbox,first,Dry,18.0
+lockbox,first,Wet,16.0
+lockbox,sex,Female,12.0
+lockbox,sex,Male,22.0
+lockbox,handedness,Right,34.0
+lockbox,dry_comfort,Comfortable and painless,5.0
+lockbox,dry_comfort,Painful and uncomfortable,7.0
+lockbox,dry_comfort,Painful but acceptable,3.0
+lockbox,dry_comfort,Slightly painful,19.0
+lockbox,wet_comfort,Comfortable and painless,28.0
+lockbox,wet_comfort,Slightly painful,6.0
+lockbox,pref_comfort,Either,4.0
+lockbox,pref_comfort,Wet,30.0
+lockbox,pref_overall,Dry,5.0
+lockbox,pref_overall,Either,6.0
+lockbox,pref_overall,Wet,23.0
+lockbox,age,mean,30.26
+lockbox,age,sd,8.04
+lockbox,age,min,8.0
+lockbox,age,median,32.0
+lockbox,age,max,44.0
+lockbox,age,n_under_18,3.0

@@ -1,0 +1,19 @@
+evidence,item,value,reference,relative_difference
+E1,impedance index 1 mean vs paper dry (261.67 kOhm),261.6748994895723,261.67,1.8723925448993484e-05
+E1,impedance index 1 mean vs paper wet (19.63 kOhm),261.6748994895723,19.63,12.330356571042909
+E1,impedance index 2 mean vs paper dry (261.67 kOhm),19.631696216808823,261.67,-0.9249753650903473
+E1,impedance index 2 mean vs paper wet (19.63 kOhm),19.631696216808823,19.63,8.640941461157681e-05
+E2,ptp_bp: subjects with EEG index 2 > index 1 (of 102),25.0,102.0,0.8202725377758043
+E2,rms_bp: subjects with EEG index 2 > index 1 (of 102),34.0,102.0,0.8776878775012591
+E2,line50: subjects with EEG index 2 > index 1 (of 102),13.0,102.0,0.20878249997526432
+E2,hf_rms: subjects with EEG index 2 > index 1 (of 102),24.0,102.0,0.8040173255545612
+E2,lf_rms: subjects with EEG index 2 > index 1 (of 102),26.0,102.0,0.6572217700550749
+E2,dc_abs: subjects with EEG index 2 > index 1 (of 102),2.0,102.0,0.11623275673802769
+E3,Spearman impedance index 1 vs line50 of EEG index 1,0.744575942460037,2.97283306955327e-19,
+E3,Spearman impedance index 1 vs line50 of EEG index 2,0.12261734454427738,0.2195404604726402,
+E3,Spearman impedance index 2 vs line50 of EEG index 1,0.3688585306274774,0.00013628925444856253,
+E3,Spearman impedance index 2 vs line50 of EEG index 2,0.10381055238590679,0.29912010400437067,
+E3,Spearman impedance index 1 vs hf_rms of EEG index 1,0.4826153089323781,2.794470324604513e-07,
+E3,Spearman impedance index 1 vs hf_rms of EEG index 2,0.13528337413981262,0.1751954509923214,
+E3,Spearman impedance index 2 vs hf_rms of EEG index 1,0.25274948968340577,0.010378982299737409,
+E3,Spearman impedance index 2 vs hf_rms of EEG index 2,-0.01798689292115962,0.8575966596593506,

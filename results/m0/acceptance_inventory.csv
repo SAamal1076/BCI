@@ -1,0 +1,4 @@
+criterion,passed,detail
+C1,True,"102 files, shapes ['8x710x2x10x12'], 0 non-finite values"
+C2a,True,"mean impedance: index 1 = 261.67 kOhm (+0.0% vs paper dry), index 2 = 19.63 kOhm (+0.0% vs paper wet)"
+C2b,True,"headband worn first: {'Dry': 53, 'Wet': 49}"

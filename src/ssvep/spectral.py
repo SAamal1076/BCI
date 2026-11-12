@@ -4,7 +4,8 @@ Why "exact frequency": with a 2 s window the FFT bins are 0.5 Hz apart and the s
 wearable dataset (9.25, 9.75, ...) fall half-way between them. The Fourier coefficient is therefore computed
 directly at the frequency of interest. For a 2 s rectangular window, sinusoids whose frequencies differ by a
 multiple of 0.5 Hz are orthogonal, so a peak at f contributes nothing at f +/- k*0.5 Hz. The mean and slow
-drifts are NOT orthogonal to these half-bin frequencies and must be removed first (preprocess_descriptive).
+drifts are NOT orthogonal to these half-bin frequencies, and neither is mains interference at about
+50 Hz: they must be removed first (preprocess_descriptive).
 """
 from __future__ import annotations
 
@@ -24,14 +25,49 @@ def lowpass(x, fs, cut, order=4, axis=-1):
 
 
 def notch(x, fs, f0=50.0, q=25.0, axis=-1):
+    """Zero-phase IIR notch. NOT used for the analyses: on a 2.84 s epoch with strong mains interference it
+    leaves an edge transient inside the response window (see tests and M0 audit, deviation D1)."""
     b, a = signal.iirnotch(f0, q, fs=fs)
     return signal.filtfilt(b, a, x, axis=axis)
 
 
-def preprocess_descriptive(x, fs, axis=-1):
-    """'BP3-90+notch' of the M0 plan: remove the mean, band-pass 3-90 Hz, notch at 50 Hz. Zero-phase."""
-    x = x - x.mean(axis=axis, keepdims=True)
-    return notch(bandpass(x, fs, 3.0, 90.0, axis=axis), fs, axis=axis)
+def remove_mains(x, fs, f0=50.0, half_width=0.5, step=0.01):
+    """Remove mains interference from each epoch by least squares, along the last axis.
+
+    The linear trend is removed, then a sinusoid with a linearly varying amplitude,
+    (a + b*t)*sin(2*pi*f*t) + (c + d*t)*cos(2*pi*f*t), is fitted and subtracted. f is searched for each
+    series between f0 - half_width and f0 + half_width (largest explained energy), because the mains
+    frequency is not exactly 50 Hz. No filter is involved, so there is no edge transient and no phase shift.
+    Limit: a response component within about 1.5 Hz of f0 (e.g. the 4th harmonic of 12.25 Hz) can be
+    partly removed.
+    """
+    x = signal.detrend(np.asarray(x, dtype=float), axis=-1, type="linear")
+    n = x.shape[-1]
+    t = np.arange(n) / fs
+    tc = (t - t.mean()) / t.std()
+    k = int(round(half_width / step))
+    flat = x.reshape(-1, n)
+    bases, energy = [], []
+    for f in f0 + np.arange(-k, k + 1) * step:
+        s, c = np.sin(2 * np.pi * f * t), np.cos(2 * np.pi * f * t)
+        q, _ = np.linalg.qr(np.column_stack([s, c, tc * s, tc * c]))
+        bases.append(q)
+        energy.append(((flat @ q) ** 2).sum(axis=1))
+    best = np.argmax(np.array(energy), axis=0)
+    out = flat.copy()
+    for i in np.unique(best):
+        rows = best == i
+        out[rows] -= (flat[rows] @ bases[i]) @ bases[i].T
+    return out.reshape(x.shape)
+
+
+def preprocess_descriptive(x, fs):
+    """Preprocessing of the M0 description, along the last axis (a full epoch):
+    remove the linear trend, remove mains by least squares, zero-phase band-pass 3-90 Hz.
+
+    The M0 plan specified an IIR notch at 50 Hz; it was replaced by remove_mains (deviation D1 of the audit).
+    """
+    return bandpass(remove_mains(x, fs), fs, 3.0, 90.0)
 
 
 # ----------------------------------------------------------------------------- Fourier coefficient

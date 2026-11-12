@@ -15,7 +15,7 @@ python -m pytest -q -p no:cacheprovider tests
 echo "M0  label-free inventory, all 102 subjects"
 python scripts/m0_inventory.py --raw "$WEARABLE_DIR" | tee logs/m0_inventory.log
 if [ -d "$BETA_DIR" ]; then
-  python scripts/check_beta_files.py --raw "$BETA_DIR" | tee logs/m0_beta_files.log
+  python scripts/check_beta_files.py --raw "$BETA_DIR"
 fi
 
 echo "M0  timing, spectra and SNR, development subjects only"

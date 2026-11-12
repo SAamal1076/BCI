@@ -1,0 +1,3 @@
+electrode,n_worn_first,snr1_trial_oz_median_worn_first,n_worn_second,snr1_trial_oz_median_worn_second,median_dry_minus_wet_same_people,people_with_dry_below_wet
+dry,35,2.898418859376831,33,3.8777844208556047,-0.031023274127079836,19/35
+wet,33,5.021095044791374,35,2.964210024840988,-0.9739427976882364,24/33

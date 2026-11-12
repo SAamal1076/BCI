@@ -8,6 +8,7 @@ median over subjects of the per-subject medians, and totals of the flags (of 122
 eeg_index                                                                                                            
 1          111.707  14.502  66.991   5.856  54.593  70449.265             4289                    0                 1
 2           90.123  12.616  12.036   4.816  28.240   8603.451             1574                    0                 0
+deviation D1, noise floor at frequencies without stimulus, planned notch / adopted removal: median 1.001, 95th percentile 1.098, max 2.091 (S035, position 1); recordings above 1.05: 14 of 204; Spearman with mains pick-up 0.83
 impedance (kOhm):
                                   0        1
 impedance_index                1.00     2.00
@@ -82,4 +83,4 @@ criterion  passed                                                               
        C1    True                                              102 files, shapes ['8x710x2x10x12'], 0 non-finite values
       C2a    True mean impedance: index 1 = 261.67 kOhm (+0.0% vs paper dry), index 2 = 19.63 kOhm (+0.0% vs paper wet)
       C2b    True                                                           headband worn first: {'Dry': 53, 'Wet': 49}
-done in 48 s
+done in 46 s

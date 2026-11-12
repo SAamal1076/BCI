@@ -1,0 +1,121 @@
+development subjects: 68 (lockbox subjects not loaded)
+
+C4, group spectrum peaks (grand-average Oz waveform, grid 8.25-15.75 Hz):
+electrode  target  target_frequency  peak_frequency  peak_amplitude  second_frequency  second_amplitude  peak_at_target
+      dry       1              9.25            9.25           1.411             11.75             0.339            True
+      dry       2             11.25           11.25           2.078             13.75             0.424            True
+      dry       3             13.25           13.25           1.777             10.25             0.338            True
+      dry       4              9.75            9.75           1.679             12.25             0.435            True
+      dry       5             11.75           11.75           2.075             14.25             0.419            True
+      dry       6             13.75           13.75           1.796             10.75             0.337            True
+      dry       7             10.25           10.25           2.431             12.75             0.391            True
+      dry       8             12.25           12.25           1.738             14.75             0.416            True
+      dry       9             14.25           14.25           1.446             14.75             0.231            True
+      dry      10             10.75           10.75           2.068              8.25             0.309            True
+      dry      11             12.75           12.75           1.863             13.25             0.273            True
+      dry      12             14.75           14.75           1.278             13.75             0.350            True
+      wet       1              9.25            9.25           1.632             11.75             0.391            True
+      wet       2             11.25           11.25           2.239             13.75             0.349            True
+      wet       3             13.25           13.25           1.946             10.25             0.359            True
+      wet       4              9.75            9.75           1.847             12.25             0.338            True
+      wet       5             11.75           11.75           2.202             14.25             0.440            True
+      wet       6             13.75           13.75           1.945             10.75             0.460            True
+      wet       7             10.25           10.25           2.394             12.75             0.318            True
+      wet       8             12.25           12.25           1.902             14.75             0.507            True
+      wet       9             14.25           14.25           1.715             14.75             0.199            True
+      wet      10             10.75           10.75           2.197              9.25             0.266            True
+      wet      11             12.75           12.75           1.976             13.25             0.291            True
+      wet      12             14.75           14.75           1.379             15.75             0.289            True
+
+group apparent latency:
+electrode                           channel  tau_fit  theta0  r2_fit  tau_scan  r_scan
+      dry                               POz   0.1352  8.9108  0.9793     0.135  0.9775
+      dry                               PO3   0.1378  9.2304  0.9777     0.138  0.9749
+      dry                               PO4   0.1351  9.0219  0.9806     0.135  0.9790
+      dry                               PO5   0.1416  9.6331  0.9772     0.142  0.9728
+      dry                               PO6   0.1375  9.3973  0.9809     0.137  0.9785
+      dry                                Oz   0.1350  8.9163  0.9753     0.135  0.9732
+      dry                                O1   0.1355  8.9917  0.9737     0.136  0.9712
+      dry                                O2   0.1352  8.9572  0.9742     0.135  0.9720
+      dry Oz, phase table ignored (control)      NaN     NaN     NaN    -0.365  0.9732
+      wet                               POz   0.1314  8.6611  0.9779     0.131  0.9772
+      wet                               PO3   0.1348  9.0605  0.9768     0.135  0.9748
+      wet                               PO4   0.1330  8.9579  0.9816     0.133  0.9806
+      wet                               PO5   0.1402  9.5707  0.9756     0.140  0.9712
+      wet                               PO6   0.1396  9.6760  0.9809     0.140  0.9779
+      wet                                Oz   0.1326  8.7102  0.9748     0.133  0.9736
+      wet                                O1   0.1334  8.8173  0.9747     0.133  0.9731
+      wet                                O2   0.1337  8.8283  0.9780     0.134  0.9765
+      wet Oz, phase table ignored (control)      NaN     NaN     NaN    -0.367  0.9736
+
+per-subject apparent latency (scan, Oz, 10-block averages):
+electrode          dry     wet
+tau_scan count  68.000  68.000
+         mean    0.138   0.148
+         std     0.035   0.053
+         min     0.028   0.040
+         25%     0.123   0.124
+         50%     0.138   0.140
+         75%     0.150   0.152
+         max     0.257   0.382
+r_scan   count  68.000  68.000
+         mean    0.866   0.896
+         std     0.146   0.102
+         min     0.398   0.550
+         25%     0.863   0.869
+         50%     0.937   0.941
+         75%     0.954   0.962
+         max     0.986   0.979
+
+comparison with the paper's Figure 4 (11.25 Hz, Oz; ours: 68 development subjects):
+electrode  harmonic  frequency  amplitude_paper_102  amplitude_mean_of_subject_averages  amplitude_grand_average  snr_db_paper_102  snr_db_single_trial  snr_db_subject_average  snr_db_grand_average
+      dry         1      11.25                2.444                               2.532                    2.078              7.51                3.944                  10.333                21.870
+      dry         2      22.50                1.119                               1.199                    0.657              4.91                1.208                   6.386                19.079
+      dry         3      33.75                0.706                               0.753                    0.388              3.08                0.338                   3.378                17.422
+      dry         4      45.00                0.305                               0.536                    0.116              1.35               -0.872                   1.693                 8.889
+      wet         1      11.25                2.597                               2.613                    2.239              8.17                4.165                  10.517                22.999
+      wet         2      22.50                1.262                               1.298                    0.692              6.01                1.463                   6.708                18.061
+      wet         3      33.75                0.746                               0.800                    0.391              3.19                0.031                   4.279                13.549
+      wet         4      45.00                0.316                               0.494                    0.089              1.59               -0.543                  -0.113                 5.034
+
+per-subject summaries (dB, amplitudes in uV): median [q25, q75] over development subjects
+electrode                  dry    wet
+snr1_trial_oz      0.25   0.58   0.76
+                   0.50   3.44   3.70
+                   0.75   4.90   6.30
+snr2_trial_oz      0.25   0.01  -0.15
+                   0.50   1.21   0.98
+                   0.75   2.43   2.83
+snr1_trial_mean8   0.25   0.58   1.04
+                   0.50   3.19   2.92
+                   0.75   5.00   5.30
+snr1_unattended_oz 0.25  -2.12  -2.15
+                   0.50  -1.77  -1.84
+                   0.75  -1.58  -1.66
+snr1_avg_oz        0.25   6.08   6.55
+                   0.50  11.05  11.73
+                   0.75  13.36  14.70
+snr2_avg_oz        0.25   3.95   3.91
+                   0.50   7.41   7.41
+                   0.75   9.60  10.89
+amp1_trial_oz      0.25   2.09   2.04
+                   0.50   2.63   2.57
+                   0.75   3.54   3.51
+amp1_avg_oz        0.25   1.33   1.33
+                   0.50   2.05   1.98
+                   0.75   2.97   3.11
+
+dry versus wet, paired by subject (number of the 68 subjects with dry below wet; median of dry - wet):
+  snr1_trial_oz        dry < wet in 43/68, median difference -0.37
+  snr2_trial_oz        dry < wet in 35/68, median difference -0.09
+  snr1_trial_mean8     dry < wet in 35/68, median difference -0.07
+  snr1_unattended_oz   dry < wet in 33/68, median difference +0.00
+  snr1_avg_oz          dry < wet in 43/68, median difference -0.92
+  snr2_avg_oz          dry < wet in 41/68, median difference -0.40
+  amp1_trial_oz        dry < wet in 34/68, median difference -0.01
+  amp1_avg_oz          dry < wet in 39/68, median difference -0.05
+
+criterion  passed                                                                                                               detail
+       C4    True                                                                  24 of 24 group spectra peak at the target frequency
+       C5    True dry: tau = 135.0 ms (R2 = 0.975), scan 135 ms (R = 0.973); wet: tau = 132.6 ms (R2 = 0.975), scan 133 ms (R = 0.974)
+done in 23 s

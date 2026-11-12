@@ -1,0 +1,3 @@
+criterion,passed,detail
+C4,True,24 of 24 group spectra peak at the target frequency
+C5,True,"dry: tau = 135.0 ms (R2 = 0.975), scan 135 ms (R = 0.973); wet: tau = 132.6 ms (R2 = 0.975), scan 133 ms (R = 0.974)"

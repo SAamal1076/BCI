@@ -77,6 +77,23 @@ Notes recorded with the hypotheses, from the dataset paper alone (no data opened
 - Trials are stored sorted by target, so the order of trials inside a block is unknown. H5 is tested at the
   resolution of blocks.
 
+## Facts established by M0 (12 Nov 2026) and open points they raise
+
+Facts (see `docs/milestones/M0_data_audit.md`):
+
+- Electrode axis: position 1 = dry, position 2 = wet (`wearable.DRY`, `wearable.WET`). The documented label
+  is reversed. To be confirmed by the M1 accuracies.
+- The 0.14 s latency and the frequency and phase table are confirmed.
+- Mains interference is removed per epoch by least squares (`spectral.remove_mains`), not by an IIR notch.
+
+Open points, to be decided by the author and dated here before the milestone concerned:
+
+- **Dry versus wet is a crossover design.** The headband worn second tends to do worse (M0, descriptive).
+  The test of H1 must take the order of wearing into account (before M2).
+- **H5** can only be tested between blocks, and between the first and the second headband with order as a
+  factor (before M4).
+- **Filters of the decoding pipeline** must pass an edge-transient test on synthetic epochs before use (before M1).
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

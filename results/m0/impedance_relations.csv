@@ -1,0 +1,7 @@
+electrode,relation,spearman_rho,p_uncorrected,n
+dry,impedance vs single-trial SNR at Oz (68 development people),0.11115776615643012,0.36682465253187496,68
+dry,impedance vs mains pick-up (102 people),0.744575942460037,2.97283306955327e-19,102
+dry,impedance vs noise 60-90 Hz (102 people),0.4826153089323781,2.794470324604513e-07,102
+wet,impedance vs single-trial SNR at Oz (68 development people),0.07932205977783714,0.5202281351805406,68
+wet,impedance vs mains pick-up (102 people),0.10381055238590679,0.29912010400437067,102
+wet,impedance vs noise 60-90 Hz (102 people),-0.01798689292115962,0.8575966596593506,102

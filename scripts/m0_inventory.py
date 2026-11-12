@@ -26,6 +26,9 @@ ARTEFACT_UV = 200.0      # descriptive flag: peak-to-peak after preprocessing, a
 FLAT_RUN = 25            # descriptive flag: identical consecutive samples (0.1 s)
 METRICS = ("ptp_bp", "rms_bp", "line50", "hf_rms", "lf_rms", "dc_abs")   # dc_abs: added during M0 (see audit)
 RAIL_UV = 374_990.0      # samples beyond this are at the limit of the amplifier range (+/-375 mV)
+# Frequencies on the half-bin grid that carry no stimulus and no harmonic: a label-free noise floor.
+PROBES = np.array([5.25, 5.75, 6.25, 6.75, 7.25, 7.75, 16.25, 16.75, 17.25, 17.75])
+WIN = slice(wd.RESP_START, wd.RESP_START + wd.STIM_SAMPLES)
 PAPER_IMPEDANCE = {"dry": 261.67, "wet": 19.63}      # kOhm, Zhu et al. 2021, section 3.5
 PAPER_FIRST = {"Dry": 53, "Wet": 49}                 # headband worn first, section 2.4
 
@@ -79,11 +82,22 @@ def noise_spectrum(x, nfft=1000):
     return amp.mean(axis=(1, 2, 3))
 
 
+def noise_floor_two_pipelines(x, bp):
+    """Deviation D1, checked on the recordings: mean amplitude at the probe frequencies in the response
+    window after the preprocessing first planned (mean removal, band-pass, IIR notch) and after the one
+    adopted (bp). Returns two arrays [electrode]."""
+    centred = x - x.mean(axis=-1, keepdims=True)
+    planned = sp.notch(sp.bandpass(centred, wd.FS, 3.0, 90.0), wd.FS)
+    return (sp.amplitude(planned[..., WIN], PROBES, wd.FS).mean(axis=(1, 2, 3, 4)),
+            sp.amplitude(bp[..., WIN], PROBES, wd.FS).mean(axis=(1, 2, 3, 4)))
+
+
 def trial_metrics(x):
     """Label-free metrics per trial and channel. x: [electrode, block, target, channel, sample]."""
     centred = x - x.mean(axis=-1, keepdims=True)
     bp = sp.preprocess_descriptive(x, wd.FS)
     return {
+        "_bp": bp,
         "ptp_bp": np.ptp(bp, axis=-1),
         "rms_bp": bp.std(axis=-1),
         "line50": sp.hann_amplitude(x, 50.0, wd.FS),
@@ -164,7 +178,11 @@ def main():
 
     # ---- files and checksums
     manifest = build_manifest(raw)
-    manifest.drop(columns="md5_equals_figshare").to_csv(ROOT / "data_manifest.csv", index=False)
+    beta = [dict(zip(("file", "bytes", "md5"), line.split()), dataset="beta", sha256="")
+            for line in (ROOT / "scripts" / "figshare_md5_beta.txt").read_text().splitlines()
+            if line.strip() and not line.startswith("#")]        # checked on the files by check_beta_files.py
+    pd.concat([manifest.drop(columns="md5_equals_figshare"), pd.DataFrame(beta)[list(manifest.columns[:5])]]
+              ).to_csv(ROOT / "data_manifest.csv", index=False)
     n_bad = int((~manifest.md5_equals_figshare).sum())
     print(f"files: {len(manifest)}, total {manifest.bytes.sum() / 1e6:.1f} MB, MD5 different from figshare: {n_bad}")
     if n_bad:
@@ -187,6 +205,7 @@ def main():
                           "n_nonfinite": int((~np.isfinite(x)).sum()), "min": x.min(), "max": x.max(),
                           "value_step": step, "share_on_value_grid": on_grid})
         m = trial_metrics(x)
+        floor_planned, floor_adopted = noise_floor_two_pipelines(x, m.pop("_bp"))
         spectra.append(noise_spectrum(x))
         flat = flat_runs(x) | (x.std(axis=-1) == 0)                        # [e, block, target, channel]
         artefact = m["ptp_bp"].max(axis=-1) > ARTEFACT_UV                  # [e, block, target]
@@ -199,6 +218,8 @@ def main():
             row["artefact_trials"] = int(artefact[e].sum())
             row["flat_channel_trials"] = int(flat[e].sum())
             row["saturated_trials"] = int((np.abs(x[e]) >= RAIL_UV).any(axis=(-1, -2)).sum())
+            row["floor_planned_notch"] = float(floor_planned[e])
+            row["floor_adopted"] = float(floor_adopted[e])
             per_subject.append(row)
             for b in range(wd.N_BLOCKS):
                 r = dict(base, block=b + 1)
@@ -250,6 +271,13 @@ def main():
     flags = ["artefact_trials", "flat_channel_trials", "saturated_trials"]
     print("median over subjects of the per-subject medians, and totals of the flags (of 12240 trials per index):")
     print(pd.concat([grouped[list(METRICS)].median(), grouped[flags].sum()], axis=1).round(3).to_string())
+
+    ratio = per_subject.floor_planned_notch / per_subject.floor_adopted
+    print(f"deviation D1, noise floor at frequencies without stimulus, planned notch / adopted removal: median "
+          f"{ratio.median():.3f}, 95th percentile {ratio.quantile(0.95):.3f}, max {ratio.max():.3f} "
+          f"(S{int(per_subject.loc[ratio.idxmax(), 'subject']):03d}, position "
+          f"{int(per_subject.loc[ratio.idxmax(), 'eeg_index'])}); recordings above 1.05: {int((ratio > 1.05).sum())} of "
+          f"{len(ratio)}; Spearman with mains pick-up {stats.spearmanr(ratio, per_subject.line50)[0]:.2f}")
 
     # ---- metadata
     imp, imp_summary, imp_subject, imp_block, imp_channel = impedance_tables(raw)

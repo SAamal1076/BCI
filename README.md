@@ -163,6 +163,11 @@ Project direction, research questions, decisions and review: the author, Salman 
 the reports were written and run with an AI assistant (Anthropic's Claude) under the author's direction,
 milestone by milestone; every milestone is reviewed and approved before the next one starts.
 
+History note: on 13 Nov 2026 the author recorded on the commits was changed from the assistant's default
+identity to the author's name; the assistant stays named as co-author on every commit. The content, the order
+and the dates of the commits are unchanged. Only the commit identifiers changed, so identifiers quoted in
+earlier versions of the reports no longer resolve.
+
 ## Licence
 
 To be added before the repository is made public. The datasets keep their own licences (see `DATA.md`).

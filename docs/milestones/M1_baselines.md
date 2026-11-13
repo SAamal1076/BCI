@@ -89,7 +89,7 @@ are that check.
 
 ## 2. Is the implementation right?
 
-- **Unit tests** on synthetic signals, written and passing before the data were used (commit `8ae6e04`): CCA
+- **Unit tests** on synthetic signals, written and passing before the data were used (commit `4468801`): CCA
   equal to the textbook formula; chance level on noise; TRCA recovers a planted source; a marker planted in
   the held-out block never reaches the templates or the filters (with a positive control); shuffled training
   labels give chance; filter coefficients and gains of every sub-band; variants A, A+ and B do not change
@@ -402,7 +402,7 @@ Proposals for the M2 plan. None is applied yet; each needs the author's approval
 |---|---|---|
 | D1 | BETA was analysed from reduced files (nine channels, single precision; `scripts/beta_reduce.py`), after the wearable part and after the author's decisions. Variants: A (the gate) and whole-trial filtering without mains removal; B and C were not run on BETA. | The 5.3 GB could not be copied; the reduction ran on the author's computer and the 0.4 GB were copied. The reduced and the original files give the same numbers (unit test; checked on S1). The amplifier removed the mains, so the mains removal of B and C has no object. Only a smoke test on two people preceded the commit of the BETA code. |
 | D2 | Two filtering variants were added after the gate failed: A+ (A with mains removed) and C- (C with mains kept). They are stored in a separate file (`wearable_accuracy_diagnostic.csv`). | To separate the effect of the mains from the effect of the filter context. They are not part of the gate. |
-| D3 | Variant C removes the mains before filtering, like B. The plan only said "filter the full epoch, then cut". | So that B and C differ by the context alone. Fixed in the code committed before the data (`8ae6e04`). |
+| D3 | Variant C removes the mains before filtering, like B. The plan only said "filter the full epoch, then cut". | So that B and C differ by the context alone. Fixed in the code committed before the data (`4468801`). |
 | D4 | Sub-bands are combined for TRCA as `sum_n w(n) * sign(r_n) * r_n^2`, not `r_n^2`. | This is what the reference implementation does; a negative correlation with a template should not count as evidence for it. Fixed before the data. |
 | D5 | A second, literal implementation was run on one person (`m1_crosscheck.py`). | Required by the plan's rule after a failed gate. |
 | D6 | A diagnostic of the decision bias was added (`m1_decision_bias.py`): CCA with other sets of harmonics, a spectrum near the mains, synthetic epochs, and a removal with one frequency per trial (B*, C*, in that script only). | To explain the confusion matrix. Post hoc; it changes no M1 result. |

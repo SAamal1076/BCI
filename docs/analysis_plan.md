@@ -269,6 +269,7 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 
 - **M5 (real-time replay) is not carried out** (author's decision). Nothing is claimed about real-time use:
   the decisions of this project are offline, and the only timing evidence is the compute measurement of M3.
-- M6 (report, graphical abstract, presentation) contains no new analysis. Plan: `docs/milestones/M6_plan.md`.
+- M6 (report, graphical abstract, presentation) contains no new analysis. Plan: `docs/milestones/M6_plan.md`;
+  done on 14 Nov 2026 (`docs/milestones/M6_note.md`), with a fresh-clone check in which no tracked file changed.
 
 Nothing is left to be fixed: every milestone that needed a rule has been run, and M6 has no analysis.

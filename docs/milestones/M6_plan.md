@@ -30,7 +30,7 @@ One document of about 2 500 words and 6 figures, results first.
 | When it fails | People not above chance, time on task, impedance, confusions | M4, final evaluation |
 | What went wrong on the way | Reversed electrode label of the dataset; published accuracies need samples after the window; bias of per-channel mains removal; the plan's wrong keypad layout | M0, M1, M2, M4 |
 | Limits | One dataset, offline, cue-guided, 12 targets; H6 post hoc; network possibly under-trained; **M5 (real-time replay) and H4 (graph denoising) not done** | all |
-| What I would do next | The real-time step, stated as not done | brief of M5 |
+| What I would do next | The real-time step, stated as not done | the M5 that was planned |
 | Reproduce | Commands, time, checksums | README |
 
 Rules of wording: effect sizes with intervals; "supported" only for the seven tests that are; results on the
@@ -71,7 +71,7 @@ Eight slides for a technical reader (five minutes), one message per slide, the s
 - **Fresh-clone check:** clone the public repository into an empty folder, install `requirements.txt`, run the
   unit tests, re-run M4 and the final steps (`--reproduce`), and compare the result files with the committed
   ones. M1 to M3 were re-run clean at their own milestones.
-- Checks before the last push: no raw data, no private brief, no personal e-mail address, licences present,
+- Checks before the last push: no raw data, no private notes, no personal e-mail address, licences present,
   every figure referenced exists, every link of README and REPORT resolves.
 - `docs/milestones/M6_note.md`: what was produced, the checks and their outcome, deviations.
 
@@ -85,7 +85,7 @@ Eight slides for a technical reader (five minutes), one message per slide, the s
 
 ## Not part of M6
 
-The CV bullet, the LinkedIn post and the message to the team are M7.
+Anything about how the project is used afterwards is outside this repository.
 
 ## Outputs
 

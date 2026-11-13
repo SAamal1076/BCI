@@ -5,6 +5,8 @@ published weights; leave-one-block-out). Windows 0.2 to 2.0 s. Filtering variant
 Nothing is tuned here: every setting comes from docs/milestones/M1_plan.md.
 
 Usage: python scripts/m1_baselines_wearable.py --raw /path/to/13560281 [--jobs 2]
+       python scripts/m1_baselines_wearable.py --raw /path/to/13560281 --diagnostic
+       (--diagnostic: the two post hoc variants A+ and C-, written to wearable_accuracy_diagnostic.csv only)
 """
 import argparse
 import os
@@ -44,15 +46,16 @@ def bases(n, n_harm=N_HARM):
 
 
 def evaluate_subject(job):
-    sid, raw = job
+    sid, raw, variants = job
     assert not wd.is_lockbox(sid)
     x = wd.load_subject(raw, sid)                                  # [electrode, block, target, channel, sample]
-    whole = fb.subbands(x, N_BANDS, wd.N_SAMPLES - wd.RESP_START, "C", wd.RESP_START, FS, FILTERS)
     acc, by_block, harm, conf = [], [], [], []
-    for variant in fb.VARIANTS:
+    for variant in variants:
+        whole = (fb.subbands(x, N_BANDS, wd.N_SAMPLES - wd.RESP_START, variant, wd.RESP_START, FS, FILTERS)
+                 if variant.startswith("C") else None)             # whole-epoch variants: filter once, cut later
         for window in WINDOWS:
             n = int(round(window * FS))
-            sub = (whole[..., :n] if variant == "C"
+            sub = (whole[..., :n] if whole is not None
                    else fb.subbands(x, N_BANDS, n, variant, wd.RESP_START, FS, FILTERS))   # (band, e, block, target, ch, n)
             rho = dc.cca_corr(sub, bases(n))                       # (band, e, block, target, class)
             for e, name in enumerate(wd.ELECTRODE_NAMES):
@@ -117,14 +120,16 @@ def main():
     ap.add_argument("--raw", default=str(wd.DEFAULT_DIR))
     ap.add_argument("--out", default=str(ROOT / "results" / "m1"))
     ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--diagnostic", action="store_true")
     args = ap.parse_args()
+    variants = fb.DIAGNOSTIC_VARIANTS if args.diagnostic else fb.VARIANTS
     raw, out = pathlib.Path(args.raw), pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     cells = loadmat(raw / "Subjects_Information.mat")["Subjects_Information"]
     first = {i: str(cells[i, 10][0]) for i in range(1, 103)}
 
-    jobs = [(sid, raw) for sid in wd.DEVELOPMENT]
+    jobs = [(sid, raw, variants) for sid in wd.DEVELOPMENT]
     if args.jobs > 1:
         import multiprocessing as mp
         with mp.get_context("fork").Pool(args.jobs) as pool:
@@ -135,6 +140,12 @@ def main():
     acc = pd.DataFrame([r for res in results for r in res[0]],
                        columns=["subject", "electrode", "variant", "method", "window_s", "accuracy"])
     acc.insert(1, "first_headband", acc.subject.map(first))
+    show = acc[acc.window_s.isin([0.2, 1.0, 2.0])].groupby(["variant", "method", "electrode", "window_s"]).accuracy.mean()
+    if args.diagnostic:
+        acc.to_csv(out / "wearable_accuracy_diagnostic.csv", index=False, float_format="%.6f")
+        print(f"diagnostic variants {variants}: {acc.subject.nunique()} development subjects, done in {time.time() - t0:.0f} s")
+        print(show.unstack(["electrode", "window_s"]).round(3).to_string())
+        return
     acc.to_csv(out / "wearable_accuracy.csv", index=False, float_format="%.6f")
     blk = pd.DataFrame([r for res in results for r in res[1]],
                        columns=["subject", "electrode", "method", "window_s", "block", "accuracy"])
@@ -154,7 +165,6 @@ def main():
 
     print(f"development subjects: {acc.subject.nunique()} (lockbox subjects not loaded); "
           f"{len(acc)} accuracies; done in {time.time() - t0:.0f} s")
-    show = acc[acc.window_s.isin([0.2, 1.0, 2.0])].groupby(["variant", "method", "electrode", "window_s"]).accuracy.mean()
     print(show.unstack(["electrode", "window_s"]).round(3).to_string())
 
 

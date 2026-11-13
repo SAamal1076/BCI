@@ -9,6 +9,11 @@ Variants (x is a full epoch of 710 samples, the window starts at sample `start`)
   B  project pipeline: samples from the start of the epoch to the END OF THE WINDOW, least-squares mains
      removal on that segment, filter, keep the window. No sample after the end of the window is used.
   C  whole epoch (diagnostic): mains removal and filter on the full epoch, then cut. Uses future samples.
+
+Two more variants were added after the reproduction gate failed, to separate the effect of the mains
+component from the effect of the context given to the filter (post hoc diagnostics, M1 report):
+  A+ as A, with least-squares mains removal on the cut window before filtering
+  C- as C, without mains removal
 """
 from __future__ import annotations
 
@@ -20,6 +25,7 @@ from .spectral import remove_mains
 PASS = (6.0, 14.0, 22.0, 30.0, 38.0, 46.0, 54.0, 62.0, 70.0, 78.0)
 STOP = (4.0, 10.0, 16.0, 24.0, 32.0, 40.0, 48.0, 56.0, 64.0, 72.0)
 VARIANTS = ("A", "B", "C")
+DIAGNOSTIC_VARIANTS = ("A+", "C-")
 
 
 def design(band: int, fs: float = 250.0, high_pass: float = 90.0, high_stop: float = 100.0):
@@ -60,4 +66,9 @@ def subbands(x, n_bands: int, n_window: int, variant: str, start: int, fs: float
     if variant == "C":
         seg = remove_mains(x, fs)
         return np.stack([zero_phase(f, seg)[..., start:stop] for f in filters])
+    if variant == "A+":
+        seg = remove_mains(x[..., start:stop], fs)
+        return np.stack([zero_phase(f, seg) for f in filters])
+    if variant == "C-":
+        return np.stack([zero_phase(f, x)[..., start:stop] for f in filters])
     raise ValueError(f"unknown variant {variant!r}")

@@ -43,7 +43,7 @@ def test_transfer_function_form_is_numerically_sound():
 
 def test_shapes_and_shortest_window():
     x = np.random.default_rng(1).standard_normal((2, 3, 8, wd.N_SAMPLES))
-    for variant in fb.VARIANTS:
+    for variant in fb.VARIANTS + fb.DIAGNOSTIC_VARIANTS:
         for n_window in (50, 250, 500):
             y = fb.subbands(x, 5, n_window, variant, wd.RESP_START)
             assert y.shape == (5, 2, 3, 8, n_window) and np.isfinite(y).all()
@@ -55,7 +55,7 @@ def test_variants_a_and_b_ignore_samples_after_the_window_and_c_does_not():
     future = x.copy()
     stop = wd.RESP_START + 250
     future[:, stop:] = 50.0 * rng.standard_normal((8, wd.N_SAMPLES - stop))        # change only the future
-    for variant, uses_future in (("A", False), ("B", False), ("C", True)):
+    for variant, uses_future in (("A", False), ("B", False), ("C", True), ("A+", False), ("C-", True)):
         d = np.abs(fb.subbands(x, 5, 250, variant, wd.RESP_START) - fb.subbands(future, 5, 250, variant, wd.RESP_START))
         assert (d.max() > 1e-3) == uses_future
 

@@ -1,0 +1,6 @@
+step,milliseconds_per_decision
+"preprocessing, variant B (mains removal + 5 sub-bands)",6.300
+"preprocessing, variant A (5 sub-bands)",0.849
+"CCA, 12 classes, one sub-band",0.189
+"FBCCA, 12 classes, 5 sub-bands",0.609
+"ensemble TRCA scoring, 12 classes, 5 sub-bands",1.325

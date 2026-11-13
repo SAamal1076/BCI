@@ -10,8 +10,8 @@ results were seen.*
 
 1. **The pre-registered reproduction gate failed.** With the filtering convention chosen for the gate (cut the
    window, then filter; mains kept), none of the ten published accuracies is reproduced within 0.05. CCA and
-   FBCCA are 0.05 to 0.10 below the paper. Ensemble TRCA with the dry headband is at chance (0.14 against a
-   published 0.62).
+   FBCCA are 0.05 to 0.10 below the paper. Ensemble TRCA with the dry headband is close to chance (0.14
+   against a published 0.62; chance is 0.08).
 2. **The implementations are right.** The unit tests pass, and a second, literal implementation (textbook CCA
    and a line-by-line port of the public reference code) gives the same decision on all 960 trials compared.
 3. **The cause is the filtering, in two parts** (section 3):
@@ -303,7 +303,8 @@ CCA favours the low targets):
   2. *Mains that is not steady.* If the amplitude of the mains wanders by a few percent within the epoch, the
      removal takes out the carrier and leaves the wander, which lies right beside 50 Hz. On synthetic epochs
      with strong wandering mains 24 to 27 % of the decisions go to the two targets, with or without the
-     shared frequency. This is what remains with the dry headband (0.190 with the shared frequency).
+     shared frequency. This is the likely reason why an excess remains with the dry headband, where the
+     mains is strong (0.190 with the shared frequency); it was not tested further.
 - **Size of the effect on accuracy** (plain CCA, 1 s, pipeline B): leaving the 4th and 5th harmonics out gives
   0.479 (dry) and 0.651 (wet) instead of 0.460 and 0.621; the shared frequency alone gives 0.465 and 0.653.
 
@@ -344,8 +345,8 @@ Proposals for the M2 plan. None is applied yet; each needs the author's approval
 2. **Mains removal is not optional for TRCA-like methods on this dataset.** Any method that learns spatial
    filters or templates from few trials needs it.
 3. **Filter context:** B's remaining error is at the end of the window (5.7 µV in the last 0.1 s against
-   1.0 µV in the first 0.1 s, synthetic dry-like case). A forward-only filter has no such error and is what
-   a real-time system would run; it can be compared with B in M2.
+   1.0 µV in the first 0.1 s, synthetic dry-like case). A forward-only filter has no error at the end of the
+   window (it has a delay instead) and is what a real-time system would run; it can be compared with B in M2.
 4. **Published results as a yardstick:** from now on the project compares with its own baselines run under
    the same pipeline. The published numbers of this dataset are quoted with the remark of section 3.3.
 5. **The filter bank** brings almost nothing with the a-priori weights here; M2 should not assume it helps.

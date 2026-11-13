@@ -57,4 +57,11 @@ echo "M2  new users, leave-one-subject-out (about 10 minutes; writes about 0.7 G
 python scripts/m2_new_users.py --raw "$WEARABLE_DIR" | tee logs/m2_new_users.log
 python scripts/m2_summary.py | tee logs/m2_summary.log
 python scripts/m2_figures.py
+
+echo "M3  24 small networks (about 50 minutes on two cores; finished networks are kept and skipped)"
+python scripts/m3_train.py --raw "$WEARABLE_DIR" | tee logs/m3_train.log
+python scripts/m3_evaluate.py | tee logs/m3_evaluate.log
+python scripts/m3_compute.py | tee logs/m3_compute.log
+python scripts/m3_summary.py | tee logs/m3_summary.log
+python scripts/m3_figures.py
 echo "done"

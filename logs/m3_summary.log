@@ -1,0 +1,64 @@
+== 1. new users with no calibration, 1 s window, blocks 7-10: 68 development people, 4 folds of people
+mean accuracy [95 % interval over people]; network: mean of 3 seeds per person
+                         method                  dry                  wet
+                          FBCCA 0.465 [0.402, 0.523] 0.652 [0.592, 0.709]
+         cross-subject template 0.572 [0.513, 0.629] 0.734 [0.683, 0.780]
+template adapted without labels 0.603 [0.537, 0.666] 0.805 [0.751, 0.854]
+         network, no adaptation 0.534 [0.473, 0.591] 0.621 [0.564, 0.674]
+         network, A1 statistics 0.543 [0.482, 0.601] 0.627 [0.568, 0.682]
+            network, A2 entropy 0.542 [0.480, 0.600] 0.626 [0.567, 0.680]
+                network, online 0.539 [0.477, 0.597] 0.628 [0.571, 0.683]
+
+== 2. differences, same people and trials: mean [95 % interval]; people better / equal / worse
+                                                    difference                               dry                               wet
+                          cross-subject template  minus  FBCCA   +0.107 [+0.081, +0.132]  57/6/5  +0.082 [+0.056, +0.108]  52/4/12
+                          network, no adaptation  minus  FBCCA  +0.069 [+0.028, +0.109]  44/1/23  -0.031 [-0.076, +0.012]  28/0/40
+         network, no adaptation  minus  cross-subject template  -0.038 [-0.067, -0.009]  23/1/44  -0.113 [-0.149, -0.080]  15/1/52
+         network, A1 statistics  minus  network, no adaptation  +0.009 [+0.003, +0.016]  38/4/26  +0.006 [-0.001, +0.012]  36/9/23
+            network, A2 entropy  minus  network, no adaptation  +0.008 [+0.002, +0.015]  35/4/29  +0.005 [-0.001, +0.011]  36/5/27
+            network, A2 entropy  minus  network, A1 statistics -0.001 [-0.003, +0.001]  14/33/21 -0.001 [-0.002, +0.001]  15/36/17
+                network, online  minus  network, no adaptation  +0.005 [-0.000, +0.011]  35/9/24  +0.007 [+0.002, +0.012]  40/5/23
+template adapted without labels  minus  cross-subject template  +0.031 [+0.012, +0.050]  44/6/18   +0.071 [+0.048, +0.095]  54/7/7
+   network, A2 entropy  minus  template adapted without labels  -0.060 [-0.099, -0.024]  26/0/42   -0.179 [-0.223, -0.137]  8/1/59
+
+== 3. H3 on the development people (descriptive; the tests are run on the lockbox)
+  H3a  g = A2 - A0, dry: +0.008 [+0.002, +0.015]; larger than 0 for 35 people, smaller for 29; largest loss -0.049, largest gain +0.118
+  H3b  g = A2 - A0, wet: +0.005 [-0.001, +0.011]; larger than 0 for 36 people, smaller for 27; largest loss -0.049, largest gain +0.083
+  H3c  g(dry) - g(wet): +0.003 [-0.005, +0.012]
+  dry: gain in the lower half of unadapted accuracy +0.015 [+0.006, +0.023], upper half +0.002 [-0.007, +0.011]
+
+== 4. spread over the three seeds (mean accuracy over people, for each seed)
+seed                      0      1      2     sd
+method     electrode                            
+net_A0     dry        0.538  0.533  0.532  0.003
+           wet        0.621  0.625  0.618  0.004
+net_A1     dry        0.544  0.540  0.545  0.002
+           wet        0.625  0.626  0.630  0.002
+net_A2     dry        0.542  0.540  0.545  0.003
+           wet        0.626  0.624  0.628  0.002
+net_online dry        0.541  0.536  0.540  0.002
+           wet        0.625  0.629  0.631  0.003
+  one person, between seeds (no adaptation): mean standard deviation 0.028
+
+== 5. the template again: population of 51 people (these folds) against 67 (leave-one-subject-out, M2)
+  dry: template 51 people 0.572, 67 people 0.568, difference +0.003 [-0.006, +0.013]; FBCCA identical: True
+  wet: template 51 people 0.734, 67 people 0.730, difference +0.004 [-0.005, +0.013]; FBCCA identical: True
+  share of right decisions of the template on the unlabelled blocks 1-6 (its pseudo-labels): dry 0.588, wet 0.744
+
+== 6. people (threshold for 48 trials)
+  dry: not above chance (below 0.167): FBCCA 7, cross-subject template 2, network, no adaptation 5, network, A2 entropy 5; at 0.9 or more: template 7, network A0 4
+  wet: not above chance (below 0.167): FBCCA 1, cross-subject template 0, network, no adaptation 1, network, A2 entropy 1; at 0.9 or more: template 19, network A0 10
+
+== 7. training: 24 networks, 5160 training trials each; epochs run 47 to 60 (best epoch 39 to 60); time 248 s on average, 274 s at most
+           validation_accuracy  validation_loss  best_epoch
+electrode                                                  
+dry                      0.637            1.309      55.583
+wet                      0.681            1.093      48.000
+
+== 8. size and compute
+                                         step  ms_per_decision  stored_numbers                                    needs
+preprocessing B2 (mains removal, 3 sub-bands)            6.100               0                                  nothing
+                                        FBCCA            0.253               0                                  nothing
+                       cross-subject template            5.412           72000 other people's data; no data of the user
+                                ensemble TRCA            0.923           72288              labelled blocks of the user
+                   network (3 572 parameters)            0.867            3652 other people's data; no data of the user

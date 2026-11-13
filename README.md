@@ -1,7 +1,7 @@
 # Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation
 
-**Status: M0 (data check), M1 (standard decoders) and M2 (new users and calibration) done on the development
-people, 13 Nov 2026. The hypotheses have not been tested yet: the 34 lockbox people are untouched and will be
+**Status: M0 (data check), M1 (standard decoders), M2 (new users and calibration) and M3 (small network,
+adaptation without labels) done on the development people, 13 Nov 2026. The hypotheses have not been tested yet: the 34 lockbox people are untouched and will be
 used once, at the end.** This README is filled in milestone by
 milestone; nothing is reported here before it has been run and reviewed.
 
@@ -34,6 +34,21 @@ Full report: [`docs/milestones/M0_data_audit.md`](docs/milestones/M0_data_audit.
    IIR notch on these short epochs leaves an edge transient (replaced by a least-squares mains removal).
 
 <p align="center"><img src="figures/m0/01_noise_dry_vs_wet.png" width="900" alt="Mains pick-up, high-frequency noise and electrode offset per person: the headband stored first in the files is the noisy one, the dry headband"></p>
+
+## What is known so far (M3, small network and adaptation without labels, 68 development people)
+
+Full report: [`docs/milestones/M3_network.md`](docs/milestones/M3_network.md). New users with no calibration,
+1 s window.
+
+1. **A small network (3 572 parameters) trained on other people does not beat the template built from other
+   people:** 0.53 against 0.57 with dry electrodes, 0.62 against 0.73 with wet ones.
+2. **Adapting the network to the new user without labels** (batch-normalisation statistics, entropy
+   minimisation) changes accuracy by less than 0.01.
+3. **The same unlabelled signals help the template much more:** updated with its own decisions as labels it
+   reaches 0.60 (dry) and 0.81 (wet), about what one to two labelled calibration blocks give.
+4. Every decoder decides in less than 6 ms on one processor core; the preprocessing takes 6 ms.
+
+<p align="center"><img src="figures/m3/01_methods.png" width="850" alt="Accuracy at 1 s with no calibration for FBCCA, the template from other people, the template adapted without labels, and the network with and without adaptation, for dry and wet electrodes"></p>
 
 ## What is known so far (M2, new users and calibration, 68 development people)
 
@@ -87,7 +102,7 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M0 | Data check: files, layout, electrode type, timing, spectra, signal-to-noise ratio, impedance | [`M0_plan.md`](docs/milestones/M0_plan.md) | [`M0_data_audit.md`](docs/milestones/M0_data_audit.md) |
 | M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
 | M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
-| M3 | Small network and test-time adaptation; model size and compute | | |
+| M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | | |
 | M5 | Real-time replay with measured latency | | |
 | M6 | Report and visual summary | | |
@@ -110,7 +125,7 @@ WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 ```
 
 Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
-and M2 about fifteen. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+M2 about fifteen and M3 about an hour (24 small networks are trained on the processor; PyTorch 2.15). `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
 
 ## Repository layout
 
@@ -120,7 +135,8 @@ src/ssvep/      wearable.py (dataset constants, loader, development/lockbox spli
                 filterbank.py (reference filter bank, ways of filtering a short window), decoders.py (CCA,
                 FBCCA, TRCA, ensemble TRCA), metrics.py (ITR, chance threshold), beta.py (reference dataset),
                 pipeline.py (preprocessing candidates of M2; B2 is the frozen one), transfer.py (template
-                decoder for new users), stats.py (tests reserved for the lockbox),
+                decoder for new users), stats.py (tests reserved for the lockbox), network.py (EEGNet-type
+                network, training, folds of people), adapt.py (adaptation without labels),
                 plotting.py (one figure style)
 scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_checks.py (timing, spectra,
                 SNR, development subjects only), m0_figures.py, m0_summary.py (every number of the audit),
@@ -132,6 +148,8 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m1_beta_summary.py (gate G5)
                 m2_pipeline_choice.py, m2_baselines.py, m2_new_users.py (leave-one-subject-out),
                 m2_summary.py (every number of the report), m2_figures.py
+                m3_train.py (24 networks, can be resumed), m3_evaluate.py, m3_compute.py, m3_summary.py,
+                m3_figures.py
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
 docs/           analysis_plan.md, milestones/ (one plan and one report per milestone)
 results/        result tables (CSV), one folder per milestone

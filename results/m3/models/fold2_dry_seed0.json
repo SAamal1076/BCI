@@ -1,0 +1,1 @@
+{"fold": 2, "electrode": "dry", "seed": 0, "train_people": 43, "validation_people": 8, "train_trials": 5160, "epochs_run": 60, "best_epoch": 58, "validation_loss": 1.1789, "validation_accuracy": 0.6698, "train_seconds": 258.3}

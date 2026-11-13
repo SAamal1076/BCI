@@ -1,0 +1,10 @@
+68 development people as new users (4 folds), 1 s window, blocks 7-10
+electrode           dry    wet
+method                        
+fbcca             0.465  0.652
+net_A0            0.534  0.621
+net_A1            0.543  0.627
+net_A2            0.542  0.626
+net_online        0.539  0.628
+template          0.572  0.734
+template_adapted  0.603  0.805

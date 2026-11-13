@@ -1,0 +1,6 @@
+step,ms_per_decision,stored_numbers,needs
+"preprocessing B2 (mains removal, 3 sub-bands)",6.100,0,nothing
+FBCCA,0.253,0,nothing
+cross-subject template,5.412,72000,other people's data; no data of the user
+ensemble TRCA,0.923,72288,labelled blocks of the user
+network (3 572 parameters),0.867,3652,other people's data; no data of the user

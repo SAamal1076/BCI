@@ -178,6 +178,19 @@ Details: `docs/milestones/M3_plan.md`.
   `g(dry) - g(wet) > 0`; one-sided Wilcoxon signed-rank tests. With H1 and H2 the Holm family has nine tests.
 - **H4** is not part of M3.
 
+## Facts established by M3 (13 Nov 2026), development people only
+
+Report: `docs/milestones/M3_network.md`.
+
+- With no calibration at 1 s the network (0.534 dry, 0.621 wet) is below the cross-subject template (0.572,
+  0.734).
+- H3 on the development people: `g` = +0.008 (dry) and +0.005 (wet); `g(dry) - g(wet)` = +0.003. The tests
+  H3a, H3b and H3c stay as fixed and will be run on the lockbox; a null result is expected and will be reported.
+- A secondary analysis: the template updated with the user's unlabelled trials gains +0.031 (dry) and +0.071
+  (wet). It is not a hypothesis of the project so far. If it is to carry a claim, its test must be fixed in a
+  plan before the lockbox is opened.
+- The lockbox has not been loaded.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

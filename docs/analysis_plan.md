@@ -127,11 +127,20 @@ Report: `docs/milestones/M1_baselines.md`. Development subjects only.
 - **Nothing was changed after seeing M1 results.** The hypotheses and the settings above stand. Variant B as
   defined above was used for every M1 number.
 
+## Decisions of the author after M1 (13 Nov 2026)
+
+1. **The failed gate.** The diagnosis of the M1 report is accepted. The gate stays recorded as failed
+   (G1 to G3). The project goes on with a pipeline that uses no sample after the window.
+2. **Mains removal.** The correction (one mains frequency per trial for all channels) is part of the M2
+   plan, with one re-run of the baselines. The M1 numbers stay as reported.
+3. **BETA.** Gate G5 is kept as the independent check of the decoders. The dataset is reduced to its nine
+   channels on the author's computer (`scripts/beta_reduce.py`) and analysed from the reduced files.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M2 | The author's decision on the failed M1 gate and on BETA (G5). Correction of the mains removal (one frequency per trial for all channels), treatment of reference harmonics next to 50 Hz, forward-only filter as an alternative to variant B; baselines re-run once with the corrected pipeline. Use of the lockbox; cross-subject models; calibration curve; threshold of H2; family for the Holm correction; test of H1 (crossover analysis). |
+| M2 | Proposed in `docs/milestones/M2_plan.md` (waiting for approval): correction of the pipeline and its choice among three candidates, design for a new user, cross-subject template, calibration curve, use of the lockbox, tests of H1 (crossover) and H2 (margin 0.05), family for the Holm correction. |
 | M3 | Network, test-time adaptation settings, compute budget, seeds. |
 | M4 | Time-on-task and impedance analyses (H5). |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

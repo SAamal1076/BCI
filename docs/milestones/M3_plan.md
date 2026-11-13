@@ -1,7 +1,8 @@
 # M3 plan: a small network, and adaptation to a new user without labels
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** Written after M2
-(`M2_calibration.md`). Anything done differently will be listed under "Deviations" in the M3 report.*
+*Proposed on 13 Nov 2026 and **approved by the author the same day**, as written, before anything was run.
+H4 stays outside M3 (the author did not ask for it). Written after M2 (`M2_calibration.md`). Anything done
+differently is listed under "Deviations" in `M3_network.md`.*
 
 ## Purpose
 

@@ -166,6 +166,18 @@ Report: `docs/milestones/M2_calibration.md`.
   reaches below the margin at 1 s. Nothing in H1, H2, their tests or the margin was changed after seeing this.
 - The lockbox has not been loaded.
 
+## Fixed before M3 (approved 13 Nov 2026, before anything of M3 was run)
+
+Details: `docs/milestones/M3_plan.md`.
+
+- **Network:** EEGNet-type, about 3 600 parameters, input = the three sub-bands of pipeline B2 at 1 s; no
+  architecture search; three seeds; four folds of people (51 for training, of which 8 for validation; 17 for test).
+- **Adaptation without labels** on the new user's first six blocks, test on blocks 7 to 10: A0 none, A1
+  batch-normalisation statistics, A2 entropy minimisation on the batch-normalisation scale and shift.
+- **H3 tests** (lockbox, 1 s, `g = accuracy(A2) - accuracy(A0)`): H3a `g > 0` dry, H3b `g > 0` wet, H3c
+  `g(dry) - g(wet) > 0`; one-sided Wilcoxon signed-rank tests. With H1 and H2 the Holm family has nine tests.
+- **H4** is not part of M3.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

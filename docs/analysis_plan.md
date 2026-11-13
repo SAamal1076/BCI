@@ -191,10 +191,17 @@ Report: `docs/milestones/M3_network.md`.
   plan before the lockbox is opened.
 - The lockbox has not been loaded.
 
+## Decisions of the author after M3 (13 Nov 2026)
+
+1. **Adaptation of the template without labels becomes a hypothesis (H6)**, to be tested on the lockbox. It was
+   written after its effect was seen on the development people (M3: +0.03 dry, +0.07 wet); this is stated
+   wherever H6 is reported. Its test is fixed in `docs/milestones/M4_plan.md`.
+2. **No further training of the network.** The M3 results stand as they are.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M3 | Network, test-time adaptation settings, compute budget, seeds. |
-| M4 | Time-on-task and impedance analyses (H5). |
+| M4 | Proposed in `docs/milestones/M4_plan.md` (waiting for approval): time on task and impedance (tests of H5a and H5b), who fails, what is confused; test of H6; the Holm family of 15 tests. |
+| Final evaluation | A short plan after M4: the single opening of the lockbox, every method and setting frozen. |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

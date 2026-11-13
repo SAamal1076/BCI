@@ -103,7 +103,7 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
 | M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
 | M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
-| M4 | Interpretation and failure cases: time on task, impedance, confusions | | |
+| M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) (proposed) | |
 | M5 | Real-time replay with measured latency | | |
 | M6 | Report and visual summary | | |
 

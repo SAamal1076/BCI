@@ -265,8 +265,13 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 - No method, setting, test or exclusion was changed after the opening. Descriptive numbers computed
   afterwards (`scripts/final_summary.py`) are labelled as such.
 
+## Decision after the final evaluation (13 Nov 2026)
+
+- **M5 (real-time replay) is not carried out** (author's decision). Nothing is claimed about real-time use:
+  the decisions of this project are offline, and the only timing evidence is the compute measurement of M3.
+- M6 (report, graphical abstract, presentation) contains no new analysis. Plan: `docs/milestones/M6_plan.md`.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M5 | Real-time replay: stream order, latency measurement, stopping rule. |

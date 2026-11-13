@@ -144,8 +144,8 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
 | Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
-| M5 | Real-time replay with measured latency | | |
-| M6 | Report and visual summary | | |
+| M5 | Real-time replay with measured latency | | Not carried out (author's decision, 13 Nov 2026) |
+| M6 | Report, graphical abstract, presentation | [`M6_plan.md`](docs/milestones/M6_plan.md) (proposed) | |
 
 The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
 

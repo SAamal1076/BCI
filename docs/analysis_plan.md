@@ -112,11 +112,26 @@ Details and sources: `docs/milestones/M1_plan.md`.
   accuracy is at or below chance.
 - **Reproduction gate:** G1 to G5 of the M1 plan (0.05 in accuracy on the wearable data, 10 % on the BETA peak ITR).
 
+## Facts established by M1 (13 Nov 2026) and open points they raise
+
+Report: `docs/milestones/M1_baselines.md`. Development subjects only.
+
+- **The reproduction gate failed as pre-registered** (G1 to G3 under the reference convention, variant A).
+  G4 passed: wet is above dry in all six comparisons, so position 1 = dry is final. G5 (BETA) is open.
+- **Cause, not an error in the decoders:** the mains component inside the pass-band breaks TRCA, and the
+  published accuracies are matched only by filtering the whole epoch (samples after the window). The
+  published numbers of this dataset are therefore not a valid target for a pipeline without future samples.
+- **The mains-removal step of variant B has a flaw** when followed by a decoder that combines channels: the
+  mains frequency is chosen per channel. It biases CCA and FBCCA decisions towards 12.25 and 12.75 Hz
+  (4th harmonic at 49 and 51 Hz).
+- **Nothing was changed after seeing M1 results.** The hypotheses and the settings above stand. Variant B as
+  defined above was used for every M1 number.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M2 | Use of the lockbox; cross-subject models; calibration curve; threshold of H2; family for the Holm correction. |
+| M2 | The author's decision on the failed M1 gate and on BETA (G5). Correction of the mains removal (one frequency per trial for all channels), treatment of reference harmonics next to 50 Hz, forward-only filter as an alternative to variant B; baselines re-run once with the corrected pipeline. Use of the lockbox; cross-subject models; calibration curve; threshold of H2; family for the Holm correction; test of H1 (crossover analysis). |
 | M3 | Network, test-time adaptation settings, compute budget, seeds. |
 | M4 | Time-on-task and impedance analyses (H5). |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

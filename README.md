@@ -1,10 +1,17 @@
 # Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation
 
-**Status: the hypotheses have been tested, 13 Nov 2026. M0 to M4 were done on 68 development people; the
-34 lockbox people were then decoded once, by a plan and code committed beforehand. Seven of the 15
-pre-specified tests are supported after the Holm correction
-([`final_evaluation.md`](docs/milestones/final_evaluation.md)).** This README is filled in milestone by
-milestone; nothing is reported here before it has been run and reviewed.
+**Status: finished, 14 Nov 2026. Every choice was made on 68 development people; the 34 lockbox people were
+then decoded once, by a plan and code committed beforehand. Seven of the 15 pre-specified tests are supported
+after the Holm correction, the seven that were expected in writing before the opening.**
+
+<p align="center"><img src="figures/graphical_abstract.png" width="1000" alt="Graphical abstract: a new user, an 8-channel headband and 12 flickering targets; accuracy at 1 s against calibration time for dry and wet electrodes on the 34 lockbox people; the hypotheses that hold and those that do not"></p>
+
+| Read it in | |
+|---|---|
+| 30 seconds | the graphical abstract above |
+| 5 minutes | the slides: [`docs/presentation.pdf`](docs/presentation.pdf) ([PowerPoint](docs/presentation.pptx)) |
+| 20 minutes | the report: [`REPORT.md`](REPORT.md) |
+| as long as you like | the plan and the report of each milestone, in [`docs/milestones`](docs/milestones) |
 
 A leakage-safe, pre-specified analysis of steady-state visual evoked potential (SSVEP) decoding from an
 8-channel wearable EEG headband, on the open dataset of Zhu et al. (*Sensors*, 2021): 102 people, 12 flickering
@@ -42,7 +49,51 @@ and H5 not supported).
 
 <p align="center"><img src="figures/final/01_tests.png" width="900" alt="The 15 pre-specified tests on the 34 lockbox people: estimates with 95 % intervals, seven supported after the Holm correction"></p>
 
-## What is known so far (M0, data check)
+## Reproduce
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q tests
+WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
+```
+
+Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
+M2 about fifteen, M3 about an hour (24 small networks are trained on the processor; PyTorch 2.15), M4 about four, and the
+rehearsal and preparation of the final evaluation about thirty (12 more networks). `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+
+The lockbox was opened once. `run_all.sh` does not open it again: it recomputes the numbers of the opening into a
+separate folder and reports whether they are identical to the committed ones.
+
+## Data
+
+Not included. See [`DATA.md`](DATA.md) for the sources, the licences and the checksums.
+
+## How the work is organised
+
+Each milestone has a plan that is committed **before** it is run, and a report committed after it
+(see the commit history).
+
+| Milestone | Content | Plan | Report |
+|---|---|---|---|
+| M0 | Data check: files, layout, electrode type, timing, spectra, signal-to-noise ratio, impedance | [`M0_plan.md`](docs/milestones/M0_plan.md) | [`M0_data_audit.md`](docs/milestones/M0_data_audit.md) |
+| M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
+| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
+| M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
+| M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
+| Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
+| M5 | Real-time replay with measured latency | | Not carried out (author's decision, 13 Nov 2026) |
+| M6 | Report, graphical abstract, presentation | [`M6_plan.md`](docs/milestones/M6_plan.md) | [`REPORT.md`](REPORT.md), [`presentation.pdf`](docs/presentation.pdf) |
+
+The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
+
+**Development and lockbox subjects.** Every third subject (S003, S006, ..., S102; 34 people) is a lockbox:
+until the final evaluation their recordings were used only for label-free checks, and they were decoded once
+(`results/final/LOCKBOX_OPENED.txt`). All method development uses
+the other 68 people. The rule was fixed before any data file was opened.
+
+The five sections below summarise the milestones in the order they were done. Their numbers are from the development people and are descriptive; the tested results are above.
+
+## M0: data check
 
 Full report: [`docs/milestones/M0_data_audit.md`](docs/milestones/M0_data_audit.md).
 
@@ -60,53 +111,7 @@ Full report: [`docs/milestones/M0_data_audit.md`](docs/milestones/M0_data_audit.
 
 <p align="center"><img src="figures/m0/01_noise_dry_vs_wet.png" width="900" alt="Mains pick-up, high-frequency noise and electrode offset per person: the headband stored first in the files is the noisy one, the dry headband"></p>
 
-## What is known so far (M4, time on task, impedance and failures, 68 development people)
-
-Full report: [`docs/milestones/M4_failures.md`](docs/milestones/M4_failures.md). One frozen decoder: template from
-other people, no calibration, 1 s.
-
-1. **Accuracy is stable over the ten blocks of a headband** (slope -0.004 per block dry, -0.002 wet; zero is
-   not excluded), and a calibration does not go stale in that time. Being the second headband costs 0.03.
-2. **Impedance changes a lot over the blocks and does not predict decoding** (correlation with accuracy +0.07
-   dry, +0.21 wet). The single-trial SNR of a short recording does (0.64 dry, 0.55 wet).
-3. **Hard-to-decode people are hard with both headbands** (correlation 0.68). Two of 68 are not above chance
-   with dry electrodes, none with wet ones.
-4. **The template makes no systematic confusion;** FBCCA confuses targets 0.5 Hz apart 1.3 to 1.4 times more
-   often than an even spread of errors would.
-
-## What is known so far (M3, small network and adaptation without labels, 68 development people)
-
-Full report: [`docs/milestones/M3_network.md`](docs/milestones/M3_network.md). New users with no calibration,
-1 s window.
-
-1. **A small network (3 572 parameters) trained on other people does not beat the template built from other
-   people:** 0.53 against 0.57 with dry electrodes, 0.62 against 0.73 with wet ones.
-2. **Adapting the network to the new user without labels** (batch-normalisation statistics, entropy
-   minimisation) changes accuracy by less than 0.01.
-3. **The same unlabelled signals help the template much more:** updated with its own decisions as labels it
-   reaches 0.60 (dry) and 0.81 (wet), about what one to two labelled calibration blocks give.
-4. Every decoder decides in less than 6 ms on one processor core; the preprocessing takes 6 ms.
-
-<p align="center"><img src="figures/m3/01_methods.png" width="850" alt="Accuracy at 1 s with no calibration for FBCCA, the template from other people, the template adapted without labels, and the network with and without adaptation, for dry and wet electrodes"></p>
-
-## What is known so far (M2, new users and calibration, 68 development people)
-
-Full report: [`docs/milestones/M2_calibration.md`](docs/milestones/M2_calibration.md). Descriptive results with
-95 % intervals over people; every person is decoded as a new user (leave-one-subject-out).
-
-1. **With no calibration at all, a template built from other people beats FBCCA** at every window length: at
-   1 s, 0.57 against 0.47 with dry electrodes and 0.73 against 0.65 with wet ones.
-2. **Two calibration blocks of the user (96 s) bring it to 0.61 (dry) and 0.82 (wet).** Other people's data
-   help most when the user has given little, and no longer matter after four blocks.
-3. **Per-person calibration with ensemble TRCA needs many blocks** and stays behind with dry electrodes: 0.52
-   (dry) and 0.85 (wet) after six blocks (288 s).
-4. **Dry electrodes cost 0.18 in accuracy at 1 s with FBCCA and 0.28 with ensemble TRCA** (same person).
-5. **The pipeline was corrected and frozen:** one mains frequency per trial for all channels, band below the
-   mains (45 Hz). No sample after the decision window is used anywhere.
-
-<p align="center"><img src="figures/m2/02_calibration_curve.png" width="900" alt="Accuracy of a new user at 1 s against the number of calibration blocks, for the cross-subject template, the user's own template and ensemble TRCA, with dry and wet electrodes"></p>
-
-## What is known so far (M1, standard decoders, 68 development people)
+## M1: standard decoders (68 development people)
 
 Full report: [`docs/milestones/M1_baselines.md`](docs/milestones/M1_baselines.md).
 
@@ -131,43 +136,51 @@ Full report: [`docs/milestones/M1_baselines.md`](docs/milestones/M1_baselines.md
 
 <p align="center"><img src="figures/m1/01_reproduction.png" width="900" alt="Accuracy against window length for CCA, FBCCA and ensemble TRCA with three ways of filtering; the published values lie on the curves obtained by filtering the whole epoch"></p>
 
-## How the work is organised
+## M2: new users and calibration (68 development people)
 
-Each milestone has a plan that is committed **before** it is run, and a report committed after it
-(see the commit history).
+Full report: [`docs/milestones/M2_calibration.md`](docs/milestones/M2_calibration.md). Descriptive results with
+95 % intervals over people; every person is decoded as a new user (leave-one-subject-out).
 
-| Milestone | Content | Plan | Report |
-|---|---|---|---|
-| M0 | Data check: files, layout, electrode type, timing, spectra, signal-to-noise ratio, impedance | [`M0_plan.md`](docs/milestones/M0_plan.md) | [`M0_data_audit.md`](docs/milestones/M0_data_audit.md) |
-| M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
-| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
-| M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
-| M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
-| Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
-| M5 | Real-time replay with measured latency | | Not carried out (author's decision, 13 Nov 2026) |
-| M6 | Report, graphical abstract, presentation | [`M6_plan.md`](docs/milestones/M6_plan.md) | |
+1. **With no calibration at all, a template built from other people beats FBCCA** at every window length: at
+   1 s, 0.57 against 0.47 with dry electrodes and 0.73 against 0.65 with wet ones.
+2. **Two calibration blocks of the user (96 s) bring it to 0.61 (dry) and 0.82 (wet).** Other people's data
+   help most when the user has given little, and no longer matter after four blocks.
+3. **Per-person calibration with ensemble TRCA needs many blocks** and stays behind with dry electrodes: 0.52
+   (dry) and 0.85 (wet) after six blocks (288 s).
+4. **Dry electrodes cost 0.18 in accuracy at 1 s with FBCCA and 0.28 with ensemble TRCA** (same person).
+5. **The pipeline was corrected and frozen:** one mains frequency per trial for all channels, band below the
+   mains (45 Hz). No sample after the decision window is used anywhere.
 
-The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
+<p align="center"><img src="figures/m2/02_calibration_curve.png" width="900" alt="Accuracy of a new user at 1 s against the number of calibration blocks, for the cross-subject template, the user's own template and ensemble TRCA, with dry and wet electrodes"></p>
 
-**Development and lockbox subjects.** Every third subject (S003, S006, ..., S102; 34 people) is a lockbox:
-until the final evaluation their recordings were used only for label-free checks, and they were decoded once
-(`results/final/LOCKBOX_OPENED.txt`). All method development uses
-the other 68 people. The rule was fixed before any data file was opened.
+## M3: small network and adaptation without labels (68 development people)
 
-## Data
+Full report: [`docs/milestones/M3_network.md`](docs/milestones/M3_network.md). New users with no calibration,
+1 s window.
 
-Not included. See [`DATA.md`](DATA.md) for the sources, the licences and the checksums.
+1. **A small network (3 572 parameters) trained on other people does not beat the template built from other
+   people:** 0.53 against 0.57 with dry electrodes, 0.62 against 0.73 with wet ones.
+2. **Adapting the network to the new user without labels** (batch-normalisation statistics, entropy
+   minimisation) changes accuracy by less than 0.01.
+3. **The same unlabelled signals help the template much more:** updated with its own decisions as labels it
+   reaches 0.60 (dry) and 0.81 (wet), about what one to two labelled calibration blocks give.
+4. Every decoder decides in less than 6 ms on one processor core; the preprocessing takes 6 ms.
 
-## Reproduce
+<p align="center"><img src="figures/m3/01_methods.png" width="850" alt="Accuracy at 1 s with no calibration for FBCCA, the template from other people, the template adapted without labels, and the network with and without adaptation, for dry and wet electrodes"></p>
 
-```bash
-pip install -r requirements.txt
-WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
-```
+## M4: time on task, impedance and failures (68 development people)
 
-Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
-M2 about fifteen, M3 about an hour (24 small networks are trained on the processor; PyTorch 2.15), M4 about four, and the
-rehearsal and preparation of the final evaluation about thirty (12 more networks). `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+Full report: [`docs/milestones/M4_failures.md`](docs/milestones/M4_failures.md). One frozen decoder: template from
+other people, no calibration, 1 s.
+
+1. **Accuracy is stable over the ten blocks of a headband** (slope -0.004 per block dry, -0.002 wet; zero is
+   not excluded), and a calibration does not go stale in that time. Being the second headband costs 0.03.
+2. **Impedance changes a lot over the blocks and does not predict decoding** (correlation with accuracy +0.07
+   dry, +0.21 wet). The single-trial SNR of a short recording does (0.64 dry, 0.55 wet).
+3. **Hard-to-decode people are hard with both headbands** (correlation 0.68). Two of 68 are not above chance
+   with dry electrodes, none with wet ones.
+4. **The template makes no systematic confusion;** FBCCA confuses targets 0.5 Hz apart 1.3 to 1.4 times more
+   often than an even spread of errors would.
 
 ## Repository layout
 
@@ -196,8 +209,11 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m4_decode.py (decision of every trial), m4_summary.py, m4_figures.py
                 final_evaluation.py (the 15 tests for new people given a population; rehearsal and lockbox),
                 final_figures.py, final_summary.py (descriptive numbers, written after the opening)
+                m6_graphical_abstract.py
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
-docs/           analysis_plan.md, milestones/ (one plan and one report per milestone)
+REPORT.md       the final report
+docs/           analysis_plan.md, milestones/ (one plan and one report per milestone), presentation.pptx and .pdf
+CITATION.cff    how to cite
 results/        result tables (CSV), one folder per milestone
 figures/        figures, one folder per milestone
 logs/           run logs

@@ -51,16 +51,17 @@ def fig_time(d):
 def fig_people(d):
     acc = d.assign(ok=d.template == d.target).groupby(["subject", "electrode"]).ok.mean().unstack("electrode")
     thr = mt.chance_threshold(120, 12)
-    fig, ax = plt.subplots(figsize=(6.4, 6.0))
+    fig, ax = plt.subplots(figsize=(7.4, 6.6))
     ax.plot([0, 1], [0, 1], color=pl.INK, lw=0.8)
     ax.axhline(thr, color=pl.INK2, lw=0.8, ls=(0, (1, 2)))
     ax.axvline(thr, color=pl.INK2, lw=0.8, ls=(0, (1, 2)))
     pl.dots(ax, acc.wet, acc.dry, color=pl.NEUTRAL, size=38)
     for sid in acc.index[acc.dry < thr]:
         ax.annotate(f"S{sid:03d}", (acc.wet[sid], acc.dry[sid]), xytext=(7, 3), textcoords="offset points", fontsize=8.5)
-    ax.annotate("not above chance", (0.99, thr), xytext=(0, -4), textcoords="offset points", ha="right", va="top", fontsize=8.5)
+    ax.annotate(f"dotted lines: chance threshold ({thr:.3f})", (1.0, thr), xytext=(0, 4), textcoords="offset points", ha="right", va="bottom",
+                fontsize=8.5, color=pl.INK2)
     ax.set(xlabel="Accuracy with the wet headband", ylabel="Accuracy with the dry headband", xlim=(0, 1.02), ylim=(0, 1.02), aspect="equal")
-    fig.subplots_adjust(left=0.13, right=0.97, bottom=0.11, top=0.84)
+    fig.subplots_adjust(left=0.12, right=0.97, bottom=0.13, top=0.88)
     return fig
 
 
@@ -94,8 +95,9 @@ def main():
     pl.save(fig_time(d), FIG / "01_time_on_task.png", "Accuracy hardly changes over the ten blocks, while the impedance does",
             "68 development people as new users, cross-subject template, 1 s window. Band: 95 % interval over people. "
             "Dry impedance rises, wet impedance falls.")
-    pl.save(fig_people(d), FIG / "02_people.png", "People who are hard to decode with one headband are hard with the other",
-            "Each dot is one development person; cross-subject template, no calibration, 1 s, all 10 blocks. Labelled: not above chance with the dry headband.")
+    pl.save(fig_people(d), FIG / "02_people.png", "People hard to decode with one headband are hard with the other",
+            "Each dot is one development person; cross-subject template, no calibration, 1 s, all 10 blocks.\n"
+            "Labelled: not above chance with the dry headband.")
     pl.save(fig_errors(), FIG / "03_errors.png", "The template spreads its errors evenly; FBCCA makes more errors between frequencies 0.5 Hz apart",
             "Errors at 1 s, 68 development people. 1.0 = what an even spread over the 11 wrong targets would give.")
     print("wrote 3 figures to", FIG)

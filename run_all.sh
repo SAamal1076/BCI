@@ -84,4 +84,7 @@ echo "Final  reproduction of the lockbox evaluation (compared with the opening),
 python scripts/final_evaluation.py evaluate --set lockbox --raw "$WEARABLE_DIR" --open-lockbox --reproduce | tee logs/final_lockbox_reproduction.log
 python scripts/final_figures.py --set lockbox
 python scripts/final_summary.py | tee logs/final_summary.log
+
+echo "M6  graphical abstract from the result files of the final evaluation"
+python scripts/m6_graphical_abstract.py
 echo "done"

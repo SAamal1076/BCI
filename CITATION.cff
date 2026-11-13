@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below, and cite the datasets it uses (see DATA.md)."
+title: "Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation"
+type: software
+authors:
+  - family-names: "Almuhammad Alali"
+    given-names: "Salman"
+repository-code: "https://github.com/SAamal1076/BCI"
+license: "PolyForm-Noncommercial-1.0.0"
+version: "1.0.0"
+date-released: 2026-11-14
+abstract: >-
+  A pre-specified analysis of SSVEP decoding from an 8-channel wearable EEG headband for a new user, on the
+  open dataset of Zhu et al. (2021): dry against wet electrodes, calibration time, adaptation without labels.
+  Every choice was made on 68 people; 15 tests were run once on the other 34.
+references:
+  - type: article
+    title: "An Open Dataset for Wearable SSVEP-Based Brain-Computer Interfaces"
+    authors:
+      - family-names: "Zhu"
+        given-names: "F."
+      - family-names: "Jiang"
+        given-names: "L."
+      - family-names: "Dong"
+        given-names: "G."
+      - family-names: "Gao"
+        given-names: "X."
+      - family-names: "Wang"
+        given-names: "Y."
+    journal: "Sensors"
+    volume: 21
+    issue: 4
+    start: 1256
+    year: 2021
+    doi: "10.3390/s21041256"
+  - type: article
+    title: "BETA: A Large Benchmark Database Toward SSVEP-BCI Application"
+    authors:
+      - family-names: "Liu"
+        given-names: "B."
+      - family-names: "Huang"
+        given-names: "X."
+      - family-names: "Wang"
+        given-names: "Y."
+      - family-names: "Chen"
+        given-names: "X."
+      - family-names: "Gao"
+        given-names: "X."
+    journal: "Frontiers in Neuroscience"
+    volume: 14
+    start: 627
+    year: 2020
+    doi: "10.3389/fnins.2020.00627"

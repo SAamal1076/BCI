@@ -198,10 +198,23 @@ Report: `docs/milestones/M3_network.md`.
    wherever H6 is reported. Its test is fixed in `docs/milestones/M4_plan.md`.
 2. **No further training of the network.** The M3 results stand as they are.
 
+## Fixed before M4 (approved 13 Nov 2026, before anything of M4 was run)
+
+Details: `docs/milestones/M4_plan.md`. Decoder for all of M4: cross-subject template, no calibration, 1 s.
+
+- **H5a:** the slope of accuracy over the 10 blocks of a headband is negative; one-sided Wilcoxon signed-rank
+  test over people; dry and wet.
+- **H5b:** across people, the Spearman correlation between `log10` of the median impedance and accuracy is
+  negative; one-sided permutation test (10 000 permutations, fixed seed); dry and wet.
+- **H6:** the template updated with the user's unlabelled blocks 1 to 6 (`n0` = 4) is more accurate on blocks
+  7 to 10 at 1 s than the template; one-sided Wilcoxon signed-rank test; dry and wet. Written after its effect
+  was seen on the development people.
+- **Holm family, complete: 15 tests.** H1 (4), H2 (2), H3 (3), H5a (2), H5b (2), H6 (2). The lockbox is opened
+  once, by a separate short plan, after M4.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M4 | Proposed in `docs/milestones/M4_plan.md` (waiting for approval): time on task and impedance (tests of H5a and H5b), who fails, what is confused; test of H6; the Holm family of 15 tests. |
 | Final evaluation | A short plan after M4: the single opening of the lockbox, every method and setting frozen. |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

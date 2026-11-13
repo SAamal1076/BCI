@@ -1,8 +1,8 @@
 # M4 plan: time on task, impedance, who fails and what is confused
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** Written after M3
-(`M3_network.md`) and the author's two decisions of 13 Nov 2026 (recorded in `docs/analysis_plan.md`).
-Anything done differently will be listed under "Deviations" in the M4 report.*
+*Proposed on 13 Nov 2026 and **approved by the author the same day**, as written, before anything was run.
+Written after M3 (`M3_network.md`) and the author's two decisions of 13 Nov 2026 (recorded in
+`docs/analysis_plan.md`). Anything done differently is listed under "Deviations" in `M4_failures.md`.*
 
 ## Purpose
 

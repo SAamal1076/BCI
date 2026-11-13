@@ -1,0 +1,11 @@
+subject S001: vectorised decoders against literal implementations
+variant  window_s electrode        method  max_abs_difference_of_correlations  trials_with_same_decision  trials  accuracy_fast  accuracy_literal
+      B       1.0       dry         FBCCA                        1.781908e-14                        120     120       0.216667          0.216667
+      B       1.0       dry ensemble TRCA                        1.861749e-03                        120     120       0.158333          0.158333
+      B       1.0       wet         FBCCA                        9.919843e-14                        120     120       0.525000          0.525000
+      B       1.0       wet ensemble TRCA                        1.476641e-03                        120     120       0.808333          0.808333
+      C       0.4       dry         FBCCA                        2.386980e-14                        120     120       0.050000          0.050000
+      C       0.4       dry ensemble TRCA                        5.544677e-03                        120     120       0.283333          0.283333
+      C       0.4       wet         FBCCA                        7.838175e-14                        120     120       0.408333          0.408333
+      C       0.4       wet ensemble TRCA                        5.999843e-03                        120     120       0.766667          0.766667
+all decisions identical

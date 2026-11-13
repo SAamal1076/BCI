@@ -1,0 +1,18 @@
+gate,method,window_s,electrode,published,ours,ours_sem,difference,passed
+G1,CCA,1.0,dry,0.497,0.424,0.031,-0.073,False
+G1,CCA,1.0,wet,0.684,0.609,0.029,-0.075,False
+G2,"FBCCA, published weights",1.0,dry,0.53,0.43,0.031,-0.1,False
+G2,"FBCCA, published weights",1.0,wet,0.73,0.635,0.03,-0.095,False
+G2,"FBCCA, published weights",2.0,dry,0.73,0.642,0.033,-0.088,False
+G2,"FBCCA, published weights",2.0,wet,0.86,0.806,0.024,-0.054,False
+G3,"ensemble TRCA, published weights",1.0,dry,0.62,0.141,0.016,-0.479,False
+G3,"ensemble TRCA, published weights",1.0,wet,0.88,0.558,0.044,-0.322,False
+G3,"ensemble TRCA, published weights",2.0,dry,0.73,0.136,0.015,-0.594,False
+G3,"ensemble TRCA, published weights",2.0,wet,0.93,0.562,0.045,-0.368,False
+G4,CCA,1.0,wet minus dry,0.18700000000000006,0.185,,,True
+G4,CCA,2.0,wet minus dry,,0.152,,,True
+G4,"FBCCA, published weights",1.0,wet minus dry,0.19999999999999996,0.205,,,True
+G4,"FBCCA, published weights",2.0,wet minus dry,0.13,0.164,,,True
+G4,"ensemble TRCA, published weights",1.0,wet minus dry,0.26,0.417,,,True
+G4,"ensemble TRCA, published weights",2.0,wet minus dry,0.20000000000000007,0.426,,,True
+G5,"BETA: CCA, FBCCA, ensemble TRCA",,,,,,,not run

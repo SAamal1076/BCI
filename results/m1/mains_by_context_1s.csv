@@ -1,0 +1,13 @@
+method,electrode,context,mains kept,mains removed
+"FBCCA, a-priori weights",dry,window only,0.4217,0.4449
+"FBCCA, a-priori weights",dry,past samples + window,,0.4512
+"FBCCA, a-priori weights",dry,whole epoch,0.4314,0.4884
+"FBCCA, a-priori weights",wet,window only,0.6230,0.6096
+"FBCCA, a-priori weights",wet,past samples + window,,0.6208
+"FBCCA, a-priori weights",wet,whole epoch,0.6358,0.6737
+"ensemble TRCA, a-priori weights",dry,window only,0.1300,0.4560
+"ensemble TRCA, a-priori weights",dry,past samples + window,,0.5153
+"ensemble TRCA, a-priori weights",dry,whole epoch,0.1325,0.6549
+"ensemble TRCA, a-priori weights",wet,window only,0.5070,0.8403
+"ensemble TRCA, a-priori weights",wet,past samples + window,,0.8412
+"ensemble TRCA, a-priori weights",wet,whole epoch,0.5110,0.8509

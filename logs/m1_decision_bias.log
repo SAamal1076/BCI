@@ -1,0 +1,94 @@
+== synthetic epochs without any response: share of the decisions on 12.25 or 12.75 Hz
+   (plain CCA, 1 s window; these two targets get fewer decisions than 2/12 here because the 1/f noise
+   favours the low targets; what matters is the change along a row)
+   mains kept: A, C- | removed, frequency chosen per channel: A+, B, C | removed, one frequency per trial: B*, C*
+references with harmonics 1-3:
+variant                                    A     C-     A+      B      C     B*     C*
+synthetic_epochs                                                                      
+no mains                               0.058  0.064  0.066  0.067  0.070  0.061  0.065
+steady mains, 40 x the noise           0.065  0.077  0.062  0.064  0.069  0.064  0.067
+wandering mains (3 %), 8 x the noise   0.075  0.076  0.065  0.067  0.068  0.068  0.068
+wandering mains (3 %), 40 x the noise  0.071  0.077  0.068  0.068  0.072  0.068  0.073
+references with harmonics 1-5:
+variant                                    A     C-     A+      B      C     B*     C*
+synthetic_epochs                                                                      
+no mains                               0.056  0.064  0.760  0.545  0.354  0.058  0.062
+steady mains, 40 x the noise           0.061  0.076  0.062  0.063  0.068  0.060  0.066
+wandering mains (3 %), 8 x the noise   0.071  0.072  0.063  0.072  0.078  0.070  0.078
+wandering mains (3 %), 40 x the noise  0.065  0.073  0.076  0.268  0.246  0.243  0.243
+
+== recordings. development subjects: 68; plain CCA, sub-band 1, 1 s window
+share of the decisions that go to 12.25 or 12.75 Hz (no bias: 2/12 = 0.167), and accuracy
+variants: A cut then filter, mains kept | C- whole epoch, mains kept | A+ cut then filter, mains removed
+          B past samples, mains removed | C whole epoch, mains removed
+          B*, C*: as B and C with one mains frequency per trial shared by the channels (this script only)
+
+share of the decisions on 12.25 or 12.75 Hz, by the harmonics in the references:
+harmonics                                                           1    1-2    1-3    1-4    1-5  1-3 and 5
+mains                  context               variant electrode                                              
+kept                   whole epoch           C-      dry        0.149  0.140  0.144  0.166  0.153      0.133
+                                                     wet        0.160  0.152  0.153  0.160  0.156      0.151
+                       window only           A       dry        0.139  0.136  0.140  0.162  0.151      0.130
+                                                     wet        0.157  0.153  0.153  0.159  0.152      0.147
+removed                past samples + window B       dry        0.138  0.135  0.137  0.229  0.212      0.128
+                                                     wet        0.160  0.156  0.158  0.258  0.248      0.152
+                       whole epoch           C       dry        0.146  0.138  0.140  0.195  0.185      0.134
+                                                     wet        0.162  0.158  0.160  0.202  0.198      0.159
+                       window only           A+      dry        0.138  0.132  0.134  0.187  0.157      0.126
+                                                     wet        0.160  0.156  0.156  0.248  0.210      0.145
+removed, one frequency past samples + window B*      dry        0.140  0.136  0.138  0.203  0.190      0.131
+                                                     wet        0.160  0.153  0.157  0.189  0.181      0.154
+                       whole epoch           C*      dry        0.146  0.137  0.139  0.182  0.174      0.134
+                                                     wet        0.164  0.159  0.160  0.168  0.165      0.160
+
+accuracy, by the harmonics in the references:
+harmonics                                                           1    1-2    1-3    1-4    1-5  1-3 and 5
+mains                  context               variant electrode                                              
+kept                   whole epoch           C-      dry        0.402  0.436  0.450  0.448  0.439      0.438
+                                                     wet        0.550  0.609  0.628  0.631  0.626      0.621
+                       window only           A       dry        0.383  0.419  0.431  0.431  0.424      0.423
+                                                     wet        0.524  0.588  0.611  0.611  0.609      0.608
+removed                past samples + window B       dry        0.426  0.465  0.479  0.465  0.460      0.463
+                                                     wet        0.561  0.627  0.651  0.617  0.621      0.636
+                       whole epoch           C       dry        0.451  0.493  0.508  0.499  0.494      0.498
+                                                     wet        0.583  0.646  0.668  0.660  0.657      0.663
+                       window only           A+      dry        0.411  0.452  0.465  0.461  0.453      0.452
+                                                     wet        0.556  0.623  0.646  0.616  0.609      0.613
+removed, one frequency past samples + window B*      dry        0.421  0.463  0.476  0.470  0.465      0.465
+                                                     wet        0.568  0.632  0.654  0.651  0.653      0.653
+                       whole epoch           C*      dry        0.450  0.491  0.507  0.501  0.496      0.496
+                                                     wet        0.586  0.649  0.670  0.674  0.669      0.667
+
+share of the decisions per target frequency (Hz), harmonics 1-5 (no bias: 0.083):
+                    9.25   9.75  10.25  10.75  11.25  11.75  12.25  12.75  13.25  13.75  14.25  14.75
+variant electrode                                                                                    
+A       dry        0.151  0.116  0.118  0.092  0.081  0.075  0.074  0.077  0.057  0.058  0.054  0.047
+        wet        0.112  0.105  0.116  0.088  0.084  0.081  0.075  0.077  0.066  0.067  0.067  0.061
+A+      dry        0.147  0.132  0.117  0.091  0.076  0.073  0.077  0.081  0.056  0.057  0.048  0.047
+        wet        0.096  0.109  0.116  0.083  0.071  0.073  0.101  0.109  0.059  0.063  0.063  0.055
+B       dry        0.139  0.104  0.107  0.087  0.074  0.070  0.105  0.107  0.058  0.056  0.048  0.046
+        wet        0.092  0.090  0.096  0.083  0.073  0.075  0.125  0.124  0.061  0.063  0.062  0.057
+B*      dry        0.148  0.105  0.109  0.090  0.074  0.072  0.094  0.096  0.058  0.057  0.049  0.048
+        wet        0.105  0.100  0.103  0.090  0.080  0.080  0.091  0.090  0.065  0.068  0.068  0.060
+C       dry        0.141  0.103  0.105  0.089  0.078  0.075  0.091  0.094  0.063  0.059  0.052  0.049
+        wet        0.099  0.095  0.100  0.089  0.078  0.079  0.099  0.099  0.066  0.068  0.066  0.062
+C*      dry        0.142  0.104  0.107  0.090  0.078  0.077  0.086  0.088  0.063  0.059  0.054  0.051
+        wet        0.106  0.097  0.102  0.093  0.083  0.081  0.083  0.082  0.069  0.071  0.070  0.063
+C-      dry        0.143  0.110  0.119  0.093  0.080  0.079  0.076  0.078  0.060  0.060  0.055  0.048
+        wet        0.106  0.104  0.111  0.089  0.083  0.083  0.075  0.081  0.069  0.068  0.070  0.062
+
+amplitude near the mains in the 1 s window (µV, median over people of the mean over channels and trials);
+removed = mains removal of variant B, no band-pass filter:
+                   46 Hz  47 Hz  48 Hz  49 Hz   50 Hz  51 Hz  52 Hz  53 Hz  54 Hz
+electrode mains                                                                  
+dry       kept     1.783  1.921  2.195  3.055  98.020  3.049  2.169  1.905  1.697
+          removed  1.603  1.578  1.568  1.597   0.616  1.639  1.596  1.522  1.532
+wet       kept     1.504  1.493  1.522  1.658  14.499  1.576  1.490  1.459  1.466
+          removed  1.497  1.493  1.474  1.362   0.564  1.338  1.439  1.421  1.448
+
+ratio of the amplitude at 49 and 51 Hz to the amplitude at 47, 48, 52 and 53 Hz (1 = nothing special):
+electrode  mains  
+dry        kept       1.50
+           removed    0.99
+wet        kept       1.05
+           removed    0.93

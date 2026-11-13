@@ -1,0 +1,57 @@
+synthetic_epochs,mains,variant,harmonics,share
+no mains,kept,A,1-3,0.0583
+no mains,kept,A,1-5,0.0563
+no mains,kept,C-,1-3,0.0643
+no mains,kept,C-,1-5,0.0637
+no mains,removed,A+,1-3,0.0663
+no mains,removed,A+,1-5,0.7597
+no mains,removed,B,1-3,0.0670
+no mains,removed,B,1-5,0.5453
+no mains,removed,C,1-3,0.0700
+no mains,removed,C,1-5,0.3543
+no mains,"removed, one frequency",B*,1-3,0.0613
+no mains,"removed, one frequency",B*,1-5,0.0580
+no mains,"removed, one frequency",C*,1-3,0.0647
+no mains,"removed, one frequency",C*,1-5,0.0617
+"steady mains, 40 x the noise",kept,A,1-3,0.0653
+"steady mains, 40 x the noise",kept,A,1-5,0.0607
+"steady mains, 40 x the noise",kept,C-,1-3,0.0767
+"steady mains, 40 x the noise",kept,C-,1-5,0.0757
+"steady mains, 40 x the noise",removed,A+,1-3,0.0623
+"steady mains, 40 x the noise",removed,A+,1-5,0.0617
+"steady mains, 40 x the noise",removed,B,1-3,0.0637
+"steady mains, 40 x the noise",removed,B,1-5,0.0630
+"steady mains, 40 x the noise",removed,C,1-3,0.0690
+"steady mains, 40 x the noise",removed,C,1-5,0.0680
+"steady mains, 40 x the noise","removed, one frequency",B*,1-3,0.0640
+"steady mains, 40 x the noise","removed, one frequency",B*,1-5,0.0597
+"steady mains, 40 x the noise","removed, one frequency",C*,1-3,0.0673
+"steady mains, 40 x the noise","removed, one frequency",C*,1-5,0.0660
+"wandering mains (3 %), 8 x the noise",kept,A,1-3,0.0747
+"wandering mains (3 %), 8 x the noise",kept,A,1-5,0.0710
+"wandering mains (3 %), 8 x the noise",kept,C-,1-3,0.0757
+"wandering mains (3 %), 8 x the noise",kept,C-,1-5,0.0717
+"wandering mains (3 %), 8 x the noise",removed,A+,1-3,0.0653
+"wandering mains (3 %), 8 x the noise",removed,A+,1-5,0.0630
+"wandering mains (3 %), 8 x the noise",removed,B,1-3,0.0673
+"wandering mains (3 %), 8 x the noise",removed,B,1-5,0.0723
+"wandering mains (3 %), 8 x the noise",removed,C,1-3,0.0677
+"wandering mains (3 %), 8 x the noise",removed,C,1-5,0.0780
+"wandering mains (3 %), 8 x the noise","removed, one frequency",B*,1-3,0.0683
+"wandering mains (3 %), 8 x the noise","removed, one frequency",B*,1-5,0.0703
+"wandering mains (3 %), 8 x the noise","removed, one frequency",C*,1-3,0.0683
+"wandering mains (3 %), 8 x the noise","removed, one frequency",C*,1-5,0.0777
+"wandering mains (3 %), 40 x the noise",kept,A,1-3,0.0710
+"wandering mains (3 %), 40 x the noise",kept,A,1-5,0.0653
+"wandering mains (3 %), 40 x the noise",kept,C-,1-3,0.0767
+"wandering mains (3 %), 40 x the noise",kept,C-,1-5,0.0727
+"wandering mains (3 %), 40 x the noise",removed,A+,1-3,0.0680
+"wandering mains (3 %), 40 x the noise",removed,A+,1-5,0.0763
+"wandering mains (3 %), 40 x the noise",removed,B,1-3,0.0683
+"wandering mains (3 %), 40 x the noise",removed,B,1-5,0.2677
+"wandering mains (3 %), 40 x the noise",removed,C,1-3,0.0723
+"wandering mains (3 %), 40 x the noise",removed,C,1-5,0.2457
+"wandering mains (3 %), 40 x the noise","removed, one frequency",B*,1-3,0.0677
+"wandering mains (3 %), 40 x the noise","removed, one frequency",B*,1-5,0.2430
+"wandering mains (3 %), 40 x the noise","removed, one frequency",C*,1-3,0.0730
+"wandering mains (3 %), 40 x the noise","removed, one frequency",C*,1-5,0.2433

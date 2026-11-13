@@ -1,0 +1,85 @@
+mains,context,variant,electrode,harmonics,accuracy,share_of_decisions_on_12.25_and_12.75_Hz
+kept,window only,A,dry,1,0.3827,0.1395
+kept,window only,A,wet,1,0.5238,0.1572
+kept,window only,A,dry,1-2,0.4188,0.1357
+kept,window only,A,wet,1-2,0.5885,0.1529
+kept,window only,A,dry,1-3,0.4308,0.1398
+kept,window only,A,wet,1-3,0.6114,0.1529
+kept,window only,A,dry,1-4,0.4311,0.1624
+kept,window only,A,wet,1-4,0.6114,0.1588
+kept,window only,A,dry,1-5,0.4241,0.1511
+kept,window only,A,wet,1-5,0.6092,0.1522
+kept,window only,A,dry,1-3 and 5,0.4228,0.1297
+kept,window only,A,wet,1-3 and 5,0.6078,0.1474
+kept,whole epoch,C-,dry,1,0.4021,0.1494
+kept,whole epoch,C-,wet,1,0.5499,0.1602
+kept,whole epoch,C-,dry,1-2,0.4362,0.1398
+kept,whole epoch,C-,wet,1-2,0.6087,0.1525
+kept,whole epoch,C-,dry,1-3,0.4495,0.1440
+kept,whole epoch,C-,wet,1-3,0.6284,0.1534
+kept,whole epoch,C-,dry,1-4,0.4475,0.1657
+kept,whole epoch,C-,wet,1-4,0.6311,0.1598
+kept,whole epoch,C-,dry,1-5,0.4388,0.1534
+kept,whole epoch,C-,wet,1-5,0.6259,0.1556
+kept,whole epoch,C-,dry,1-3 and 5,0.4382,0.1335
+kept,whole epoch,C-,wet,1-3 and 5,0.6210,0.1509
+removed,window only,A+,dry,1,0.4107,0.1380
+removed,window only,A+,wet,1,0.5556,0.1597
+removed,window only,A+,dry,1-2,0.4520,0.1317
+removed,window only,A+,wet,1-2,0.6225,0.1559
+removed,window only,A+,dry,1-3,0.4653,0.1339
+removed,window only,A+,wet,1-3,0.6458,0.1560
+removed,window only,A+,dry,1-4,0.4614,0.1873
+removed,window only,A+,wet,1-4,0.6161,0.2482
+removed,window only,A+,dry,1-5,0.4534,0.1572
+removed,window only,A+,wet,1-5,0.6092,0.2104
+removed,window only,A+,dry,1-3 and 5,0.4517,0.1259
+removed,window only,A+,wet,1-3 and 5,0.6135,0.1451
+removed,past samples + window,B,dry,1,0.4260,0.1381
+removed,past samples + window,B,wet,1,0.5613,0.1600
+removed,past samples + window,B,dry,1-2,0.4653,0.1347
+removed,past samples + window,B,wet,1-2,0.6266,0.1560
+removed,past samples + window,B,dry,1-3,0.4789,0.1373
+removed,past samples + window,B,wet,1-3,0.6507,0.1583
+removed,past samples + window,B,dry,1-4,0.4651,0.2294
+removed,past samples + window,B,wet,1-4,0.6174,0.2582
+removed,past samples + window,B,dry,1-5,0.4602,0.2116
+removed,past samples + window,B,wet,1-5,0.6207,0.2482
+removed,past samples + window,B,dry,1-3 and 5,0.4631,0.1277
+removed,past samples + window,B,wet,1-3 and 5,0.6364,0.1520
+removed,whole epoch,C,dry,1,0.4513,0.1456
+removed,whole epoch,C,wet,1,0.5831,0.1625
+removed,whole epoch,C,dry,1-2,0.4926,0.1381
+removed,whole epoch,C,wet,1-2,0.6460,0.1585
+removed,whole epoch,C,dry,1-3,0.5081,0.1397
+removed,whole epoch,C,wet,1-3,0.6678,0.1602
+removed,whole epoch,C,dry,1-4,0.4988,0.1950
+removed,whole epoch,C,wet,1-4,0.6598,0.2021
+removed,whole epoch,C,dry,1-5,0.4936,0.1850
+removed,whole epoch,C,wet,1-5,0.6575,0.1980
+removed,whole epoch,C,dry,1-3 and 5,0.4975,0.1337
+removed,whole epoch,C,wet,1-3 and 5,0.6629,0.1588
+"removed, one frequency",past samples + window,B*,dry,1,0.4207,0.1396
+"removed, one frequency",past samples + window,B*,wet,1,0.5675,0.1604
+"removed, one frequency",past samples + window,B*,dry,1-2,0.4627,0.1357
+"removed, one frequency",past samples + window,B*,wet,1-2,0.6325,0.1534
+"removed, one frequency",past samples + window,B*,dry,1-3,0.4759,0.1385
+"removed, one frequency",past samples + window,B*,wet,1-3,0.6536,0.1567
+"removed, one frequency",past samples + window,B*,dry,1-4,0.4701,0.2027
+"removed, one frequency",past samples + window,B*,wet,1-4,0.6506,0.1892
+"removed, one frequency",past samples + window,B*,dry,1-5,0.4650,0.1897
+"removed, one frequency",past samples + window,B*,wet,1-5,0.6531,0.1815
+"removed, one frequency",past samples + window,B*,dry,1-3 and 5,0.4651,0.1306
+"removed, one frequency",past samples + window,B*,wet,1-3 and 5,0.6529,0.1537
+"removed, one frequency",whole epoch,C*,dry,1,0.4505,0.1456
+"removed, one frequency",whole epoch,C*,wet,1,0.5858,0.1641
+"removed, one frequency",whole epoch,C*,dry,1-2,0.4906,0.1375
+"removed, one frequency",whole epoch,C*,wet,1-2,0.6485,0.1593
+"removed, one frequency",whole epoch,C*,dry,1-3,0.5070,0.1391
+"removed, one frequency",whole epoch,C*,wet,1-3,0.6702,0.1600
+"removed, one frequency",whole epoch,C*,dry,1-4,0.5009,0.1816
+"removed, one frequency",whole epoch,C*,wet,1-4,0.6735,0.1684
+"removed, one frequency",whole epoch,C*,dry,1-5,0.4956,0.1738
+"removed, one frequency",whole epoch,C*,wet,1-5,0.6695,0.1654
+"removed, one frequency",whole epoch,C*,dry,1-3 and 5,0.4962,0.1344
+"removed, one frequency",whole epoch,C*,wet,1-3 and 5,0.6672,0.1603

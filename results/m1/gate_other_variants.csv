@@ -1,0 +1,6 @@
+variant,G1-G3 values within 0.05,"largest deviation, G1-G3","mean deviation, G1-G3",all 14 published values within 0.05,"largest deviation, all 14"
+A,0/10,0.594,0.225,1/14,0.594
+A+,5/10,0.140,0.071,7/14,0.140
+B,5/10,0.093,0.053,7/14,0.093
+C-,1/10,0.593,0.218,2/14,0.593
+C,9/10,0.053,0.029,13/14,0.053

@@ -1,0 +1,9 @@
+variant,window_s,electrode,method,max_abs_difference_of_correlations,trials_with_same_decision,trials,accuracy_fast,accuracy_literal
+B,1,dry,FBCCA,1.78e-14,120,120,0.217,0.217
+B,1,dry,ensemble TRCA,0.00186,120,120,0.158,0.158
+B,1,wet,FBCCA,9.92e-14,120,120,0.525,0.525
+B,1,wet,ensemble TRCA,0.00148,120,120,0.808,0.808
+C,0.4,dry,FBCCA,2.39e-14,120,120,0.05,0.05
+C,0.4,dry,ensemble TRCA,0.00554,120,120,0.283,0.283
+C,0.4,wet,FBCCA,7.84e-14,120,120,0.408,0.408
+C,0.4,wet,ensemble TRCA,0.006,120,120,0.767,0.767

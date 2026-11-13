@@ -1,0 +1,5 @@
+method,window_s,dry lower in,"mean, dry worn first",n,"mean, wet worn first",n ,headband effect (mean of the two),second-headband effect
+"FBCCA, a-priori weights",1.0000,56/68,-0.1317,35,-0.2098,33,-0.1708,-0.0391
+"FBCCA, a-priori weights",2.0000,52/68,-0.1307,35,-0.1593,33,-0.1450,-0.0143
+"ensemble TRCA, a-priori weights",1.0000,62/68,-0.3076,35,-0.3452,33,-0.3264,-0.0188
+"ensemble TRCA, a-priori weights",2.0000,57/68,-0.2483,35,-0.2614,33,-0.2548,-0.0065

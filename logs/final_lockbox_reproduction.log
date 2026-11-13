@@ -1,0 +1,65 @@
+set lockbox: 34 new people decoded with a population of 68 development people in 63 s; frozen.json matches
+  accuracy.csv: identical to the opening
+  decisions_1s.csv: identical to the opening
+  impedance.csv: identical to the opening
+  tests.csv: identical to the opening
+== final evaluation, set 'lockbox': 34 new people (dry worn first: 18, wet worn first: 16); pipeline B2, n0 = 4
+population: 68 development people (57 for training, 11 for validation of the networks)
+
+== 1. the 15 tests (one-sided; Holm at familywise level 0.05)
+ test hypothesis          case                                    quantity  n   estimate [95 % interval]       p threshold p (Holm)  supported
+    1         H1     fbcca 1 s dry minus wet accuracy (crossover estimate) 34 -0.2109 [-0.2777, -0.1501] 2.6e-06    0.0042  3.1e-05       True
+    2         H1     fbcca 2 s dry minus wet accuracy (crossover estimate) 34 -0.1597 [-0.2239, -0.1036] 6.3e-06    0.0050  6.3e-05       True
+    3         H1     etrca 1 s dry minus wet accuracy (crossover estimate) 34 -0.3331 [-0.4224, -0.2459]   1e-06    0.0036  1.5e-05       True
+    4         H1     etrca 2 s dry minus wet accuracy (crossover estimate) 34 -0.2720 [-0.3619, -0.1871]   1e-06    0.0033  1.5e-05       True
+    5         H2           dry template k=2 minus eTRCA k=6 (margin -0.05) 34 +0.1452 [+0.0815, +0.2114] 1.1e-06    0.0038  1.5e-05       True
+    6         H2           wet template k=2 minus eTRCA k=6 (margin -0.05) 34 -0.0527 [-0.0760, -0.0312]    0.45    0.0250      0.9      False
+    7         H3           dry                        network: A2 minus A0 34 +0.0069 [-0.0014, +0.0153]   0.059    0.0071     0.41      False
+    8         H3           wet                        network: A2 minus A0 34 +0.0022 [-0.0049, +0.0086]    0.27    0.0167     0.85      False
+    9         H3 dry minus wet                        network: A2 minus A0 34 +0.0047 [-0.0057, +0.0149]    0.16    0.0100     0.85      False
+   10        H5a           dry                 slope of accuracy per block 34 -0.0027 [-0.0087, +0.0036]    0.19    0.0125     0.85      False
+   11        H5a           wet                 slope of accuracy per block 34 +0.0021 [-0.0037, +0.0080]    0.69    0.0500      0.9      False
+   12        H5b           dry   Spearman of log10 impedance with accuracy 34 -0.3548 [-0.5798, -0.0789]   0.019    0.0063     0.15      False
+   13        H5b           wet   Spearman of log10 impedance with accuracy 34 -0.1913 [-0.4782, +0.1404]    0.14    0.0083     0.85      False
+   14         H6           dry             adapted template minus template 34 +0.0404 [+0.0202, +0.0595] 0.00043    0.0056   0.0038       True
+   15         H6           wet             adapted template minus template 34 +0.0686 [+0.0484, +0.0901] 3.5e-06    0.0045  3.8e-05       True
+supported after Holm: 7 of 15
+
+== 2. no calibration, blocks 7 to 10, 1 s: mean accuracy [95 % interval over people]; next to it: the 68 development people (M2 to M4)
+          method  window_s  k                  dry dry, the 68 development people (M2 to M4)                  wet wet, the 68 development people (M2 to M4)
+           fbcca       1.0  0 0.504 [0.420, 0.587]                                     0.465 0.707 [0.634, 0.775]                                     0.652
+        template       1.0  0 0.567 [0.482, 0.646]                                     0.568 0.773 [0.710, 0.832]                                     0.730
+template_adapted       1.0  0 0.607 [0.518, 0.689]                                     0.603 0.842 [0.782, 0.898]                                     0.805
+          net_A0       1.0  0 0.508 [0.422, 0.589]                                     0.534 0.682 [0.601, 0.760]                                     0.621
+          net_A1       1.0  0 0.516 [0.431, 0.596]                                     0.543 0.685 [0.604, 0.764]                                     0.627
+          net_A2       1.0  0 0.515 [0.430, 0.596]                                     0.542 0.684 [0.601, 0.764]                                     0.626
+      net_online       1.0  0 0.513 [0.427, 0.594]                                     0.539 0.689 [0.609, 0.766]                                     0.628
+accuracy of the template's own decisions on blocks 1 to 6 (used as labels): dry 0.584, wet 0.767
+
+== 3. calibration curve, blocks 7 to 10, 1 s (k = number of calibration blocks; one block = 48 s)
+  method  window_s  k                  dry dry, the 68 development people (M2 to M4)                  wet wet, the 68 development people (M2 to M4)
+template       1.0  0 0.567 [0.482, 0.646]                                     0.568 0.773 [0.710, 0.832]                                     0.730
+template       1.0  1 0.589 [0.503, 0.673]                                     0.593 0.828 [0.769, 0.883]                                     0.797
+template       1.0  2 0.621 [0.534, 0.703]                                     0.607 0.842 [0.784, 0.895]                                     0.815
+template       1.0  4 0.639 [0.552, 0.719]                                     0.633 0.862 [0.809, 0.911]                                     0.831
+template       1.0  6 0.654 [0.565, 0.735]                                     0.653 0.874 [0.824, 0.921]                                     0.844
+     own       1.0  1 0.562 [0.472, 0.650]                                     0.546 0.819 [0.752, 0.877]                                     0.766
+     own       1.0  2 0.588 [0.498, 0.676]                                     0.582 0.842 [0.781, 0.898]                                     0.798
+     own       1.0  4 0.634 [0.544, 0.716]                                     0.631 0.860 [0.803, 0.912]                                     0.827
+     own       1.0  6 0.661 [0.576, 0.741]                                     0.649 0.881 [0.827, 0.929]                                     0.839
+   etrca       1.0  2 0.305 [0.223, 0.392]                                     0.286 0.763 [0.676, 0.843]                                     0.699
+   etrca       1.0  4 0.401 [0.311, 0.493]                                     0.440 0.852 [0.781, 0.914]                                     0.806
+   etrca       1.0  6 0.475 [0.381, 0.568]                                     0.523 0.895 [0.848, 0.937]                                     0.852
+
+== 4. the person's own ten blocks (ensemble TRCA: leave-one-block-out) and the template with no calibration
+    method  window_s  k                  dry dry, the 68 development people (M2 to M4)                  wet wet, the 68 development people (M2 to M4)
+     fbcca       1.0  0 0.500 [0.421, 0.578]                                     0.475 0.712 [0.644, 0.776]                                     0.658
+     fbcca       2.0  0 0.719 [0.645, 0.788]                                     0.702 0.878 [0.826, 0.924]                                     0.836
+etrca_lobo       1.0  0 0.576 [0.482, 0.666]                                     0.606 0.908 [0.867, 0.946]                                     0.889
+etrca_lobo       2.0  0 0.687 [0.595, 0.771]                                     0.741 0.956 [0.932, 0.977]                                     0.940
+  method  window_s  k                  dry dry, the 68 development people (M2 to M4)                  wet wet, the 68 development people (M2 to M4)
+template       1.0  0 0.577 [0.497, 0.650]                                     0.578 0.769 [0.705, 0.829]                                     0.737
+
+== 5. people not above chance at 1 s over the ten blocks (120 trials)
+  template: below 0.133: dry 0, wet 0 of 34; {'dry': [], 'wet': []}
+  fbcca: below 0.133: dry 1, wet 0 of 34; {'dry': ['S045'], 'wet': []}

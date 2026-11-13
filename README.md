@@ -1,11 +1,9 @@
 # Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation
 
-**Status: M0 (data check), M1 (standard decoders), M2 (new users and calibration), M3 (small network,
-adaptation without labels) and M4 (time on task, impedance, failures) done on the development people,
-13 Nov 2026. The hypotheses have not been tested yet: the 34 lockbox people are untouched and will be
-used once, at the end, by an approved plan
-([`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md)). The code of that step has been rehearsed on development
-people and is locked in the commit tagged `pre-lockbox` ([`final_rehearsal.md`](docs/milestones/final_rehearsal.md)).** This README is filled in milestone by
+**Status: the hypotheses have been tested, 13 Nov 2026. M0 to M4 were done on 68 development people; the
+34 lockbox people were then decoded once, by a plan and code committed beforehand. Seven of the 15
+pre-specified tests are supported after the Holm correction
+([`final_evaluation.md`](docs/milestones/final_evaluation.md)).** This README is filled in milestone by
 milestone; nothing is reported here before it has been run and reviewed.
 
 A leakage-safe, pre-specified analysis of steady-state visual evoked potential (SSVEP) decoding from an
@@ -19,6 +17,30 @@ and model size?
 > **AI assistance.** The code, analyses, figures and reports in this repository were written and run with an AI
 > assistant (Anthropic's Claude) under the author's direction. Direction, research questions, decisions and review are
 > the author's; see [Authorship and AI assistance](#authorship-and-ai-assistance).
+
+## Tested results (final evaluation, 34 lockbox people, opened once)
+
+Full report: [`docs/milestones/final_evaluation.md`](docs/milestones/final_evaluation.md). Window 1 s unless
+stated; estimates with 95 % intervals over people; one-sided tests, familywise level 0.05 (Holm, 15 tests).
+
+1. **Dry electrodes cost accuracy (H1, supported):** dry minus wet -0.21 (FBCCA) and -0.33 (ensemble TRCA) at
+   1 s, -0.16 and -0.27 at 2 s.
+2. **With dry electrodes, other people's data plus 96 s of calibration are enough (H2 dry, supported):**
+   +0.145 [+0.082, +0.211] against ensemble TRCA with 288 s of calibration.
+3. **With wet electrodes they are not (H2 wet, not supported):** -0.053 [-0.076, -0.031], around the margin of
+   0.05.
+4. **A template updated with its own decisions, without labels, gains accuracy (H6, supported):** +0.040 dry,
+   +0.069 wet. H6 was formulated after the effect had been seen on the development people.
+5. **Not supported:** entropy adaptation of the small network (H3: +0.007 dry, +0.002 wet); a loss of accuracy
+   over the ten blocks or with higher impedance (H5).
+6. **The development numbers were not optimistic:** with no calibration the template reaches 0.567 (dry) and
+   0.773 (wet) on the lockbox people, 0.568 and 0.730 on the development people. Its advantage over FBCCA is
+   smaller with dry electrodes (+0.062 against +0.104 on the development people).
+
+The outcome is the one written down before the opening (H1, H2 dry and H6 supported; H2 wet uncertain; H3
+and H5 not supported).
+
+<p align="center"><img src="figures/final/01_tests.png" width="900" alt="The 15 pre-specified tests on the 34 lockbox people: estimates with 95 % intervals, seven supported after the Holm correction"></p>
 
 ## What is known so far (M0, data check)
 
@@ -121,14 +143,15 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
 | M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
-| Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | Rehearsal and lock: [`final_rehearsal.md`](docs/milestones/final_rehearsal.md); the lockbox is not opened yet |
+| Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
 | M5 | Real-time replay with measured latency | | |
 | M6 | Report and visual summary | | |
 
 The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
 
 **Development and lockbox subjects.** Every third subject (S003, S006, ..., S102; 34 people) is a lockbox:
-until the final evaluation their recordings are used only for label-free checks. All method development uses
+until the final evaluation their recordings were used only for label-free checks, and they were decoded once
+(`results/final/LOCKBOX_OPENED.txt`). All method development uses
 the other 68 people. The rule was fixed before any data file was opened.
 
 ## Data
@@ -172,7 +195,7 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m3_figures.py
                 m4_decode.py (decision of every trial), m4_summary.py, m4_figures.py
                 final_evaluation.py (the 15 tests for new people given a population; rehearsal and lockbox),
-                final_figures.py
+                final_figures.py, final_summary.py (descriptive numbers, written after the opening)
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
 docs/           analysis_plan.md, milestones/ (one plan and one report per milestone)
 results/        result tables (CSV), one folder per milestone

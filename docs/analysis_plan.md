@@ -248,6 +248,23 @@ Details: `docs/milestones/final_rehearsal.md`.
 - The population template and the six networks for the lockbox people were built from the 68 development
   people before the opening; their checksums are in the commit tagged `pre-lockbox`.
 
+## Results of the final evaluation (13 Nov 2026), 34 lockbox people, opened once
+
+Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familywise level 0.05 over 15 tests.
+
+| Hypothesis | Tests supported | Estimates |
+|---|---|---|
+| H1 dry below wet | 4 of 4 | -0.211 (FBCCA 1 s), -0.160 (FBCCA 2 s), -0.333 (eTRCA 1 s), -0.272 (eTRCA 2 s) |
+| H2 template + 2 blocks within 0.05 of eTRCA + 6 blocks | dry: yes; wet: no | dry +0.145 [+0.082, +0.211]; wet -0.053 [-0.076, -0.031] |
+| H3 entropy adaptation of the network | 0 of 3 | dry +0.007, wet +0.002, dry minus wet +0.005 |
+| H5a accuracy falls over the blocks | 0 of 2 | slope per block: dry -0.0027, wet +0.0021 |
+| H5b higher impedance, lower accuracy | 0 of 2 | Spearman: dry -0.35 (p 0.019 before the correction, 0.15 after), wet -0.19 |
+| H6 template adapted without labels (post hoc) | 2 of 2 | dry +0.040 [+0.020, +0.060]; wet +0.069 [+0.048, +0.090] |
+
+- The outcome is the expectation written in the plan before the opening.
+- No method, setting, test or exclusion was changed after the opening. Descriptive numbers computed
+  afterwards (`scripts/final_summary.py`) are labelled as such.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

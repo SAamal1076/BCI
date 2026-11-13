@@ -77,6 +77,11 @@ python scripts/final_figures.py --set rehearsal
 
 echo "Final  template and 6 networks for the lockbox people, built from the 68 development people only (about 18 minutes)"
 python scripts/final_evaluation.py prepare --set lockbox --raw "$WEARABLE_DIR" | tee logs/final_lockbox_prepare.log
-# The opening of the lockbox is not part of this script: it is done once, by hand, from the commit tagged
-# pre-lockbox (docs/milestones/final_evaluation_plan.md).
+# The lockbox was opened once, on 13 Nov 2026, from commit 6006614 (results/final/LOCKBOX_OPENED.txt,
+# logs/final_lockbox.log). A second opening is refused. This recomputes the same numbers into
+# results/final/lockbox_reproduction and compares them with the opening.
+echo "Final  reproduction of the lockbox evaluation (compared with the opening), figures, descriptive numbers"
+python scripts/final_evaluation.py evaluate --set lockbox --raw "$WEARABLE_DIR" --open-lockbox --reproduce | tee logs/final_lockbox_reproduction.log
+python scripts/final_figures.py --set lockbox
+python scripts/final_summary.py | tee logs/final_summary.log
 echo "done"

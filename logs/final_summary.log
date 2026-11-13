@@ -1,0 +1,42 @@
+== descriptive numbers of the final report; written after the opening; result files only; no test
+lockbox people: 34, development people: 68
+
+== 1. paired differences between methods, blocks 7 to 10, 1 s: mean [95 % interval over people]
+                                      difference            dry, lockbox        dry, development            wet, lockbox        wet, development
+                            template minus FBCCA +0.062 [+0.034, +0.089] +0.104 [+0.077, +0.128] +0.066 [+0.028, +0.102] +0.078 [+0.050, +0.104]
+                    adapted template minus FBCCA +0.103 [+0.075, +0.131] +0.138 [+0.114, +0.161] +0.135 [+0.102, +0.169] +0.153 [+0.127, +0.180]
+                     template minus network (A0) +0.058 [+0.006, +0.114] +0.034 [+0.004, +0.066] +0.092 [+0.044, +0.139] +0.109 [+0.075, +0.145]
+     adapted template minus adapted network (A2) +0.092 [+0.030, +0.154] +0.060 [+0.024, +0.099] +0.158 [+0.101, +0.216] +0.179 [+0.137, +0.223]
+template + 2 blocks minus own template, 2 blocks +0.032 [+0.012, +0.054] +0.025 [+0.010, +0.041] +0.000 [-0.017, +0.018] +0.017 [+0.002, +0.031]
+template + 6 blocks minus own template, 6 blocks -0.007 [-0.022, +0.007] +0.004 [-0.007, +0.016] -0.006 [-0.017, +0.006] +0.005 [-0.003, +0.013]
+              own template minus eTRCA, 6 blocks +0.186 [+0.125, +0.249] +0.126 [+0.084, +0.171] -0.014 [-0.033, +0.004] -0.013 [-0.028, +0.003]
+development: template and FBCCA from M2 (population of 67), adapted template and networks from M3 (population of 51)
+
+== 2. lockbox mean minus development mean (different people, so not paired), blocks 7 to 10, 1 s
+          method  k                    dry                    wet
+           fbcca  0 0.504 - 0.465 = +0.040 0.707 - 0.652 = +0.055
+        template  0 0.567 - 0.568 = -0.002 0.773 - 0.730 = +0.043
+template_adapted  0 0.607 - 0.603 = +0.005 0.842 - 0.805 = +0.036
+          net_A0  0 0.508 - 0.534 = -0.026 0.682 - 0.621 = +0.060
+          net_A2  0 0.515 - 0.542 = -0.027 0.684 - 0.626 = +0.058
+        template  2 0.621 - 0.607 = +0.014 0.842 - 0.815 = +0.027
+             own  6 0.661 - 0.649 = +0.013 0.881 - 0.839 = +0.041
+           etrca  6 0.475 - 0.523 = -0.047 0.895 - 0.852 = +0.043
+
+== 3. dry minus wet and the headband worn second, ten blocks, 1 s (crossover estimates)
+  fbcca      dry minus wet -0.211 [-0.278, -0.150]; dry worn first (18 people): dry 0.489, wet 0.702; wet worn first (16): wet 0.722, dry 0.514; effect of being the second headband +0.002
+  etrca_lobo dry minus wet -0.333 [-0.422, -0.246]; dry worn first (18 people): dry 0.581, wet 0.893; wet worn first (16): wet 0.926, dry 0.571; effect of being the second headband -0.022
+  template   dry minus wet -0.194 [-0.251, -0.139]; dry worn first (18 people): dry 0.591, wet 0.753; wet worn first (16): wet 0.787, dry 0.562; effect of being the second headband -0.032
+
+== 4. each person: how many are better with the adapted template, and with 2 blocks of calibration
+  dry: adapted template better for 24, equal for 4, worse for 6 of 34; template + 2 blocks at least as good as eTRCA + 6 blocks for 28, within 0.05 for 31
+  wet: adapted template better for 30, equal for 3, worse for 1 of 34; template + 2 blocks at least as good as eTRCA + 6 blocks for 10, within 0.05 for 20
+
+== 5. expectation written in the plan before the opening, and the outcome
+  H1      expected: supported      outcome: supported (4 of 4 tests)
+  H2 dry  expected: supported      outcome: supported (1 of 1 tests)
+  H2 wet  expected: uncertain      outcome: not supported (0 of 1 tests)
+  H3      expected: not supported  outcome: not supported (0 of 3 tests)
+  H5a     expected: not supported  outcome: not supported (0 of 2 tests)
+  H5b     expected: not supported  outcome: not supported (0 of 2 tests)
+  H6      expected: supported      outcome: supported (2 of 2 tests)

@@ -6,3 +6,5 @@ __pycache__/
 *.pkl
 # intermediate arrays: reproducible from the raw data, not redistributed
 results/**/cache/
+# recomputed copy of the lockbox results (compared with the opening by the script)
+results/final/lockbox_reproduction/

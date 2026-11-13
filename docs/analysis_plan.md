@@ -227,5 +227,5 @@ Report: `docs/milestones/M4_failures.md`.
 
 | Before | What |
 |---|---|
-| Final evaluation | A short plan after M4: the single opening of the lockbox, every method and setting frozen. |
+| Final evaluation | The single opening of the lockbox, every method and setting frozen. Plan proposed 13 Nov 2026, waiting for approval: `docs/milestones/final_evaluation_plan.md`. |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

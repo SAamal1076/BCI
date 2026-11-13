@@ -1,6 +1,6 @@
 # Final evaluation plan: the single opening of the lockbox
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** So far the lockbox
+*13 Nov 2026. **Approved by the author on 13 Nov 2026, before anything below was run.** So far the lockbox
 people were used only in the label-free checks of M0 (file integrity, noise, impedance); no decoder has seen
 them and no target of their trials has been used. Written after M4 (`M4_failures.md`). Anything done
 differently will be listed under "Deviations" in the final report.*

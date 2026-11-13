@@ -223,9 +223,23 @@ Report: `docs/milestones/M4_failures.md`.
   were looked at (deviation D1 of the M4 report).
 - The lockbox has not been loaded.
 
+## Fixed before the final evaluation (approved 13 Nov 2026, before anything of it was run)
+
+Details: `docs/milestones/final_evaluation_plan.md`.
+
+- **Frozen:** pipeline B2, `n0` = 4, the new-user design, the network and its training settings, the two
+  adaptations without labels, the 15 tests and the Holm correction at familywise level 0.05.
+- **Population for a lockbox person:** the 68 development people. **Networks:** trained on the 68 development
+  people, one per type of headband and seed; validation people by the rule of M3 (every 6th from the 4th: 11
+  for validation, 57 for training).
+- **No person is excluded.** H4 was not carried out and is not tested.
+- **Rehearsal** on the development people (23 as new people, 45 as population) before the opening; its
+  p-values are neither written nor shown.
+- **One opening:** the script needs `--open-lockbox`, and refuses a second run. The commit before the opening
+  is tagged `pre-lockbox`. After the opening no method, setting, test or exclusion is changed.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| Final evaluation | The single opening of the lockbox, every method and setting frozen. Plan proposed 13 Nov 2026, waiting for approval: `docs/milestones/final_evaluation_plan.md`. |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

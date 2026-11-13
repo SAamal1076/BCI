@@ -271,7 +271,4 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
   the decisions of this project are offline, and the only timing evidence is the compute measurement of M3.
 - M6 (report, graphical abstract, presentation) contains no new analysis. Plan: `docs/milestones/M6_plan.md`.
 
-## To be fixed before the milestone that needs it
-
-| Before | What |
-|---|---|
+Nothing is left to be fixed: every milestone that needed a rule has been run, and M6 has no analysis.

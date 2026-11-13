@@ -48,6 +48,7 @@ carry one line that points to it (Q3).
 | D2 | The program that builds the slides is not in the repository. | It uses a JavaScript library and a helper that is not part of this project. The slides are an editable file, and their numbers were checked as above. |
 | D3 | After approval, one sentence of the plan about uses of the project outside the repository was replaced by a neutral one, and two words were changed. | It did not belong in a public document. Nothing of M6 depends on it. |
 | D4 | The report has about 2 300 words (planned: about 2 500). | Nothing was left out. |
+| D5 | In the fresh-clone check `requirements.txt` was not installed into a new environment, as the plan said; the installed versions were compared with it instead. | The PyTorch download is several GB. The check therefore does not prove that the file installs on a new machine. |
 
 ## Left to the author
 

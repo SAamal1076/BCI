@@ -62,8 +62,13 @@ def main():
                          "published": PUBLISHED[(method, window)][1] - PUBLISHED[(method, window)][0]
                          if (method, window) in PUBLISHED else np.nan,
                          "ours": round(w - d, 3), "ours_sem": np.nan, "difference": np.nan, "passed": bool(w > d)})
+    g5 = "not run"
+    if (RES / "gate_beta.csv").exists():                 # written by m1_beta_summary.py
+        b = pd.read_csv(RES / "gate_beta.csv")
+        b = b[b.gate == "G5"]
+        g5 = f"{int(b.passed.sum())} of {len(b)} pass (see gate_beta.csv)"
     rows.append({"gate": "G5", "method": "BETA: CCA, FBCCA, ensemble TRCA", "window_s": np.nan, "electrode": "",
-                 "published": np.nan, "ours": np.nan, "ours_sem": np.nan, "difference": np.nan, "passed": "not run"})
+                 "published": np.nan, "ours": np.nan, "ours_sem": np.nan, "difference": np.nan, "passed": g5})
     gate = pd.DataFrame(rows)
     gate.to_csv(RES / "gate.csv", index=False)
     print(gate.to_string(index=False))

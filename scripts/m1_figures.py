@@ -233,6 +233,31 @@ def fig_itr(s):
             "68 development people, project pipeline B, a-priori weights. Per person, then averaged.")
 
 
+def fig_beta():
+    b = pd.read_csv(RES / "beta_summary.csv")
+    published = {"cca": (72.54, 1.8), "fbcca": (98.79, 1.4), "etrca": (139.58, 0.6)}
+    title = {"cca": "CCA (6-80 Hz)", "fbcca": "FBCCA (no calibration)", "etrca": "Ensemble TRCA (per-person calibration)"}
+    style = {"A": "solid", "C-": (0, (5, 2))}
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4.6), sharey=True)
+    for ax, method in zip(axes, ("cca", "fbcca", "etrca")):
+        for variant in ("A", "C-"):
+            d = b[(b.variant == variant) & (b.method == method)].sort_values("window_s")
+            ax.plot(d.window_s, d.itr, color=pl.NEUTRAL, ls=style[variant], lw=2 if variant == "A" else 1.5)
+        pub, win = published[method]
+        ax.scatter([win], [pub], s=80, marker="D", facecolor=pl.SURFACE, edgecolor=pl.INK, linewidth=2, zorder=4)
+        ax.annotate(f"published peak\n{pub:.0f} bits/min at {win:g} s", (win, pub), xytext=(0, 11),
+                    textcoords="offset points", ha="center", fontsize=8.5)
+        ax.set(xlabel="Window length (s)", xticks=np.arange(0.2, 2.01, 0.4), title=title[method])
+    axes[0].set_ylabel("Information transfer rate (bits/min)")
+    axes[0].set_ylim(0, 1.25 * max(b.itr.max(), 139.58))
+    handles = [plt.Line2D([], [], color=pl.NEUTRAL, ls=style["A"], lw=2, label="ours: cut the window, then filter (gate)"),
+               plt.Line2D([], [], color=pl.NEUTRAL, ls=style["C-"], lw=1.5, label="ours: whole trial filtered"),
+               plt.Line2D([], [], color=pl.INK, marker="D", mfc=pl.SURFACE, mew=2, ms=8, lw=0, label="published (Liu et al. 2020)")]
+    fig.legend(handles=handles, loc="upper right", bbox_to_anchor=(0.99, 0.93), ncol=3, fontsize=8.5)
+    fig.subplots_adjust(left=0.06, right=0.99, bottom=0.16, top=0.76, wspace=0.05)
+    return fig
+
+
 def main():
     FIG.mkdir(parents=True, exist_ok=True)
     pl.use_style()
@@ -245,7 +270,18 @@ def main():
     fig_edge()
     fig_confusion()
     fig_itr(s)
-    print("wrote 7 figures to", FIG)
+    n = 7
+    if (RES / "beta_summary.csv").exists():
+        g = pd.read_csv(RES / "gate_beta.csv")
+        g = g[g.gate == "G5"]
+        ok = int(g.passed.sum())
+        head = ("On BETA, the reference dataset, the published peak rates are reproduced" if ok == len(g)
+                else f"On BETA, the reference dataset, {ok} of {len(g)} published peak rates are reproduced within 10 %")
+        pl.save(fig_beta(), FIG / "08_beta.png", head,
+                "70 people, 40 targets, nine channels, a-priori weights, 0.55 s gaze shift as in the BETA paper. "
+                "Mean over people.")
+        n = 8
+    print(f"wrote {n} figures to", FIG)
 
 
 if __name__ == "__main__":

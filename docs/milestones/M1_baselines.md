@@ -1,10 +1,12 @@
 # M1 baselines: standard decoders on the wearable dataset
 
 *13 Nov 2026. Plan: [`M1_plan.md`](M1_plan.md), approved by the author before anything was run. Only the 68
-development people were loaded (the 34 lockbox people were not). Descriptive statistics only, no hypothesis
-test. Every number below is recomputed by `scripts/m1_summary.py` (`logs/m1_summary.log`) and
-`scripts/m1_decision_bias.py` (`logs/m1_decision_bias.log`). "Post hoc" marks what was added after the first
-results were seen.*
+development people of the wearable dataset were loaded (the 34 lockbox people were not); BETA, the reference
+dataset, has no lockbox and all its 70 people were used. Descriptive statistics only, no hypothesis test.
+Every number below is recomputed by `scripts/m1_summary.py` (`logs/m1_summary.log`),
+`scripts/m1_decision_bias.py` (`logs/m1_decision_bias.log`) and `scripts/m1_beta_summary.py`
+(`logs/m1_beta_summary.log`). "Post hoc" marks what was added after the first results were seen. The BETA
+part (section 3.4) was added later the same day, after the author's decisions (section 11).*
 
 ## Result in short
 
@@ -32,9 +34,13 @@ results were seen.*
    onto: 21 % (dry) and 25 % (wet) of the CCA decisions, and 29 to 30 % of the FBCCA decisions, go to the two
    targets whose 4th harmonic is next to 50 Hz (12.25 and 12.75 Hz), where about 15 % is expected. A
    correction is proposed for the M2 plan; the M1 numbers are reported as planned, with the flaw.
-8. **The BETA part (gate G5) was not run.** The 5.3 GB could not be copied to the analysis workspace.
+8. **On BETA, the reference dataset, the gate passes (G5, 3 of 3).** With the same code and the reference
+   convention, the published peak rates are reproduced within 4 %: CCA 70.2 bits/min (published 72.5), FBCCA
+   96.8 (98.8), ensemble TRCA 139.9 (139.6). BETA was recorded with a laboratory amplifier that removes the
+   mains, and there the filtering convention changes accuracy by 0.04 at most. This is independent evidence
+   that the decoders are right and that the failure on the wearable data comes from its interference.
 
-Three decisions are needed from the author before M2 (section 11).
+The author's decisions of 13 Nov 2026 are in section 11.
 
 ## Reproduction gate
 
@@ -59,7 +65,7 @@ Variant A (reference convention), 68 development people, against the published m
 | G2 FBCCA | **Fail**, 0 of 4 |
 | G3 TRCA | **Fail**, 0 of 4 |
 | G4 wet above dry (CCA, FBCCA, ensemble TRCA at 1 s and 2 s) | **Pass**, 6 of 6 |
-| G5 BETA | **Not run** (deviation D1) |
+| G5 BETA: peak ITR of CCA, FBCCA and ensemble TRCA within 10 %, at the same window +/- 0.2 s | **Pass**, 3 of 3 (section 3.4) |
 
 The plan says what happens then: no tuning to reach a target; the implementation is checked against the unit
 tests and the reference code; the difference is documented; the author decides how to go on. Sections 2 and 3
@@ -186,6 +192,38 @@ most 0.05 to CCA and FBCCA.
   0.88, 0.93); the ensemble form is 0.03 to 0.05 above for dry and 0.02 below for wet. Neither form fits both.
 - Our means are over 68 people and the published ones over 102. This can explain about 0.02, not the gaps of
   variant A.
+
+### 3.4 Independent check on BETA (gate G5)
+
+BETA (Liu et al. 2020): 70 people, 40 targets, 4 blocks, laboratory amplifier with a 50 Hz notch, files
+already band-passed (3-100 Hz) by the authors. Nine channels as in the BETA paper, window from 0.13 s after
+stimulus onset, 5 harmonics, a-priori weights (also the BETA paper's), leave-one-block-out for TRCA, ITR with
+a gaze shift of 0.55 s. Data check first (`logs/m1_beta_check.log`): all values finite, the same frequency
+table in every file, each of the 40 targets peaks at its own frequency in the group average at Oz, no mains
+component (0.13 µV at 50 Hz against 0.37 µV around it).
+
+![BETA](../../figures/m1/08_beta.png)
+
+| | Method | Published peak ITR (bits/min) | Ours, variant A (SEM) | Difference | Passes |
+|---|---|---|---|---|---|
+| G5 | CCA (6-80 Hz) | 72.5 at 1.8 s | 70.2 (4.6) at 1.8 s | -3.2 % | yes |
+| G5 | FBCCA | 98.8 at 1.4 s | 96.8 (4.0) at 1.6 s; 96.7 at 1.4 s | -2.0 % | yes |
+| G5 | Ensemble TRCA with filter bank | 139.6 at 0.6 s | 139.9 (8.3) at 0.6 s | +0.2 % | yes |
+
+- Mean accuracy at 1 s (variant A): CCA 0.386, FBCCA 0.568, TRCA 0.637, ensemble TRCA 0.761. At 2 s: 0.682,
+  0.823, 0.781, 0.863. With FBCCA and ensemble TRCA nobody is at chance at 1 s or 2 s (40 targets, chance
+  0.025).
+- **Here the filtering convention hardly matters.** Filtering the whole trial instead of the cut window
+  changes accuracy by 0.04 at most (ensemble TRCA at 0.2 s) and by 0.02 at most from 1 s on; the peak rates
+  become 71.1, 98.5 and 143.6 bits/min. The files contain no mains and no drift, so a short window has little
+  to produce an edge error from.
+- Reading the two datasets together: the same decoders, with the same convention, reproduce the published
+  results on clean laboratory data and fall 0.05 to 0.6 short on the unshielded wearable data, where the
+  shortfall disappears once the mains is removed and the whole epoch is filtered. The failed gate G1-G3 is
+  therefore about how the wearable recordings were filtered, not about the decoders.
+- Limits: the BETA paper evaluated S16-S70 with windows up to 3 s; ours stop at 2 s, which covers the three
+  published peaks. The phase table stored in the files differs from the paper by a constant (the authors'
+  correction of June 2022); these decoders do not use it.
 
 ## 4. Results with the project pipeline (variant B)
 
@@ -357,7 +395,7 @@ Proposals for the M2 plan. None is applied yet; each needs the author's approval
 
 | | Deviation | Why |
 |---|---|---|
-| D1 | The BETA part was not done: data check, baselines, gate G5, `src/ssvep/beta.py`. | The dataset (5.3 GB) is on the author's computer. Files above about 60 MB could not be copied to the analysis workspace and the computer went offline; 2 of 70 files arrived and were not used. |
+| D1 | BETA was analysed from reduced files (nine channels, single precision; `scripts/beta_reduce.py`), after the wearable part and after the author's decisions. Variants: A (the gate) and whole-trial filtering without mains removal; B and C were not run on BETA. | The 5.3 GB could not be copied; the reduction ran on the author's computer and the 0.4 GB were copied. The reduced and the original files give the same numbers (unit test; checked on S1). The amplifier removed the mains, so the mains removal of B and C has no object. Only a smoke test on two people preceded the commit of the BETA code. |
 | D2 | Two filtering variants were added after the gate failed: A+ (A with mains removed) and C- (C with mains kept). They are stored in a separate file (`wearable_accuracy_diagnostic.csv`). | To separate the effect of the mains from the effect of the filter context. They are not part of the gate. |
 | D3 | Variant C removes the mains before filtering, like B. The plan only said "filter the full epoch, then cut". | So that B and C differ by the context alone. Fixed in the code committed before the data (`8ae6e04`). |
 | D4 | Sub-bands are combined for TRCA as `sum_n w(n) * sign(r_n) * r_n^2`, not `r_n^2`. | This is what the reference implementation does; a negative correlation with a template should not count as evidence for it. Fixed before the data. |
@@ -368,26 +406,27 @@ Proposals for the M2 plan. None is applied yet; each needs the author's approval
 Nothing was tuned. No weight, band, harmonic count or window was chosen from these results. No lockbox
 person was loaded.
 
-## 11. Decisions for the author
+## 11. Decisions of the author (13 Nov 2026)
 
-1. **How to treat the failed gate.** The gate as written failed. The check required by the plan found no
-   error in the decoders and found the cause in the filtering convention. Options: (a) accept this
-   diagnosis, keep the gate recorded as failed, and go on with pipeline B; (b) ask for more evidence first,
-   for example the BETA gate G5, or the public MATLAB code run on a few people of this dataset.
-2. **The correction of the mains removal** (section 9, point 1) as part of the M2 plan, with a re-run of the
-   baselines.
-3. **BETA.** How to get it to the analysis workspace (a small script run on the author's computer that keeps
-   the nine channels and writes about 300 MB, or another route), or whether to drop G5.
+Three questions were put to the author with the wearable results, before the BETA part was run:
+
+1. **The failed gate.** Decision: the diagnosis is accepted, the gate stays recorded as failed (G1 to G3),
+   and the project goes on with a pipeline that uses no sample after the window.
+2. **The correction of the mains removal** (section 9, point 1). Decision: part of the M2 plan, with one
+   re-run of the baselines.
+3. **BETA.** Decision: gate G5 is kept; the dataset is reduced on the author's computer. Done: section 3.4.
 
 ## 12. Files
 
-- Code: `src/ssvep/filterbank.py`, `decoders.py`, `metrics.py`; tests in `tests/`.
+- Code: `src/ssvep/filterbank.py`, `decoders.py`, `metrics.py`, `beta.py`; tests in `tests/`.
 - Scripts: `scripts/m1_edge_transients.py` (synthetic, before the data), `m1_baselines_wearable.py`
-  (`--diagnostic` for A+ and C-), `m1_crosscheck.py`, `m1_decision_bias.py`, `m1_summary.py`, `m1_figures.py`.
+  (`--diagnostic` for A+ and C-), `m1_crosscheck.py`, `m1_decision_bias.py`, `m1_summary.py`, `m1_figures.py`;
+  BETA: `beta_reduce.py`, `m1_beta_check.py`, `m1_baselines_beta.py`, `m1_beta_summary.py`.
 - Tables: `results/m1/` (`gate.csv`, `published_comparison.csv`, `gate_other_variants.csv`,
   `wearable_accuracy.csv` with one row per person, headband, variant, method and window,
   `wearable_accuracy_by_block.csv`, `accuracy_summary.csv`, `mains_by_context_1s.csv`,
   `variant_differences.csv`, `dry_minus_wet_by_window.csv`, `dry_minus_wet_by_order.csv`,
   `wearable_confusion_1s.csv`, `decision_bias_1s.csv`, `decision_bias_synthetic.csv`,
-  `amplitude_near_mains_1s.csv`, `edge_transients.csv`, `crosscheck.csv`, `compute_time.csv`).
-- Figures: `figures/m1/01` to `07`. Logs: `logs/m1_*.log`.
+  `amplitude_near_mains_1s.csv`, `edge_transients.csv`, `crosscheck.csv`, `compute_time.csv`; BETA:
+  `beta_accuracy.csv`, `beta_summary.csv`, `gate_beta.csv`, `beta_check.csv`, `beta_group_amplitude_oz.csv`).
+- Figures: `figures/m1/01` to `08`. Logs: `logs/m1_*.log`.

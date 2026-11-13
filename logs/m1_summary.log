@@ -1,24 +1,24 @@
 development subjects: 68; accuracies: 28560
 
 == reproduction gate (variant A, development subjects against the published values for 102 subjects)
-gate                           method  window_s     electrode  published  ours  ours_sem  difference  passed
-  G1                              CCA       1.0           dry      0.497 0.424     0.031      -0.073   False
-  G1                              CCA       1.0           wet      0.684 0.609     0.029      -0.075   False
-  G2         FBCCA, published weights       1.0           dry      0.530 0.430     0.031      -0.100   False
-  G2         FBCCA, published weights       1.0           wet      0.730 0.635     0.030      -0.095   False
-  G2         FBCCA, published weights       2.0           dry      0.730 0.642     0.033      -0.088   False
-  G2         FBCCA, published weights       2.0           wet      0.860 0.806     0.024      -0.054   False
-  G3 ensemble TRCA, published weights       1.0           dry      0.620 0.141     0.016      -0.479   False
-  G3 ensemble TRCA, published weights       1.0           wet      0.880 0.558     0.044      -0.322   False
-  G3 ensemble TRCA, published weights       2.0           dry      0.730 0.136     0.015      -0.594   False
-  G3 ensemble TRCA, published weights       2.0           wet      0.930 0.562     0.045      -0.368   False
-  G4                              CCA       1.0 wet minus dry      0.187 0.185       NaN         NaN    True
-  G4                              CCA       2.0 wet minus dry        NaN 0.152       NaN         NaN    True
-  G4         FBCCA, published weights       1.0 wet minus dry      0.200 0.205       NaN         NaN    True
-  G4         FBCCA, published weights       2.0 wet minus dry      0.130 0.164       NaN         NaN    True
-  G4 ensemble TRCA, published weights       1.0 wet minus dry      0.260 0.417       NaN         NaN    True
-  G4 ensemble TRCA, published weights       2.0 wet minus dry      0.200 0.426       NaN         NaN    True
-  G5  BETA: CCA, FBCCA, ensemble TRCA       NaN                      NaN   NaN       NaN         NaN not run
+gate                           method  window_s     electrode  published  ours  ours_sem  difference                          passed
+  G1                              CCA       1.0           dry      0.497 0.424     0.031      -0.073                           False
+  G1                              CCA       1.0           wet      0.684 0.609     0.029      -0.075                           False
+  G2         FBCCA, published weights       1.0           dry      0.530 0.430     0.031      -0.100                           False
+  G2         FBCCA, published weights       1.0           wet      0.730 0.635     0.030      -0.095                           False
+  G2         FBCCA, published weights       2.0           dry      0.730 0.642     0.033      -0.088                           False
+  G2         FBCCA, published weights       2.0           wet      0.860 0.806     0.024      -0.054                           False
+  G3 ensemble TRCA, published weights       1.0           dry      0.620 0.141     0.016      -0.479                           False
+  G3 ensemble TRCA, published weights       1.0           wet      0.880 0.558     0.044      -0.322                           False
+  G3 ensemble TRCA, published weights       2.0           dry      0.730 0.136     0.015      -0.594                           False
+  G3 ensemble TRCA, published weights       2.0           wet      0.930 0.562     0.045      -0.368                           False
+  G4                              CCA       1.0 wet minus dry      0.187 0.185       NaN         NaN                            True
+  G4                              CCA       2.0 wet minus dry        NaN 0.152       NaN         NaN                            True
+  G4         FBCCA, published weights       1.0 wet minus dry      0.200 0.205       NaN         NaN                            True
+  G4         FBCCA, published weights       2.0 wet minus dry      0.130 0.164       NaN         NaN                            True
+  G4 ensemble TRCA, published weights       1.0 wet minus dry      0.260 0.417       NaN         NaN                            True
+  G4 ensemble TRCA, published weights       2.0 wet minus dry      0.200 0.426       NaN         NaN                            True
+  G5  BETA: CCA, FBCCA, ensemble TRCA       NaN                      NaN   NaN       NaN         NaN 3 of 3 pass (see gate_beta.csv)
 G1: 0 of 2 checks pass
 G2: 0 of 4 checks pass
 G3: 0 of 4 checks pass

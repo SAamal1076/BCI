@@ -1,7 +1,8 @@
 # Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation
 
-**Status: M0 (data check) and M1 (standard decoders) done, 13 Nov 2026. The reproduction gate of M1 failed as
-pre-registered; the cause was found (see below). M2 has not started.** This README is filled in milestone by
+**Status: M0 (data check) and M1 (standard decoders) done, 13 Nov 2026. The reproduction gate of M1 failed on
+the wearable data as pre-registered and passed on the reference dataset; the cause was found (see below).
+The M2 plan is proposed and not yet run.** This README is filled in milestone by
 milestone; nothing is reported here before it has been run and reviewed.
 
 A leakage-safe, pre-specified analysis of steady-state visual evoked potential (SSVEP) decoding from an
@@ -53,7 +54,9 @@ Full report: [`docs/milestones/M1_baselines.md`](docs/milestones/M1_baselines.md
 5. **A flaw was found in our own mains-removal step:** it treats each channel separately, which creates a
    small artefact next to 50 Hz and pulls CCA decisions towards the two targets whose 4th harmonic is 49 and
    51 Hz. To be corrected in the M2 plan; the M1 numbers are reported with it.
-6. The second dataset (BETA) has not been run yet.
+6. **On BETA, the laboratory reference dataset, the same code reproduces the published peak rates within
+   4 %** (gate G5, 3 of 3: CCA 70.2 against 72.5 bits/min, FBCCA 96.8 against 98.8, ensemble TRCA 139.9 against
+   139.6), and there the filtering convention hardly matters.
 
 <p align="center"><img src="figures/m1/01_reproduction.png" width="900" alt="Accuracy against window length for CCA, FBCCA and ensemble TRCA with three ways of filtering; the published values lie on the curves obtained by filtering the whole epoch"></p>
 
@@ -66,7 +69,7 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 |---|---|---|---|
 | M0 | Data check: files, layout, electrode type, timing, spectra, signal-to-noise ratio, impedance | [`M0_plan.md`](docs/milestones/M0_plan.md) | [`M0_data_audit.md`](docs/milestones/M0_data_audit.md) |
 | M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
-| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | | |
+| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) (proposed) | |
 | M3 | Small network and test-time adaptation; model size and compute | | |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | | |
 | M5 | Real-time replay with measured latency | | |
@@ -89,7 +92,8 @@ pip install -r requirements.txt
 WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 ```
 
-Python 3.13. On two cores M0 takes about two minutes and M1 about fifteen. `BETA_DIR` is optional for now.
+Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, and its BETA part about twenty-five
+more. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
 
 ## Repository layout
 
@@ -97,13 +101,16 @@ Python 3.13. On two cores M0 takes about two minutes and M1 about fifteen. `BETA
 src/ssvep/      wearable.py (dataset constants, loader, development/lockbox split), spectral.py (filters,
                 mains removal, Fourier coefficient at an exact frequency, narrow-band SNR, apparent latency),
                 filterbank.py (reference filter bank, ways of filtering a short window), decoders.py (CCA,
-                FBCCA, TRCA, ensemble TRCA), metrics.py (ITR, chance threshold), plotting.py (one figure style)
+                FBCCA, TRCA, ensemble TRCA), metrics.py (ITR, chance threshold), beta.py (reference dataset),
+                plotting.py (one figure style)
 scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_checks.py (timing, spectra,
                 SNR, development subjects only), m0_figures.py, m0_summary.py (every number of the audit),
                 check_beta_files.py
                 m1_edge_transients.py (synthetic), m1_baselines_wearable.py (development subjects only),
                 m1_crosscheck.py (second implementation), m1_decision_bias.py (diagnostic),
                 m1_summary.py (every number of the report), m1_figures.py
+                beta_reduce.py (BETA to nine channels, numpy only), m1_beta_check.py, m1_baselines_beta.py,
+                m1_beta_summary.py (gate G5)
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
 docs/           analysis_plan.md, milestones/ (one plan and one report per milestone)
 results/        result tables (CSV), one folder per milestone

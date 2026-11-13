@@ -1,0 +1,7 @@
+gate,variant,method,published_peak_itr,published_window_s,our_peak_itr,our_sem,our_window_s,relative_difference,our_itr_at_published_window,passed
+G5,A,CCA (6-80 Hz),72.54,1.8,70.2,4.6,1.8,-0.032,70.2,True
+G5,A,FBCCA,98.79,1.4,96.8,4.0,1.6,-0.02,96.7,True
+G5,A,ensemble TRCA with filter bank,139.58,0.6,139.9,8.3,0.6,0.002,139.9,True
+(same criterion),C-,CCA (6-80 Hz),72.54,1.8,71.1,4.6,1.8,-0.019,71.1,True
+(same criterion),C-,FBCCA,98.79,1.4,98.5,4.7,1.4,-0.003,98.5,True
+(same criterion),C-,ensemble TRCA with filter bank,139.58,0.6,143.6,9.5,0.4,0.029,143.4,True

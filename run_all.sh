@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Full pipeline, in milestone order.
 # WEARABLE_DIR: unzipped wearable SSVEP dataset (S001.mat ... S102.mat, Impedance.mat, Subjects_Information.mat)
-# BETA_DIR:     unzipped BETA dataset (S1.mat ... S70.mat); optional for M0
+# BETA_DIR:     BETA dataset: the original S1.mat ... S70.mat, or the files reduced by scripts/beta_reduce.py
+#               (S1.npy, S1.json, ...). Optional: the BETA steps are skipped if the folder is missing.
 set -euo pipefail
 cd "$(dirname "$0")"
 export PYTHONDONTWRITEBYTECODE=1
@@ -14,7 +15,7 @@ python -m pytest -q -p no:cacheprovider tests
 
 echo "M0  label-free inventory, all 102 subjects"
 python scripts/m0_inventory.py --raw "$WEARABLE_DIR" | tee logs/m0_inventory.log
-if [ -d "$BETA_DIR" ]; then
+if [ -d "$BETA_DIR" ] && ls "$BETA_DIR"/S1.mat >/dev/null 2>&1; then
   python scripts/check_beta_files.py --raw "$BETA_DIR"
 fi
 
@@ -36,6 +37,13 @@ python scripts/m1_baselines_wearable.py --raw "$WEARABLE_DIR" --diagnostic | tee
 echo "M1  second implementation on one person, and the decision-bias diagnostic"
 python scripts/m1_crosscheck.py --raw "$WEARABLE_DIR" | tee logs/m1_crosscheck.log
 python scripts/m1_decision_bias.py --raw "$WEARABLE_DIR" | tee logs/m1_decision_bias.log
+
+if [ -d "$BETA_DIR" ]; then
+  echo "M1  BETA (reference dataset, gate G5): data check, standard decoders (about 25 minutes), gate"
+  python scripts/m1_beta_check.py --raw "$BETA_DIR" | tee logs/m1_beta_check.log
+  python scripts/m1_baselines_beta.py --raw "$BETA_DIR" | tee logs/m1_baselines_beta.log
+  python scripts/m1_beta_summary.py | tee logs/m1_beta_summary.log
+fi
 
 echo "M1  the numbers quoted in the report, and the figures"
 python scripts/m1_summary.py | tee logs/m1_summary.log

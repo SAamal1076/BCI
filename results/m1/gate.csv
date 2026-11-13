@@ -15,4 +15,4 @@ G4,"FBCCA, published weights",1.0,wet minus dry,0.19999999999999996,0.205,,,True
 G4,"FBCCA, published weights",2.0,wet minus dry,0.13,0.164,,,True
 G4,"ensemble TRCA, published weights",1.0,wet minus dry,0.26,0.417,,,True
 G4,"ensemble TRCA, published weights",2.0,wet minus dry,0.20000000000000007,0.426,,,True
-G5,"BETA: CCA, FBCCA, ensemble TRCA",,,,,,,not run
+G5,"BETA: CCA, FBCCA, ensemble TRCA",,,,,,,3 of 3 pass (see gate_beta.csv)

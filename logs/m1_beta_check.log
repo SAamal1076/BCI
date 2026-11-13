@@ -1,0 +1,9 @@
+people: 70; 2 s of stimulation: 15, 3 s: 55; samples per trial: [750, 1000]
+all values finite: True; frequency table identical in all files: True
+phase table equal to the one stored in the files (0, 0.5, 1, 1.5 pi ...): 70 of 70; equal to the authors' correction of June 2022 (1.5, 0, 0.5, 1 pi ...): 0 of 70
+  (the phase table is not used by CCA, FBCCA or TRCA)
+nine channels found by name in every file: True; positions: ['[47, 54, 53, 56, 57, 55, 60, 61, 62]']
+reduced files made from originals whose MD5 equals figshare's: 70 of 70
+RMS over people (uV): median 5.0, range 3.1 to 53.6; largest absolute value 2040 uV
+amplitude at 50 Hz against 47-53 Hz, 1 s window (uV, median over people): 0.133 against 0.370 (a hardware notch removed the mains)
+group average at Oz: largest of the 40 candidate frequencies is the target's own in 40 of 40 targets

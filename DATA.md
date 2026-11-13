@@ -20,6 +20,13 @@ Raw data are **not** in this repository. Download them from their publishers and
   (about 5.3 GB).
 - Licence shown by figshare: **CC BY 4.0** (checked 12 Nov 2026).
 - Content: `S1.mat` ... `S70.mat`, `Description.pdf`, `note.txt`.
+- The project uses nine of the 64 channels. `scripts/beta_reduce.py` (numpy only) writes them in single
+  precision as `S<n>.npy` with a small `S<n>.json` (tables, channel names, MD5 of the source file): 0.4 GB
+  instead of 5.3 GB. `ssvep.beta.load_subject` reads the original or the reduced files and returns the same
+  numbers (unit test). The results in this repository were computed from the reduced files, made from
+  originals whose MD5 equals figshare's for all 70 files.
+- The phase table stored in the files differs from the paper by a constant; the authors published a
+  correction on 15 June 2022 (`Description.pdf`). The decoders of M1 do not use the phase table.
 
 ## Expected layout
 
@@ -27,7 +34,7 @@ Unzip each archive anywhere and pass the folders to the scripts (defaults shown)
 
 ```
 data/wearable_ssvep/S001.mat ... S102.mat, Impedance.mat, Subjects_Information.mat
-data/beta/S1.mat ... S70.mat
+data/beta/S1.mat ... S70.mat          (or the reduced S1.npy, S1.json, ...)
 ```
 
 ```bash

@@ -62,8 +62,8 @@ def main():
     pd.DataFrame(amp, index=[f"{f:g}" for f in F], columns=[f"{f:g}" for f in F]).to_csv(
         out / "beta_group_amplitude_oz.csv", float_format="%.4f")
 
-    print(f"people: {len(d)}; 2 s of stimulation: {(d.stim_s == 2).sum()}, 3 s: {(d.stim_s == 3).sum()}; "
-          f"samples per trial: {sorted(d.samples.unique())}")
+    print(f"people: {len(d)}; 2 s of stimulation: {int((d.stim_s == 2).sum())}, 3 s: {int((d.stim_s == 3).sum())}; "
+          f"samples per trial: {sorted(int(v) for v in d.samples.unique())}")
     print(f"all values finite: {d.finite.all()}; frequency table identical in all files: {d.freq_table_ok.all()}")
     print(f"phase table equal to the one stored in the files (0, 0.5, 1, 1.5 pi ...): {d.phase_table_as_in_files.sum()} of {len(d)}; "
           f"equal to the authors' correction of June 2022 (1.5, 0, 0.5, 1 pi ...): {d.phase_table_as_corrected.sum()} of {len(d)}")

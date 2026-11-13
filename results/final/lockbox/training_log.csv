@@ -1,0 +1,7 @@
+electrode,seed,train_people,validation_people,train_trials,epochs_run,best_epoch,validation_loss,validation_accuracy,train_seconds
+dry,0,57,11,6840,42,34,1.4309,0.578,233.2
+dry,1,57,11,6840,60,59,1.4069,0.5955,329.8
+dry,2,57,11,6840,60,55,1.4052,0.5917,326.1
+wet,0,57,11,6840,37,29,1.1942,0.6742,196.8
+wet,1,57,11,6840,60,56,1.1936,0.6614,312.1
+wet,2,57,11,6840,60,60,1.1416,0.6742,322.5

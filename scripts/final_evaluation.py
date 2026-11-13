@@ -342,7 +342,11 @@ def authorise(name, open_lockbox, reproduce, marker=MARKER, git=_git):
     commit = git("rev-parse", "HEAD")
     if git("status", "--porcelain", "--untracked-files=no"):
         raise lb.LockboxError("the working tree has uncommitted changes; the opening needs a clean commit")
-    if git("rev-parse", "pre-lockbox^{commit}") != commit:
+    try:
+        tagged = git("rev-parse", "pre-lockbox^{commit}")
+    except subprocess.CalledProcessError:
+        raise lb.LockboxError("there is no tag pre-lockbox") from None
+    if tagged != commit:
         raise lb.LockboxError("the commit is not the one tagged pre-lockbox")
     return True, commit
 
@@ -444,12 +448,12 @@ def report(name, reproduce=False):
     old_keys = set(old.index.droplevel("subject"))
     label = "the same people in M2 to M4" if same_people else "the 68 development people (M2 to M4)"
 
-    def table(design, methods, windows=(1.0,)):
+    def table(design, methods, windows=(1.0,), only_k=None):
         rows = []
         for method in methods:
             for window in windows:
                 ks = sorted(acc[(acc.design == design) & (acc.method == method)].k.unique())
-                for k in ks:
+                for k in ks if only_k is None else [only_k]:
                     row = {"method": method, "window_s": window, "k": k}
                     for el in NAMES:
                         key = (design, method, window, k, el)
@@ -460,7 +464,7 @@ def report(name, reproduce=False):
         print(pd.DataFrame(rows).to_string(index=False))
 
     print(f"\n== 2. no calibration, blocks 7 to 10, 1 s: mean accuracy [95 % interval over people]; next to it: {label}")
-    table("new_user", ["fbcca", "template", "template_adapted", "net_A0", "net_A1", "net_A2", "net_online"])
+    table("new_user", ["fbcca", "template", "template_adapted", "net_A0", "net_A1", "net_A2", "net_online"], only_k=0)
     pl_acc = acc[acc.method == "template_adapted"].groupby("electrode").pseudo_label_accuracy.mean()
     print(f"accuracy of the template's own decisions on blocks 1 to 6 (used as labels): dry {pl_acc.dry:.3f}, wet {pl_acc.wet:.3f}")
     print("\n== 3. calibration curve, blocks 7 to 10, 1 s (k = number of calibration blocks; one block = 48 s)")

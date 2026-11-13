@@ -1,0 +1,1 @@
+{"electrode": "wet", "seed": 0, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 37, "best_epoch": 29, "validation_loss": 1.1942, "validation_accuracy": 0.6742, "train_seconds": 196.8}

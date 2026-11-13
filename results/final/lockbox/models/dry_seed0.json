@@ -1,0 +1,1 @@
+{"electrode": "dry", "seed": 0, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 42, "best_epoch": 34, "validation_loss": 1.4309, "validation_accuracy": 0.578, "train_seconds": 233.2}

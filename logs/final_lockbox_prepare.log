@@ -1,0 +1,8 @@
+set lockbox: population 68 development people (57 for training, 11 for validation); 0 networks already trained, 6 to train
+{"electrode": "dry", "seed": 0, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 42, "best_epoch": 34, "validation_loss": 1.4309, "validation_accuracy": 0.578, "train_seconds": 233.2}
+{"electrode": "dry", "seed": 1, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 60, "best_epoch": 59, "validation_loss": 1.4069, "validation_accuracy": 0.5955, "train_seconds": 329.8}
+{"electrode": "wet", "seed": 0, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 37, "best_epoch": 29, "validation_loss": 1.1942, "validation_accuracy": 0.6742, "train_seconds": 196.8}
+{"electrode": "dry", "seed": 2, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 60, "best_epoch": 55, "validation_loss": 1.4052, "validation_accuracy": 0.5917, "train_seconds": 326.1}
+{"electrode": "wet", "seed": 1, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 60, "best_epoch": 56, "validation_loss": 1.1936, "validation_accuracy": 0.6614, "train_seconds": 312.1}
+{"electrode": "wet", "seed": 2, "train_people": 57, "validation_people": 11, "train_trials": 6840, "epochs_run": 60, "best_epoch": 60, "validation_loss": 1.1416, "validation_accuracy": 0.6742, "train_seconds": 322.5}
+networks: 6; epochs run 37 to 60; validation accuracy 0.629; checksums written to results/final/lockbox/frozen.json

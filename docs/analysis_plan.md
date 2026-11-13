@@ -238,6 +238,16 @@ Details: `docs/milestones/final_evaluation_plan.md`.
 - **One opening:** the script needs `--open-lockbox`, and refuses a second run. The commit before the opening
   is tagged `pre-lockbox`. After the opening no method, setting, test or exclusion is changed.
 
+## Facts established by the rehearsal (13 Nov 2026), development people only
+
+Details: `docs/milestones/final_rehearsal.md`.
+
+- With 23 development people as new people and the other 45 as population, the script of the final evaluation
+  returns the M2 values exactly where no population is involved (552 accuracies), and close values elsewhere.
+- The 15 tests ran; their p-values were neither written nor looked at.
+- The population template and the six networks for the lockbox people were built from the 68 development
+  people before the opening; their checksums are in the commit tagged `pre-lockbox`.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

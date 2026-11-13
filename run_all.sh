@@ -73,6 +73,7 @@ python scripts/m4_figures.py
 echo "Final  rehearsal of the final evaluation on development people only (6 networks, about 12 minutes; p-values withheld)"
 python scripts/final_evaluation.py prepare --set rehearsal --raw "$WEARABLE_DIR" | tee logs/final_rehearsal_prepare.log
 python scripts/final_evaluation.py evaluate --set rehearsal --raw "$WEARABLE_DIR" | tee logs/final_rehearsal.log
+python scripts/final_figures.py --set rehearsal
 
 echo "Final  template and 6 networks for the lockbox people, built from the 68 development people only (about 18 minutes)"
 python scripts/final_evaluation.py prepare --set lockbox --raw "$WEARABLE_DIR" | tee logs/final_lockbox_prepare.log

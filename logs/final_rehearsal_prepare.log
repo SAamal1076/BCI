@@ -1,0 +1,8 @@
+set rehearsal: population 45 development people (38 for training, 7 for validation); 0 networks already trained, 6 to train
+{"electrode": "dry", "seed": 0, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 59, "validation_loss": 1.943, "validation_accuracy": 0.381, "train_seconds": 212.2}
+{"electrode": "dry", "seed": 1, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 55, "validation_loss": 1.9615, "validation_accuracy": 0.3929, "train_seconds": 219.1}
+{"electrode": "dry", "seed": 2, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 55, "validation_loss": 1.9632, "validation_accuracy": 0.3738, "train_seconds": 212.5}
+{"electrode": "wet", "seed": 0, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 55, "validation_loss": 1.6037, "validation_accuracy": 0.5381, "train_seconds": 211.7}
+{"electrode": "wet", "seed": 1, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 59, "validation_loss": 1.6079, "validation_accuracy": 0.5488, "train_seconds": 209.5}
+{"electrode": "wet", "seed": 2, "train_people": 38, "validation_people": 7, "train_trials": 4560, "epochs_run": 60, "best_epoch": 56, "validation_loss": 1.5835, "validation_accuracy": 0.55, "train_seconds": 209.3}
+networks: 6; epochs run 60 to 60; validation accuracy 0.464; checksums written to results/final/rehearsal/frozen.json

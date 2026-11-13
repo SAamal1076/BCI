@@ -136,11 +136,28 @@ Report: `docs/milestones/M1_baselines.md`. Development subjects only.
 3. **BETA.** Gate G5 is kept as the independent check of the decoders. The dataset is reduced to its nine
    channels on the author's computer (`scripts/beta_reduce.py`) and analysed from the reduced files.
 
+## Fixed before M2 (approved 13 Nov 2026, before anything of M2 was run)
+
+Details: `docs/milestones/M2_plan.md`.
+
+- **Pipeline:** chosen once among B (as in M1), B1 (one mains frequency per trial for all channels) and B2
+  (B1 with the band limited to 45 Hz and 3 harmonics), by the mean accuracy at 1 s of FBCCA and ensemble TRCA
+  over the two headbands, on the development people. B2 is taken only if it is at least 0.01 above B1.
+- **New user:** calibration = the first `k` blocks (`k` = 0, 1, 2, 4, 6), test = blocks 7 to 10, other people
+  by leave-one-subject-out.
+- **Cross-subject template:** `T_f = (n0 * P_f + k * I_f) / (n0 + k)`, extended-CCA decision; `n0` chosen once
+  on the development people in {0.5, 1, 2, 4, 8}.
+- **H1 test:** crossover analysis (rank-sum test on first minus second headband between the two orders of
+  wearing, one-sided); four cases: FBCCA and ensemble TRCA at 1 s and 2 s.
+- **H2 (threshold fixed):** cross-subject template with 2 blocks is not more than 0.05 below ensemble TRCA with
+  6 blocks, at 1 s; one-sided Wilcoxon signed-rank test; two cases (dry, wet).
+- **Lockbox:** opened once, after the methods of M3 are frozen. Holm correction over the six tests above plus
+  those that the M3 and M4 plans add. No p-value on the development people.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |
 |---|---|
-| M2 | Proposed in `docs/milestones/M2_plan.md` (waiting for approval): correction of the pipeline and its choice among three candidates, design for a new user, cross-subject template, calibration curve, use of the lockbox, tests of H1 (crossover) and H2 (margin 0.05), family for the Holm correction. |
 | M3 | Network, test-time adaptation settings, compute budget, seeds. |
 | M4 | Time-on-task and impedance analyses (H5). |
 | M5 | Real-time replay: stream order, latency measurement, stopping rule. |

@@ -1,8 +1,8 @@
 # M2 plan: new users and calibration
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** Written after M1
-(`M1_baselines.md`) and the author's three decisions of 13 Nov 2026 (recorded in `docs/analysis_plan.md`).
-Anything done differently will be listed under "Deviations" in the M2 report.*
+*Proposed on 13 Nov 2026 and **approved by the author the same day**, as written, before anything was run.
+Written after M1 (`M1_baselines.md`) and the author's three decisions of 13 Nov 2026 (recorded in
+`docs/analysis_plan.md`). Anything done differently is listed under "Deviations" in `M2_calibration.md`.*
 
 ## Purpose
 

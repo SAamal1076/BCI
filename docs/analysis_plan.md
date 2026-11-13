@@ -212,6 +212,17 @@ Details: `docs/milestones/M4_plan.md`. Decoder for all of M4: cross-subject temp
 - **Holm family, complete: 15 tests.** H1 (4), H2 (2), H3 (3), H5a (2), H5b (2), H6 (2). The lockbox is opened
   once, by a separate short plan, after M4.
 
+## Facts established by M4 (13 Nov 2026), development people only
+
+Report: `docs/milestones/M4_failures.md`.
+
+- H5a on the development people: slope of accuracy -0.0035 per block (dry) and -0.0016 (wet); the intervals
+  include zero. H5b: correlation of impedance with accuracy +0.07 (dry) and +0.21 (wet), not negative.
+- The tests of H5a, H5b and H6 stay as fixed. Two null results are expected for H5 and will be reported.
+- The keypad has 3 rows of 4 targets; the error classes of the M4 plan were corrected before the decisions
+  were looked at (deviation D1 of the M4 report).
+- The lockbox has not been loaded.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

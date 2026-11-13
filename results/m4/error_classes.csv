@@ -1,0 +1,6 @@
+decoder,electrode,errors,0.5 Hz apart and neighbours on the keypad (diagonal),"0.5 Hz apart, not neighbours on the keypad","neighbours on the keypad, not 0.5 Hz apart",neither
+template,dry,3442,0.080,0.073,0.348,0.499
+template,wet,2142,0.092,0.078,0.380,0.450
+fbcca,dry,4282,0.125,0.104,0.330,0.442
+fbcca,wet,2791,0.117,0.102,0.370,0.411
+even spread,,,0.091,0.076,0.348,0.485

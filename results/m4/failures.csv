@@ -1,0 +1,3 @@
+subject,fails with,accuracy 1 s,other headband 1 s,same headband 2 s,ensemble TRCA 1 s,SNR dB,noise floor,mains uV,impedance kOhm,worn
+22,dry,0.1083,0.7167,0.2333,0.1000,-0.6593,2.5822,28.4759,122.1321,first
+76,dry,0.0833,0.1583,0.1667,0.1167,-0.9367,1.5068,16.4534,157.4133,second

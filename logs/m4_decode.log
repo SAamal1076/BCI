@@ -1,0 +1,6 @@
+pipeline B2; 68 development people, leave-one-subject-out; 16320 decisions at 1 s
+accuracy over all 10 blocks at 1 s (template, FBCCA):
+              ok    okf
+electrode              
+dry        0.578  0.475
+wet        0.738  0.658

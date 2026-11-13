@@ -1,0 +1,70 @@
+== A. time on task: 68 development people, cross-subject template, no calibration, 1 s
+mean accuracy per block:
+block         1      2      3      4      5      6      7      8      9      10
+electrode                                                                      
+dry        0.598  0.612  0.580  0.556  0.583  0.580  0.572  0.562  0.560  0.578
+wet        0.743  0.719  0.763  0.740  0.744  0.744  0.732  0.743  0.717  0.730
+
+slope per block, mean over people [95 % interval]; people with a negative accuracy slope:
+  dry: accuracy -0.0035 [-0.0078, +0.0008] per block (over 9 steps: -0.032); negative for 36, positive for 31 of 68
+        SNR at Oz -0.021 [-0.068, +0.031] dB per block; log10 impedance +0.0153 [+0.0103, +0.0201] per block (x1.37 over the 10 blocks)
+  wet: accuracy -0.0016 [-0.0062, +0.0027] per block (over 9 steps: -0.014); negative for 36, positive for 32 of 68
+        SNR at Oz -0.037 [-0.086, +0.015] dB per block; log10 impedance -0.0185 [-0.0210, -0.0159] per block (x0.68 over the 10 blocks)
+first half (blocks 1-5) against second half (blocks 6-10), accuracy:
+  dry: 0.586 then 0.571, difference -0.015 [-0.038, +0.009]
+  wet: 0.742 then 0.733, difference -0.009 [-0.035, +0.017]
+the session as worn (first headband, then second), mean accuracy:
+  dry worn first (35 people): first headband (dry) 0.580, second headband (wet) 0.711
+  wet worn first (33 people): first headband (wet) 0.766, second headband (dry) 0.576
+  effect of being the second headband (crossover estimate): -0.030
+
+ageing of a calibration: template from the person's blocks 1 and 2, tested on blocks 3 to 10
+          own_blocks_1_2                                                  template                                                 
+block                 3      4      5      6      7      8      9      10       3      4      5      6      7      8      9      10
+electrode                                                                                                                          
+dry                0.609  0.594  0.600  0.599  0.585  0.567  0.578  0.598    0.580  0.556  0.583  0.580  0.572  0.562  0.560  0.578
+wet                0.815  0.799  0.789  0.820  0.820  0.804  0.784  0.786    0.763  0.740  0.744  0.744  0.732  0.743  0.717  0.730
+  dry: slope over blocks 3-10, own blocks 1-2: -0.0032 [-0.0076, +0.0010]; no calibration: -0.0007 [-0.0067, +0.0050]; difference -0.0025 [-0.0078, +0.0020]
+  wet: slope over blocks 3-10, own blocks 1-2: -0.0028 [-0.0074, +0.0014]; no calibration: -0.0043 [-0.0097, +0.0005]; difference +0.0015 [-0.0018, +0.0049]
+
+== B. impedance
+  dry: median impedance over people 125 kOhm (range 19 to 1368)
+  wet: median impedance over people 17 kOhm (range 1 to 68)
+electrode      impedance against spearman [95 % interval]
+      dry         accuracy (H5b)     +0.07 [-0.19, +0.32]
+      dry single-trial SNR at Oz     +0.10 [-0.15, +0.32]
+      dry            noise floor     +0.19 [-0.05, +0.41]
+      dry          mains pick-up     +0.68 [+0.51, +0.81]
+      wet         accuracy (H5b)     +0.21 [-0.05, +0.43]
+      wet single-trial SNR at Oz     +0.08 [-0.17, +0.32]
+      wet            noise floor     +0.01 [-0.23, +0.24]
+      wet          mains pick-up     +0.13 [-0.12, +0.37]
+  within a person, impedance of a block against accuracy of that block, dry: mean Spearman -0.06 [-0.14, +0.03], negative for 37 of 68 people
+  within a person, impedance of a block against accuracy of that block, wet: mean Spearman +0.01 [-0.07, +0.10], negative for 32 of 68 people
+
+== C. who fails
+not above chance at 1 s (below 0.133 over 120 trials): dry 2, wet 0 of 68; dry only 2, wet only 0, both 0
+with FBCCA: dry 4, wet 0
+ subject fails with  accuracy 1 s  other headband 1 s  same headband 2 s  ensemble TRCA 1 s  SNR dB  noise floor  mains uV  impedance kOhm   worn
+      22        dry         0.108               0.717              0.233              0.100  -0.659        2.582    28.476         122.132  first
+      76        dry         0.083               0.158              0.167              0.117  -0.937        1.507    16.453         157.413 second
+  dry: failing against the others, medians: SNR dB -0.80 / 3.70; noise floor 2.04 / 1.90; mains uV 22.46 / 63.05; impedance kOhm 139 / 124
+below 0.30 at 1 s: dry 11, wet 2, both 1; Spearman of a person's dry accuracy with their wet accuracy: +0.68 [+0.51, +0.79]
+Spearman of accuracy with the label-free measures of M0 [95 % interval]:
+electrode                  SNR          noise floor        mains pick-up            impedance
+      dry +0.64 [+0.46, +0.77] -0.15 [-0.39, +0.11] +0.18 [-0.09, +0.41] +0.07 [-0.19, +0.32]
+      wet +0.55 [+0.34, +0.70] -0.11 [-0.38, +0.18] -0.03 [-0.26, +0.21] +0.21 [-0.05, +0.43]
+
+== D. what is confused (1 s)
+    decoder electrode errors 0.5 Hz apart and neighbours on the keypad (diagonal) 0.5 Hz apart, not neighbours on the keypad neighbours on the keypad, not 0.5 Hz apart neither
+   template       dry   3442                                                0.080                                      0.073                                      0.348   0.499
+   template       wet   2142                                                0.092                                      0.078                                      0.380   0.450
+      fbcca       dry   4282                                                0.125                                      0.104                                      0.330   0.442
+      fbcca       wet   2791                                                0.117                                      0.102                                      0.370   0.411
+even spread                                                                 0.091                                      0.076                                      0.348   0.485
+  dry: an error goes to a given frequency neighbour 0.92 times as often as to an average wrong target; to a given keypad neighbour (not a frequency neighbour) 1.00 times
+       share of the decisions per target: from 0.053 (9.75 Hz) to 0.109 (11.25 Hz); 0.083 without bias
+       accuracy per target: lowest 0.347 (9.75 Hz), highest 0.691 (11.25 Hz)
+  wet: an error goes to a given frequency neighbour 1.02 times as often as to an average wrong target; to a given keypad neighbour (not a frequency neighbour) 1.09 times
+       share of the decisions per target: from 0.065 (13.25 Hz) to 0.102 (11.75 Hz); 0.083 without bias
+       accuracy per target: lowest 0.625 (13.25 Hz), highest 0.793 (10.75 Hz)

@@ -64,4 +64,9 @@ python scripts/m3_evaluate.py | tee logs/m3_evaluate.log
 python scripts/m3_compute.py | tee logs/m3_compute.log
 python scripts/m3_summary.py | tee logs/m3_summary.log
 python scripts/m3_figures.py
+
+echo "M4  decision of every trial with the frozen decoder (about 4 minutes), summary and figures"
+python scripts/m4_decode.py --raw "$WEARABLE_DIR" | tee logs/m4_decode.log
+python scripts/m4_summary.py | tee logs/m4_summary.log
+python scripts/m4_figures.py
 echo "done"

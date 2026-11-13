@@ -1,6 +1,6 @@
 # M6 plan: report, graphical abstract, presentation, repository finish
 
-*13 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been produced.** Written after
+*13 Nov 2026. **Approved by the author on 14 Nov 2026, with the three defaults (Q1 to Q3), before anything below was produced.** Written after
 the final evaluation (`final_evaluation.md`) and the author's decision of the same day to skip M5 (real-time
 replay). Anything done differently will be listed under "Deviations" in the M6 note.*
 

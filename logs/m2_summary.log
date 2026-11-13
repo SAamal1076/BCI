@@ -1,0 +1,154 @@
+== 1. step 0: pipeline candidates (1 s, FBCCA and ensemble TRCA, development people)
+pipeline  etrca_dry  etrca_wet  fbcca_dry  fbcca_wet  criterion  fbcca_share_12.25_12.75  etrca_share_12.25_12.75  chosen
+       B      0.515      0.841      0.451      0.621      0.607                    0.291                    0.173   False
+      B1      0.518      0.859      0.465      0.671      0.628                    0.226                    0.174   False
+      B2      0.606      0.889      0.475      0.658      0.657                    0.176                    0.176    True
+chosen and frozen: B2
+
+== 2. baselines re-run with pipeline B2: mean accuracy (SEM), 68 development people, leave-one-block-out
+window_s                    0.2            0.6            1.0            1.4            2.0
+method electrode                                                                           
+cca    dry        0.100 (0.004)  0.296 (0.023)  0.463 (0.030)  0.581 (0.032)  0.691 (0.031)
+       wet        0.100 (0.004)  0.430 (0.023)  0.634 (0.027)  0.743 (0.026)  0.816 (0.023)
+etrca  dry        0.331 (0.026)  0.509 (0.033)  0.606 (0.034)  0.683 (0.033)  0.741 (0.032)
+       wet        0.612 (0.027)  0.827 (0.021)  0.889 (0.017)  0.917 (0.015)  0.940 (0.012)
+fbcca  dry        0.102 (0.004)  0.306 (0.024)  0.475 (0.031)  0.596 (0.031)  0.702 (0.031)
+       wet        0.103 (0.004)  0.456 (0.025)  0.658 (0.027)  0.763 (0.025)  0.836 (0.021)
+trca   dry        0.244 (0.022)  0.381 (0.033)  0.468 (0.034)  0.546 (0.035)  0.620 (0.036)
+       wet        0.531 (0.028)  0.777 (0.027)  0.856 (0.022)  0.895 (0.019)  0.925 (0.015)
+change against the M1 numbers (pipeline B): B2 minus B
+window_s            0.2    0.6    1.0    1.4    2.0
+method electrode                                   
+cca    dry       -0.008 -0.020  0.003 -0.001  0.009
+       wet       -0.022 -0.026  0.013  0.012 -0.001
+etrca  dry        0.044  0.081  0.090  0.096  0.098
+       wet        0.011  0.039  0.048  0.041  0.042
+fbcca  dry       -0.008 -0.008  0.024  0.030  0.021
+       wet       -0.034 -0.019  0.037  0.031  0.010
+trca   dry        0.031  0.069  0.079  0.093  0.101
+       wet       -0.009  0.042  0.054  0.064  0.058
+peak ITR (bits/min, window + 0.5 s):
+  CCA            dry:   45.1 at 1.8 s
+  CCA            wet:   66.6 at 1.2 s
+  FBCCA          dry:   46.7 at 1.8 s
+  FBCCA          wet:   68.7 at 1.2 s
+  ensemble TRCA  dry:   64.1 at 0.8 s
+  ensemble TRCA  wet:  147.3 at 0.4 s
+  FBCCA          1.0 s: not above chance (below 0.133) dry 5, wet 0 of 68; at 0.9 or more dry 6, wet 12
+  FBCCA          2.0 s: not above chance (below 0.133) dry 2, wet 0 of 68; at 0.9 or more dry 21, wet 32
+  ensemble TRCA  1.0 s: not above chance (below 0.133) dry 5, wet 0 of 68; at 0.9 or more dry 15, wet 43
+  ensemble TRCA  2.0 s: not above chance (below 0.133) dry 2, wet 0 of 68; at 0.9 or more dry 24, wet 54
+  share of the decisions on 12.25 or 12.75 Hz, ensemble TRCA, dry: 0.182 (0.167 without bias)
+  share of the decisions on 12.25 or 12.75 Hz, FBCCA, dry: 0.175 (0.167 without bias)
+  share of the decisions on 12.25 or 12.75 Hz, ensemble TRCA, wet: 0.171 (0.167 without bias)
+  share of the decisions on 12.25 or 12.75 Hz, FBCCA, wet: 0.176 (0.167 without bias)
+
+== 3. dry minus wet, same person, pipeline B2 (descriptive; H1 is tested on the lockbox)
+       method  window_s  mean d dry lower in  dry worn first  n1  wet worn first  n2  crossover estimate
+        FBCCA       1.0  -0.183        56/68          -0.160  35          -0.206  33              -0.183
+        FBCCA       2.0  -0.134        49/68          -0.113  35          -0.156  33              -0.134
+ensemble TRCA       1.0  -0.283        63/68          -0.264  35          -0.303  33              -0.284
+ensemble TRCA       2.0  -0.199        59/68          -0.192  35          -0.207  33              -0.199
+mean dry - wet by window:
+window_s    0.2    0.4    0.6    0.8    1.0    1.2    1.4    1.6    1.8    2.0
+method                                                                        
+cca      -0.000 -0.067 -0.134 -0.152 -0.171 -0.171 -0.162 -0.155 -0.138 -0.125
+fbcca    -0.001 -0.084 -0.150 -0.168 -0.183 -0.170 -0.167 -0.158 -0.144 -0.134
+etrca    -0.282 -0.323 -0.318 -0.287 -0.283 -0.258 -0.235 -0.231 -0.211 -0.199
+  time cost of dry electrodes, FBCCA: 0.4 s -> 0.55 s (+0.15); 0.6 s -> 0.95 s (+0.35); 0.8 s -> 1.29 s (+0.49); 1.0 s -> 1.71 s (+0.71); 1.2 s -> not reached within 2 s
+  time cost of dry electrodes, ensemble TRCA: 0.4 s -> not reached within 2 s; 0.6 s -> not reached within 2 s; 0.8 s -> not reached within 2 s; 1.0 s -> not reached within 2 s; 1.2 s -> not reached within 2 s
+
+== 4. new users: 68 development people, leave-one-subject-out, test = blocks 7-10 (48 trials)
+choice of n0 (mean accuracy at 1 s over k = 1, 2, 4 and both headbands):
+electrode    dry                  wet               criterion
+k              1      2      4      1      2      4          
+n0                                                           
+0.5        0.557  0.586  0.628  0.780  0.805  0.828     0.697
+1.0        0.562  0.593  0.623  0.787  0.811  0.830     0.701
+2.0        0.583  0.600  0.631  0.795  0.813  0.833     0.709
+4.0        0.593  0.607  0.633  0.797  0.815  0.831     0.713
+8.0        0.600  0.611  0.634  0.782  0.805  0.828     0.710
+chosen and frozen: n0 = 4
+
+calibration curve at 1.0 s: mean accuracy [95 % bootstrap interval over people]; one block = 48 s
+k                                    0                     1                     2                     4                     6
+electrode method                                                                                                              
+dry       cross   0.568 [0.511, 0.625]  0.593 [0.535, 0.652]  0.607 [0.547, 0.667]  0.633 [0.575, 0.691]  0.653 [0.595, 0.711]
+          etrca                                               0.286 [0.230, 0.347]  0.440 [0.372, 0.508]  0.523 [0.455, 0.592]
+          fbcca   0.465 [0.402, 0.523]                                                                                        
+          own                           0.546 [0.482, 0.607]  0.582 [0.518, 0.643]  0.631 [0.569, 0.691]  0.649 [0.587, 0.711]
+wet       cross   0.730 [0.678, 0.778]  0.797 [0.747, 0.842]  0.815 [0.768, 0.858]  0.831 [0.788, 0.872]  0.844 [0.804, 0.882]
+          etrca                                               0.699 [0.635, 0.759]  0.806 [0.753, 0.855]  0.852 [0.807, 0.892]
+          fbcca   0.652 [0.592, 0.709]                                                                                        
+          own                           0.766 [0.711, 0.817]  0.798 [0.748, 0.846]  0.827 [0.781, 0.868]  0.839 [0.795, 0.878]
+
+calibration curve at 2.0 s: mean accuracy [95 % bootstrap interval over people]; one block = 48 s
+k                                    0                     1                     2                     4                     6
+electrode method                                                                                                              
+dry       cross   0.756 [0.699, 0.810]  0.773 [0.718, 0.826]  0.789 [0.735, 0.841]  0.797 [0.744, 0.848]  0.808 [0.756, 0.858]
+          etrca                                               0.419 [0.350, 0.486]  0.571 [0.500, 0.640]  0.663 [0.595, 0.727]
+          fbcca   0.697 [0.634, 0.759]                                                                                        
+          own                           0.735 [0.672, 0.796]  0.767 [0.710, 0.822]  0.794 [0.739, 0.847]  0.806 [0.751, 0.858]
+wet       cross   0.868 [0.829, 0.904]  0.896 [0.859, 0.927]  0.908 [0.875, 0.938]  0.916 [0.884, 0.943]  0.923 [0.893, 0.949]
+          etrca                                               0.813 [0.756, 0.867]  0.891 [0.850, 0.926]  0.915 [0.884, 0.943]
+          fbcca   0.829 [0.784, 0.871]                                                                                        
+          own                           0.883 [0.845, 0.917]  0.895 [0.857, 0.927]  0.908 [0.874, 0.937]  0.919 [0.888, 0.946]
+
+ITR at the best window (bits/min, window + 0.5 s) by number of calibration blocks:
+k                             0              1               2               4               6
+electrode method                                                                              
+dry       cross   56.0 at 1.2 s  59.7 at 1.2 s   63.9 at 1.2 s   67.9 at 0.8 s   70.8 at 0.8 s
+          etrca                                  20.8 at 2.0 s   39.4 at 0.8 s   50.0 at 0.8 s
+          fbcca   46.5 at 1.8 s                                                               
+          own                    53.5 at 1.6 s   59.2 at 1.2 s   65.2 at 1.2 s   69.1 at 1.2 s
+wet       cross   79.8 at 0.8 s  95.4 at 0.8 s  100.7 at 0.8 s  108.9 at 0.8 s  112.1 at 0.6 s
+          etrca                                  80.7 at 0.8 s  116.4 at 0.4 s  130.8 at 0.4 s
+          fbcca   68.2 at 1.2 s                                                               
+          own                    89.4 at 0.8 s   98.0 at 0.8 s  107.0 at 0.8 s  111.4 at 0.6 s
+
+== 5. no calibration: cross-subject template (k = 0) minus FBCCA, same trials: mean [95 % interval]
+electrode  window_s           cross - fbcca  people better  equal  worse
+      dry       0.2 +0.062 [+0.042, +0.081]             50      6     12
+      dry       0.6 +0.130 [+0.105, +0.154]             58      3      7
+      dry       1.0 +0.104 [+0.077, +0.128]             59      2      7
+      dry       1.4 +0.083 [+0.061, +0.105]             50     13      5
+      dry       2.0 +0.059 [+0.041, +0.078]             44     14     10
+      wet       0.2 +0.093 [+0.072, +0.115]             54      9      5
+      wet       0.6 +0.141 [+0.109, +0.172]             56      2     10
+      wet       1.0 +0.078 [+0.050, +0.104]             48      7     13
+      wet       1.4 +0.054 [+0.027, +0.081]             40     14     14
+      wet       2.0 +0.039 [+0.015, +0.061]             37     18     13
+
+== 6. what the population adds to the person's own blocks: cross (n0 frozen) minus own template, 1 s
+electrode  k             cross - own           cross - etrca
+      dry  1 +0.047 [+0.033, +0.063]                        
+      dry  2 +0.025 [+0.010, +0.041] +0.321 [+0.276, +0.367]
+      dry  4 +0.002 [-0.006, +0.011] +0.193 [+0.151, +0.235]
+      dry  6 +0.004 [-0.007, +0.016] +0.130 [+0.087, +0.173]
+      wet  1 +0.031 [+0.010, +0.052]                        
+      wet  2 +0.017 [+0.002, +0.031] +0.116 [+0.084, +0.150]
+      wet  4 +0.004 [-0.009, +0.017] +0.025 [+0.002, +0.051]
+      wet  6 +0.005 [-0.003, +0.013] -0.008 [-0.026, +0.011]
+
+== 7. H2 on the development people (descriptive; the test is run on the lockbox): cross-subject template with 2 blocks (96 s)
+   minus ensemble TRCA with 6 blocks (288 s); H2 says: not more than 0.05 lower
+electrode  window_s  cross k=2  etrca k=6              difference  interval above -0.05 people within 0.05 or better
+      dry       1.0      0.607      0.523 +0.084 [+0.039, +0.130]                  True                        53/68
+      dry       2.0      0.789      0.663 +0.126 [+0.087, +0.170]                  True                        65/68
+      wet       1.0      0.815      0.852 -0.036 [-0.059, -0.015]                 False                        44/68
+      wet       2.0      0.908      0.915 -0.007 [-0.026, +0.013]                  True                        55/68
+blocks the cross-subject template needs to come within 0.05 of ensemble TRCA with 6 blocks (mean accuracy, 1 s):
+  dry: target 0.473; reached from k = 0
+  wet: target 0.802; reached from k = 2
+
+== 8. people (1 s, test blocks 7-10)
+  dry FBCCA                 : not above chance (below 0.167) 7 of 68; at 0.9 or more 6
+  dry cross, k = 0          : not above chance (below 0.167) 3 of 68; at 0.9 or more 8
+  dry cross, k = 2          : not above chance (below 0.167) 3 of 68; at 0.9 or more 13
+  dry ensemble TRCA, k = 6  : not above chance (below 0.167) 10 of 68; at 0.9 or more 13
+  dry: gain of the population template (k = 0) in the lower half of FBCCA accuracy +0.134 [+0.104, +0.165], upper half +0.073 [+0.037, +0.111]; Spearman of the gain with the SNR of M0: +0.04
+  wet FBCCA                 : not above chance (below 0.167) 1 of 68; at 0.9 or more 16
+  wet cross, k = 0          : not above chance (below 0.167) 1 of 68; at 0.9 or more 16
+  wet cross, k = 2          : not above chance (below 0.167) 0 of 68; at 0.9 or more 29
+  wet ensemble TRCA, k = 6  : not above chance (below 0.167) 0 of 68; at 0.9 or more 40
+  wet: gain of the population template (k = 0) in the lower half of FBCCA accuracy +0.122 [+0.080, +0.162], upper half +0.034 [+0.007, +0.064]; Spearman of the gain with the SNR of M0: -0.37

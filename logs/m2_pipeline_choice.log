@@ -1,0 +1,15 @@
+development subjects: 68; 1 s window; a-priori weights
+          etrca_dry  etrca_wet  fbcca_dry  fbcca_wet  criterion  fbcca_share_12.25_12.75  etrca_share_12.25_12.75  chosen
+pipeline                                                                                                                 
+B             0.515      0.841      0.451      0.621      0.607                    0.291                    0.173   False
+B1            0.518      0.859      0.465      0.671      0.628                    0.226                    0.174   False
+B2            0.606      0.889      0.475      0.658      0.657                    0.176                    0.176    True
+(share: part of the decisions that go to 12.25 or 12.75 Hz; 0.167 without bias)
+criterion: B 0.6071, B1 0.6282, B2 0.6570; B2 minus B1 = +0.0287 (needed: +0.01)
+chosen pipeline: B2
+
+people for whom the candidate is better / equal / worse than B1 (per person and headband):
+  B against B1, fbcca: 25 / 21 / 90, mean difference -0.0319
+  B against B1, etrca: 39 / 48 / 49, mean difference -0.0103
+  B2 against B1, fbcca: 58 / 15 / 63, mean difference -0.0013
+  B2 against B1, etrca: 84 / 26 / 26, mean difference +0.0588

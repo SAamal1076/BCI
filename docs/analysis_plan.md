@@ -154,6 +154,18 @@ Details: `docs/milestones/M2_plan.md`.
 - **Lockbox:** opened once, after the methods of M3 are frozen. Holm correction over the six tests above plus
   those that the M3 and M4 plans add. No p-value on the development people.
 
+## Facts established by M2 (13 Nov 2026), development people only
+
+Report: `docs/milestones/M2_calibration.md`.
+
+- **Frozen:** pipeline B2 (one mains frequency per trial for all channels; sub-bands from 6, 14 and 22 Hz to
+  45 Hz; 3 harmonics; a-priori weights), `n0` = 4, the new-user design. Both choices were made on the
+  development people by the rules fixed before the run.
+- With no calibration the cross-subject template is above FBCCA at every window (1 s: +0.10 dry, +0.08 wet).
+- H2 on the development people: holds with the dry headband; with the wet one the interval of the difference
+  reaches below the margin at 1 s. Nothing in H1, H2, their tests or the margin was changed after seeing this.
+- The lockbox has not been loaded.
+
 ## To be fixed before the milestone that needs it
 
 | Before | What |

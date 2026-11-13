@@ -1,8 +1,8 @@
 # Wearable SSVEP decoding for new users: calibration cost, dry electrodes, honest evaluation
 
-**Status: M0 (data check) and M1 (standard decoders) done, 13 Nov 2026. The reproduction gate of M1 failed on
-the wearable data as pre-registered and passed on the reference dataset; the cause was found (see below).
-The M2 plan is proposed and not yet run.** This README is filled in milestone by
+**Status: M0 (data check), M1 (standard decoders) and M2 (new users and calibration) done on the development
+people, 13 Nov 2026. The hypotheses have not been tested yet: the 34 lockbox people are untouched and will be
+used once, at the end.** This README is filled in milestone by
 milestone; nothing is reported here before it has been run and reviewed.
 
 A leakage-safe, pre-specified analysis of steady-state visual evoked potential (SSVEP) decoding from an
@@ -34,6 +34,23 @@ Full report: [`docs/milestones/M0_data_audit.md`](docs/milestones/M0_data_audit.
    IIR notch on these short epochs leaves an edge transient (replaced by a least-squares mains removal).
 
 <p align="center"><img src="figures/m0/01_noise_dry_vs_wet.png" width="900" alt="Mains pick-up, high-frequency noise and electrode offset per person: the headband stored first in the files is the noisy one, the dry headband"></p>
+
+## What is known so far (M2, new users and calibration, 68 development people)
+
+Full report: [`docs/milestones/M2_calibration.md`](docs/milestones/M2_calibration.md). Descriptive results with
+95 % intervals over people; every person is decoded as a new user (leave-one-subject-out).
+
+1. **With no calibration at all, a template built from other people beats FBCCA** at every window length: at
+   1 s, 0.57 against 0.47 with dry electrodes and 0.73 against 0.65 with wet ones.
+2. **Two calibration blocks of the user (96 s) bring it to 0.61 (dry) and 0.82 (wet).** Other people's data
+   help most when the user has given little, and no longer matter after four blocks.
+3. **Per-person calibration with ensemble TRCA needs many blocks** and stays behind with dry electrodes: 0.52
+   (dry) and 0.85 (wet) after six blocks (288 s).
+4. **Dry electrodes cost 0.18 in accuracy at 1 s with FBCCA and 0.28 with ensemble TRCA** (same person).
+5. **The pipeline was corrected and frozen:** one mains frequency per trial for all channels, band below the
+   mains (45 Hz). No sample after the decision window is used anywhere.
+
+<p align="center"><img src="figures/m2/02_calibration_curve.png" width="900" alt="Accuracy of a new user at 1 s against the number of calibration blocks, for the cross-subject template, the user's own template and ensemble TRCA, with dry and wet electrodes"></p>
 
 ## What is known so far (M1, standard decoders, 68 development people)
 
@@ -69,7 +86,7 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 |---|---|---|---|
 | M0 | Data check: files, layout, electrode type, timing, spectra, signal-to-noise ratio, impedance | [`M0_plan.md`](docs/milestones/M0_plan.md) | [`M0_data_audit.md`](docs/milestones/M0_data_audit.md) |
 | M1 | Reproduce the standard methods (CCA, FBCCA, TRCA) and their published results | [`M1_plan.md`](docs/milestones/M1_plan.md) | [`M1_baselines.md`](docs/milestones/M1_baselines.md) |
-| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) (proposed) | |
+| M2 | New users and calibration: calibration-free and few-calibration decoding, dry vs wet | [`M2_plan.md`](docs/milestones/M2_plan.md) | [`M2_calibration.md`](docs/milestones/M2_calibration.md) |
 | M3 | Small network and test-time adaptation; model size and compute | | |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | | |
 | M5 | Real-time replay with measured latency | | |
@@ -92,8 +109,8 @@ pip install -r requirements.txt
 WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 ```
 
-Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, and its BETA part about twenty-five
-more. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
+and M2 about fifteen. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
 
 ## Repository layout
 
@@ -102,6 +119,8 @@ src/ssvep/      wearable.py (dataset constants, loader, development/lockbox spli
                 mains removal, Fourier coefficient at an exact frequency, narrow-band SNR, apparent latency),
                 filterbank.py (reference filter bank, ways of filtering a short window), decoders.py (CCA,
                 FBCCA, TRCA, ensemble TRCA), metrics.py (ITR, chance threshold), beta.py (reference dataset),
+                pipeline.py (preprocessing candidates of M2; B2 is the frozen one), transfer.py (template
+                decoder for new users), stats.py (tests reserved for the lockbox),
                 plotting.py (one figure style)
 scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_checks.py (timing, spectra,
                 SNR, development subjects only), m0_figures.py, m0_summary.py (every number of the audit),
@@ -111,6 +130,8 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m1_summary.py (every number of the report), m1_figures.py
                 beta_reduce.py (BETA to nine channels, numpy only), m1_beta_check.py, m1_baselines_beta.py,
                 m1_beta_summary.py (gate G5)
+                m2_pipeline_choice.py, m2_baselines.py, m2_new_users.py (leave-one-subject-out),
+                m2_summary.py (every number of the report), m2_figures.py
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
 docs/           analysis_plan.md, milestones/ (one plan and one report per milestone)
 results/        result tables (CSV), one folder per milestone

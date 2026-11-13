@@ -1,0 +1,4 @@
+pipeline,etrca_dry,etrca_wet,fbcca_dry,fbcca_wet,criterion,fbcca_share_12.25_12.75,etrca_share_12.25_12.75,chosen
+B,0.5153,0.8412,0.4512,0.6208,0.6071,0.2911,0.1728,False
+B1,0.5183,0.8588,0.4647,0.6712,0.6282,0.2256,0.1740,False
+B2,0.6058,0.8888,0.4752,0.6580,0.6570,0.1756,0.1763,True

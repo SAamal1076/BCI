@@ -48,4 +48,13 @@ fi
 echo "M1  the numbers quoted in the report, and the figures"
 python scripts/m1_summary.py | tee logs/m1_summary.log
 python scripts/m1_figures.py
+
+echo "M2  step 0: choice of the pipeline (development subjects only)"
+python scripts/m2_pipeline_choice.py --raw "$WEARABLE_DIR" | tee logs/m2_pipeline_choice.log
+echo "M2  baselines with the chosen pipeline (about 3 minutes)"
+python scripts/m2_baselines.py --raw "$WEARABLE_DIR" | tee logs/m2_baselines.log
+echo "M2  new users, leave-one-subject-out (about 10 minutes; writes about 0.7 GB to a temporary folder)"
+python scripts/m2_new_users.py --raw "$WEARABLE_DIR" | tee logs/m2_new_users.log
+python scripts/m2_summary.py | tee logs/m2_summary.log
+python scripts/m2_figures.py
 echo "done"

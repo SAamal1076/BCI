@@ -346,6 +346,11 @@ CCA favours the low targets):
 - **Size of the effect on accuracy** (plain CCA, 1 s, pipeline B): leaving the 4th and 5th harmonics out gives
   0.479 (dry) and 0.651 (wet) instead of 0.460 and 0.621; the shared frequency alone gives 0.465 and 0.653.
 
+*Note added with M2 (13 Nov 2026):* mechanism 1 needs channels that are strongly correlated, as scalp
+channels are. The synthetic channels above happen to be (condition number of their mixing matrix: 548). With
+weakly correlated synthetic channels the per-channel removal causes no bias (unit test in
+`tests/test_m2.py`). No M1 number changes.
+
 **What it means.** The removal step was designed in M0 for single-channel spectra (deviation D1 of M0), where
 it is sound. Used before a decoder that combines channels it has this side effect. The M1 numbers of
 variants A+, B and C contain it. The baselines are therefore somewhat pessimistic for CCA and FBCCA; the

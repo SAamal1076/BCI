@@ -1,0 +1,5 @@
+method,window_s,mean d,dry lower in,dry worn first,n1,wet worn first,n2,crossover estimate
+FBCCA,1.0000,-0.1827,56/68,-0.1605,35,-0.2063,33,-0.1834
+FBCCA,2.0000,-0.1337,49/68,-0.1131,35,-0.1556,33,-0.1343
+ensemble TRCA,1.0000,-0.2831,63/68,-0.2640,35,-0.3033,33,-0.2837
+ensemble TRCA,2.0000,-0.1990,59/68,-0.1917,35,-0.2068,33,-0.1992

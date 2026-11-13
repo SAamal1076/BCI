@@ -1,0 +1,18 @@
+pass 1 done in 92 s (mean responses of 68 development people)
+pipeline B2; 68 development people as new users; 39440 accuracies; done in 534 s
+mean accuracy at 1 s, test blocks 7-10 (cross: all n0 pooled here; the choice of n0 is made in m2_summary.py):
+electrode    dry    wet
+method k               
+cross  0   0.568  0.730
+       1   0.579  0.788
+       2   0.600  0.810
+       4   0.630  0.830
+       6   0.649  0.842
+etrca  2   0.286  0.699
+       4   0.440  0.806
+       6   0.523  0.852
+fbcca  0   0.465  0.652
+own    1   0.546  0.766
+       2   0.582  0.798
+       4   0.631  0.827
+       6   0.649  0.839

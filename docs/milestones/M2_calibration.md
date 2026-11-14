@@ -6,6 +6,11 @@ population never contains their data (leave-one-subject-out). Descriptive statis
 bootstrap intervals over people; **no p-value**, because the tests of H1 and H2 are reserved for the lockbox.
 Every number below is recomputed by `scripts/m2_summary.py` (`logs/m2_summary.log`).*
 
+> **Note added on 14 Nov 2026, after M5.** One saturated trial of one development person (S067, dry headband,
+> block 4, target 4) dominates the dry population template for the 9.75 Hz target used in this report. On the
+> development people, leaving it out raises the dry accuracy of the template from 0.578 to 0.590. Nothing
+> below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+
 ## Result in short
 
 1. **Pipeline frozen: B2.** One mains frequency per trial for all channels, band limited to 45 Hz, three

@@ -1,0 +1,116 @@
+pass 1: mean responses of 68 development people and the templates of 4 folds (0 people computed now, 0 s)
+pass 2: scores of 68 people x 2 headbands x 120 trials at 18 lengths of signal (0 people computed now, 0 s in all)
+== M5: 68 development people, each decoded once as a test person; 32640 decisions; updates every 0.1 s from 0.3 s to 2.0 s; 0.5 s added for moving the eyes
+
+== 1. chosen on the validation people of each fold (theta of the stopping rule; best fixed window)
+ fold electrode  decoder  theta  fixed_window_s  validation_itr_stopping  validation_itr_fixed
+    0       dry template   0.85             0.9                     87.2                  68.0
+    0       dry    fbcca   0.65             1.7                     64.5                  49.7
+    0       wet template   0.90             0.9                    143.9                 112.5
+    0       wet    fbcca   0.85             1.0                    123.5                  97.1
+    1       dry template   0.80             1.1                    100.9                  78.9
+    1       dry    fbcca   0.75             1.6                     85.2                  67.1
+    1       wet template   0.80             1.2                    109.6                  86.5
+    1       wet    fbcca   0.85             1.2                    110.9                  90.8
+    2       dry template   0.80             1.4                    104.0                  81.7
+    2       dry    fbcca   0.75             1.6                     85.2                  67.1
+    2       wet template   0.85             1.0                    117.4                  92.6
+    2       wet    fbcca   0.85             1.2                    110.9                  90.8
+    3       dry template   0.80             1.1                     99.7                  77.9
+    3       dry    fbcca   0.75             1.6                     85.2                  67.1
+    3       wet template   0.90             1.1                    106.8                  86.1
+    3       wet    fbcca   0.85             1.2                    110.9                  90.8
+theta, how often chosen: {('fbcca', 'dry'): [0.65, 0.75, 0.75, 0.75], ('fbcca', 'wet'): [0.85, 0.85, 0.85, 0.85], ('template', 'dry'): [0.8, 0.8, 0.8, 0.85], ('template', 'wet'): [0.8, 0.85, 0.9, 0.9]}
+scale b_T (median over folds) at 0.3, 1.0 and 2.0 s:
+                    b_0.3  b_1.0  b_2.0
+decoder  electrode                     
+fbcca    dry          2.0    9.5   18.6
+         wet          3.6   12.3   17.6
+template dry          1.9    7.6   14.7
+         wet          1.8    7.3   10.5
+
+== 2. test people: stopping rule against the best fixed window, mean [95 % interval over people]
+ decoder electrode        ITR stopping         ITR fixed       ITR difference relative people faster with stopping
+   fbcca       dry   60.4 [49.5, 71.0] 46.2 [39.0, 53.5] +14.2 [+10.4, +18.0]    +31 %                    60 of 68
+template       dry   79.4 [67.7, 90.8] 58.1 [49.2, 66.9] +21.3 [+17.7, +24.7]    +37 %                    65 of 68
+   fbcca       wet   88.3 [76.9, 99.3] 67.9 [58.8, 76.7] +20.5 [+17.6, +23.4]    +30 %                    67 of 68
+template       wet 104.9 [93.3, 115.9] 79.0 [70.0, 87.5] +25.8 [+22.3, +29.4]    +33 %                    68 of 68
+ decoder electrode    accuracy stopping mean time stopping (s)       accuracy fixed fixed window (s), by fold decided at 2.0 s
+   fbcca       dry 0.664 [0.605, 0.721]      1.43 [1.36, 1.50] 0.641 [0.583, 0.699]                [1.6, 1.7]             30 %
+template       dry 0.736 [0.685, 0.785]      1.22 [1.14, 1.30] 0.635 [0.574, 0.691]           [0.9, 1.1, 1.4]             22 %
+   fbcca       wet 0.795 [0.751, 0.838]      1.18 [1.11, 1.24] 0.705 [0.650, 0.758]                [1.0, 1.2]             17 %
+template       wet 0.838 [0.802, 0.870]      1.06 [0.98, 1.14] 0.746 [0.695, 0.793]      [0.9, 1.0, 1.1, 1.2]             16 %
+
+== 3. accuracy at the same time: stopping rule against a fixed window at least as long as its mean decision time
+electrode  decoder  mean_time_s  fixed_window_s  accuracy_stopping  accuracy_fixed              difference
+      dry    fbcca        1.431             1.5              0.664           0.615 +0.049 [+0.039, +0.060]
+      dry template        1.216             1.3              0.736           0.683 +0.053 [+0.039, +0.069]
+      wet    fbcca        1.177             1.2              0.795           0.720 +0.075 [+0.060, +0.091]
+      wet template        1.058             1.1              0.838           0.760 +0.078 [+0.060, +0.098]
+
+== 4. fixed windows on the test people (mean accuracy; ITR of the mean person is not shown, see section 2)
+window_s              0.3    0.5    0.8    1.0    1.2    1.5    2.0
+decoder  electrode                                                 
+fbcca    dry        0.140  0.256  0.404  0.475  0.550  0.615  0.702
+         wet        0.188  0.378  0.571  0.658  0.720  0.782  0.836
+template dry        0.251  0.410  0.548  0.604  0.663  0.715  0.777
+         wet        0.329  0.525  0.679  0.734  0.776  0.827  0.870
+
+== 5. when the rule decides (share of the decisions of the test people, %)
+when                0.3-0.5 s  0.6-1.0 s  1.1-1.5 s  1.6-1.9 s  2.0 s
+decoder  electrode                                                   
+fbcca    dry              0.0       28.4       28.1       13.9   29.7
+         wet              1.7       49.8       23.4        7.9   17.1
+template dry              9.3       37.6       22.1        9.2   21.8
+         wet             16.8       44.3       17.1        5.6   16.2
+accuracy of the decisions taken before 2.0 s and of those forced at 2.0 s:
+late                before 2.0 s  at 2.0 s
+decoder  electrode                        
+fbcca    dry               0.795     0.355
+         wet               0.859     0.487
+template dry               0.828     0.407
+         wet               0.896     0.539
+
+== 6. can the confidence be believed? decisions of the test people by confidence at the decision
+ decoder electrode        bin  decisions  confidence  correct
+   fbcca       dry [0.0, 0.5)       1558       0.345    0.257
+   fbcca       dry [0.5, 0.6)        366       0.549    0.415
+   fbcca       dry [0.6, 0.7)        730       0.665    0.658
+   fbcca       dry [0.7, 0.8)       2414       0.765    0.737
+   fbcca       dry [0.8, 0.9)       2427       0.844    0.826
+   fbcca       dry [0.9, 1.0)        665       0.928    0.910
+   fbcca       wet [0.0, 0.5)        696       0.357    0.345
+   fbcca       wet [0.5, 0.6)        221       0.546    0.507
+   fbcca       wet [0.6, 0.7)        175       0.644    0.606
+   fbcca       wet [0.7, 0.8)        156       0.750    0.686
+   fbcca       wet [0.8, 0.9)       2940       0.874    0.813
+   fbcca       wet [0.9, 1.0)       3972       0.939    0.890
+template       dry [0.0, 0.5)       1022       0.350    0.288
+template       dry [0.5, 0.6)        246       0.543    0.455
+template       dry [0.6, 0.7)        187       0.649    0.492
+template       dry [0.7, 0.8)        145       0.748    0.634
+template       dry [0.8, 0.9)       3682       0.853    0.779
+template       dry [0.9, 1.0)       2878       0.942    0.885
+template       wet [0.0, 0.5)        673       0.344    0.360
+template       wet [0.5, 0.6)        174       0.551    0.563
+template       wet [0.6, 0.7)        152       0.648    0.704
+template       wet [0.7, 0.8)        135       0.748    0.733
+template       wet [0.8, 0.9)       1768       0.858    0.867
+template       wet [0.9, 1.0)       5258       0.946    0.905
+  fbcca    dry: mean confidence 0.703, accuracy 0.664, mean |gap| 0.039
+  fbcca    wet: mean confidence 0.845, accuracy 0.795, mean |gap| 0.050
+  template dry: mean confidence 0.805, accuracy 0.736, mean |gap| 0.070
+  template wet: mean confidence 0.860, accuracy 0.838, mean |gap| 0.031
+
+== 7. the people for whom stopping helps least and most (template, ITR stopping minus fixed, bits/min)
+  dry: min -7.6, median +20.7, max +71.4; Spearman with the fixed-window accuracy +0.67; people with ITR 0 under both rules: 0
+  wet: min +1.5, median +21.3, max +69.6; Spearman with the fixed-window accuracy +0.60; people with ITR 0 under both rules: 0
+
+== 8. is the confidence too high for the people who are hard to decode? (template; thirds of the people by accuracy)
+  dry: hardest third: accuracy 0.48, confidence minus accuracy +0.212, mean time 1.55 s; middle third: accuracy 0.78, confidence minus accuracy +0.047, mean time 1.22 s; easiest third: accuracy 0.94, confidence minus accuracy -0.049, mean time 0.88 s; Spearman of the gap with accuracy -0.94
+  wet: hardest third: accuracy 0.66, confidence minus accuracy +0.120, mean time 1.32 s; middle third: accuracy 0.88, confidence minus accuracy -0.001, mean time 1.09 s; easiest third: accuracy 0.97, confidence minus accuracy -0.050, mean time 0.76 s; Spearman of the gap with accuracy -0.79
+people not faster with the stopping rule (template):
+ subject electrode  accuracy  fixed_accuracy   itr  fixed_itr
+      44       dry      0.28            0.25  6.64       6.72
+      61       dry      0.53            0.52 31.52      39.16
+      76       dry      0.12            0.15  0.41       1.09

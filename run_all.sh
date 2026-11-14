@@ -85,10 +85,12 @@ python scripts/final_evaluation.py evaluate --set lockbox --raw "$WEARABLE_DIR" 
 python scripts/final_figures.py --set lockbox
 python scripts/final_summary.py | tee logs/final_summary.log
 
-echo "M5  streaming replay on the development people: scores at 18 lengths of signal (about 40 minutes), stopping rule, latency"
+echo "M5  streaming replay on the development people: scores at 18 lengths of signal, stopping rule, latency (about 12 minutes)"
 python scripts/m5_scores.py --raw "$WEARABLE_DIR" | tee logs/m5_scores.log
 python scripts/m5_stopping.py --raw "$WEARABLE_DIR" | tee logs/m5_stopping.log
 python scripts/m5_stream.py --raw "$WEARABLE_DIR" | tee logs/m5_stream.log
+python scripts/m5_template_check.py --raw "$WEARABLE_DIR" | tee logs/m5_template_check.log
+python scripts/m5_figures.py
 
 echo "M6  graphical abstract from the result files of the final evaluation"
 python scripts/m6_graphical_abstract.py

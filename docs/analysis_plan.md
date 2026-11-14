@@ -277,4 +277,12 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 - The author asked for a **short version of M5** (streaming replay, latency, stopping when confident). Plan
   approved on 14 Nov 2026 before anything was run: `docs/milestones/M5_plan.md`. It uses the development people only, changes
   no method, runs no test, and leaves the lockbox opened once.
-- Until M5 has been run, the statements "real-time replay not done" in the report and the slides stay true.
+- M5 was run on 14 Nov 2026 (`docs/milestones/M5_realtime.md`): the stream gives the numbers of the
+  fixed-window code; one update takes 15 ms; stopping when confident gives about a third more bits per minute
+  than the best fixed window. Descriptive, development people.
+- **Flaw found during M5:** the population template of M2 to M4 and of the final evaluation contains the one
+  trial of the dataset that reaches the limit of the converter (S067, dry, block 4, target 4), which spoils
+  the dry entry of the 9.75 Hz target. Effect on the development people: dry accuracy 0.578 to 0.590.
+- **Open, for the author to decide:** the plan of the final evaluation says that an error found afterwards is
+  reported with the original and the corrected result. The corrected result needs the lockbox people to be
+  decoded a second time with the repaired template; it has not been done.

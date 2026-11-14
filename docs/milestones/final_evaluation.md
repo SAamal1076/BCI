@@ -7,6 +7,12 @@ seconds that was not interrupted (`results/final/LOCKBOX_OPENED.txt`). Populatio
 Every number below is in `logs/final_lockbox.log` (tests and tables) or `logs/final_summary.log`
 (descriptive differences).*
 
+> **Note added on 14 Nov 2026, after M5.** One saturated trial of one development person (S067, dry headband,
+> block 4, target 4) dominates the dry population template for the 9.75 Hz target used in this report. On the
+> development people, leaving it out raises the dry accuracy of the template from 0.578 to 0.590. The
+> tests that use the dry template are H2, H5 and H6 with dry electrodes. The lockbox people were not decoded
+> again; the results below are those of the method as frozen. Nothing below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+
 ## Result in short
 
 **Seven of the 15 tests are supported after the Holm correction, exactly the ones expected before the

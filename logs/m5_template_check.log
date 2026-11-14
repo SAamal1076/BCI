@@ -1,0 +1,31 @@
+pass 1: mean responses of 68 development people and the templates of 4 folds (0 people computed now, 0 s)
+pass 2: scores of 68 people x 2 headbands x 120 trials at 18 lengths of signal (0 people computed now, 0 s in all)
+== the saturated trial: S067, dry headband, block 4, target 4 (9.75 Hz)
+size (rms after preprocessing) of that trial: 2900; of the person's 9 other trials of the target: median 10.5
+dry population template, frozen  : size of the entry of target 4: 4.27; of the 11 other targets: median 1.01
+dry population template, repaired: size of the entry of target 4: 0.91; of the 11 other targets: median 1.01
+
+== check: the frozen variant against M4 (136 accuracies): largest difference 0.000000
+
+== accuracy at 1 s, no calibration, all ten blocks, 68 development people (mean; difference with 95 % interval)
+  dry: all targets: frozen 0.578, repaired 0.590, difference +0.011 [+0.007, +0.016]; people better 45, worse 9
+       target 4 (9.75 Hz) only: frozen 0.347, repaired 0.529
+  wet: all targets: frozen 0.737, repaired 0.737, difference +0.000 [+0.000, +0.000]; people better 0, worse 0
+       target 4 (9.75 Hz) only: frozen 0.699, repaired 0.699
+
+== accuracy by target, dry headband (frozen | repaired)
+variant     Hz  frozen  repaired
+target                          
+1         9.25   0.521     0.518
+2        11.25   0.691     0.679
+3        13.25   0.540     0.535
+4         9.75   0.347     0.529
+5        11.75   0.582     0.574
+6        13.75   0.462     0.457
+7        10.25   0.643     0.647
+8        12.25   0.597     0.597
+9        14.25   0.629     0.624
+10       10.75   0.663     0.654
+11       12.75   0.609     0.606
+12       14.75   0.654     0.654
+share of all dry decisions given to target 4: frozen 0.053, repaired 0.073 (even: 0.083)

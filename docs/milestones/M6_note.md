@@ -5,6 +5,10 @@ was produced. No data file was opened for a new computation and nothing new was 
 report, the graphical abstract and the slides comes from result files, logs and reports that were already
 committed.*
 
+> **Note added on 14 Nov 2026, after M5.** The report, the README and the slides were updated with M5: the
+> slides now have 9 slides, the report 12 sections. See [`M5_realtime.md`](M5_realtime.md). The checks below
+> describe the state before M5.
+
 ## Produced
 
 | | File | Content |

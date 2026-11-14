@@ -1,0 +1,4 @@
+pass 1: mean responses of 68 development people and the templates of 4 folds (68 people computed now, 139 s)
+pass 2: scores of 68 people x 2 headbands x 120 trials at 18 lengths of signal (68 people computed now, 396 s in all)
+fbcca    fixed 1.0 s, every person as a test person: dry 0.475, wet 0.658
+template fixed 1.0 s, every person as a test person: dry 0.604, wet 0.734

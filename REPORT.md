@@ -25,6 +25,14 @@ was made on 68 people, and 15 pre-specified tests were then run once on the othe
 Seven of the 15 tests are supported after correction for multiple testing, and they are the seven that were
 expected in writing before the test people were decoded.
 
+Two things were added after the tests, on the development people only and without tests:
+
+- **On a stream** (replayed recordings), the decoder gives the same decisions, updates in 15 ms, and gains
+  about a third in bits per minute when it stops as soon as it is confident instead of waiting a fixed time.
+- **A flaw was found:** one saturated trial of one person spoiled one entry of the dry template that all the
+  earlier steps used. It costs about 0.01 of accuracy on the development people. The tested results are those
+  of the method as it was frozen.
+
 ## 1. Data
 
 The dataset is that of Zhu et al. (2021): 102 healthy people, 8 channels (POz, PO3, PO4, PO5, PO6, Oz, O1,
@@ -126,11 +134,40 @@ Three remarks belong with this table.
 the template decoder 5.4 ms and the network 0.9 ms. The network stores 3 652 numbers, the template 72 000.
 All are far below the 1 s of signal a decision needs.
 
-**Speed** (M2, development people, descriptive, with 0.5 s to move the eyes): with no calibration the template
-gives 56.0 bits/min with dry electrodes (window 1.2 s) and 79.8 with wet ones (0.8 s), against 46.5 and 68.2 for
-FBCCA.
+## 6. On a stream: latency and stopping when confident
 
-## 6. When it fails
+*M5, added after the tests. Development people only, each decoded by a template and by settings that never saw
+them; descriptive, no test ([`M5_realtime.md`](docs/milestones/M5_realtime.md)).*
+
+![Replay](figures/m5/replay.gif)
+
+A device receives samples as they arrive. The recordings were therefore replayed in pieces of 0.1 s, and the
+decoder updated its decision 18 times between 0.3 s and 2.0 s, with the samples received so far.
+
+- **Same decisions.** All 29 376 updates of 1 632 replayed trials have exactly the scores of the fixed-window
+  code.
+- **Latency.** One update takes 15 ms (median; 95th percentile 23 ms) on one processor core in Python, for the
+  100 ms between two updates.
+- **Stopping when confident.** The scores are turned into probabilities, and the decoder decides as soon as
+  the largest one reaches a threshold chosen on other people. Against the best fixed window, chosen the same
+  way, and with 0.5 s to move the eyes:
+
+| Cross-subject template, no calibration | Dry | Wet |
+|---|---|---|
+| Best fixed window (bits/min) | 58.1 | 79.0 |
+| Stopping when confident (bits/min) | 79.4 | 104.9 |
+| Difference [95 % interval] | +21.3 [+17.7, +24.7] | +25.8 [+22.3, +29.4] |
+| People who are faster with it | 65 of 68 | 68 of 68 |
+| Accuracy and mean time of a decision | 0.74 after 1.22 s | 0.84 after 1.06 s |
+
+![Speed and accuracy](figures/m5/01_speed_accuracy.png)
+
+- **The confidence is not reliable for everybody.** It is 0.07 too high on average with dry electrodes, and
+  0.21 too high for the third of the people who are hardest to decode. With dry electrodes 22 % of the
+  decisions (wet: 16 %) are forced at 2.0 s without confidence, and those are right only 41 % (dry) and 54 %
+  (wet) of the time.
+
+## 7. When it fails
 
 - **Nobody among the 34 lockbox people is below chance with the template;** one is with FBCCA and dry
   electrodes. Among the 68 development people two were below chance with the template and dry electrodes, and
@@ -146,9 +183,9 @@ FBCCA.
 - **The template makes no systematic confusion.** FBCCA confuses targets 0.5 Hz apart 1.3 to 1.4 times more
   often than an even spread of errors would (development people).
 
-## 7. What went wrong on the way
+## 8. What went wrong on the way
 
-Four findings changed the work. Each was reported when it was found.
+Five findings changed the work. Each was reported when it was found.
 
 1. **The dataset's electrode label is reversed** (M0). The documentation says "1: wet, 2: dry"; the files hold
    the dry headband first. Four independent checks agree, among them the paper's own impedance values, and
@@ -173,8 +210,33 @@ Four findings changed the work. Each was reported when it was found.
 4. **A plan was wrong about the keypad** (M4). It assumed a layout in which neighbouring targets are 0.5 Hz
    apart. The paper shows the opposite design, so the classes of errors were redefined, in code and in a unit
    test, before any decision was looked at.
+5. **One saturated trial spoiled one entry of the dry template** (found in M5, after the tests). The template
+   is a plain mean over people. One trial of one development person reaches the limit of the converter; M0 had
+   flagged it, and it was not left out. It makes the template of the 9.75 Hz target with dry electrodes about
+   4 times too large and mostly artefact, in M2, M3, M4 and in the final evaluation. On the development people,
+   leaving that one trial out raises the dry accuracy from 0.578 to 0.590, and at 9.75 Hz from 0.35 to 0.53; wet
+   is not affected. The tests that use the dry template (H2, H5 and H6 with dry electrodes) were therefore run
+   with a slightly handicapped template. The lockbox people were not decoded again: the tested results stand
+   as the results of the method as frozen, and the flaw is reported next to them.
 
-## 8. Limits
+## 9. Recommendations for a product team
+
+Each line says what it rests on: **tested** (34 lockbox people, once) or **descriptive** (development people).
+
+| Recommendation | Evidence |
+|---|---|
+| With dry electrodes, start a new user from other people's data and ask for about 1.5 minutes of calibration. More of the user's own data is not needed to beat a per-person method with 5 minutes. | Tested (H2 dry: 0.62 against 0.48) |
+| With wet electrodes and 5 minutes to spare, calibrate on the user alone. | Tested (H2 wet not supported: 0.89 against 0.84) |
+| Keep adapting the template from use, without labels. | Tested (H6: +0.04 dry, +0.07 wet; formulated after seeing the development people) |
+| Do not wait a fixed time: decide when confident. | Descriptive (M5: about +35 % bits/min) |
+| When the confidence is not reached, do not force a decision; ask for another look. | Descriptive (M5: forced decisions are right 41 % to 54 % of the time) |
+| Do not use one confidence scale for everybody; adapt it to the person. | Descriptive (M5: 0.21 too high for the hardest third) |
+| Do not count on a small network with entropy adaptation instead of the template at this amount of data. | Tested for the adaptation (H3 not supported); descriptive for the comparison (the network is 0.06 to 0.09 below the template); one network, one training recipe |
+| Treat the dry contact as the bottleneck, and judge it from the signal: impedance did not predict decoding. | Tested (H1: -0.16 to -0.33; H5b not supported) |
+| Protect a template shared between users against one bad recording. | Descriptive (one saturated trial: 0.53 to 0.35 on one target) |
+| Computing is not the constraint. | Descriptive (15 ms per update in Python on one core) |
+
+## 10. Limits
 
 - One dataset from one laboratory, healthy people, cue-guided trials, 12 targets, analysed offline.
 - 34 people in the tests. Intervals are over people; a result for one person is far less certain.
@@ -182,21 +244,24 @@ Four findings changed the work. Each was reported when it was found.
 - One small network and one training recipe; the conclusion about the network holds for these.
 - Published accuracies on this dataset are not comparable with the ones here: they use samples after the
   window, and parameters tuned on the same recordings.
-- **Not done:** the real-time replay planned as M5 (author's decision), and the exploratory hypothesis H4
-  (graph-based denoising). Nothing here is a claim about real-time use; the only timing evidence is the
-  compute measurement above.
+- The stream of section 6 is a replay of recordings on development people: nobody reacts to the decisions,
+  the decoder is told when the flicker starts, and the times are those of Python code on one machine. It is
+  not a claim about a person using a device.
+- The dry template used in the tests had one spoiled entry (section 8, point 5).
+- **Not done:** the exploratory hypothesis H4 (graph-based denoising).
 
-## 9. What I would do next
+## 11. What I would do next
 
-1. **Run it as a stream.** Replay the recordings sample by sample, decide causally, measure the latency of
-   each decision, and stop early when the decision is confident.
+1. **Record a person using it.** The replay shows that the decoder keeps up with a stream; only a live
+   recording shows what happens when the user sees the decisions.
 2. **Use the unlabelled stream.** The template update of H6 was done once on 72 trials; an update after every
-   decision is the natural next version.
+   decision is the natural next version, and the same trials can set the confidence scale of the person.
 3. **Look at the dry contact,** which is where the accuracy is lost: per-channel quality from the signal
    itself, since impedance did not predict decoding.
-4. **A second wearable dataset,** to see which of these results survive another headset and another laboratory.
+4. **A second wearable dataset,** to see which of these results survive another headset and another laboratory,
+   and to test a template that is protected against bad recordings, which cannot be tested here any more.
 
-## 10. Reproduce
+## 12. Reproduce
 
 ```bash
 pip install -r requirements.txt
@@ -204,7 +269,7 @@ python -m pytest -q tests
 WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 ```
 
-Python 3.13; about two and a half hours on two processor cores, most of it for 36 small networks. The
+Python 3.13; under three hours on two processor cores, most of it for 36 small networks. The
 lockbox step of `run_all.sh` recomputes the numbers of the opening into a separate folder and compares them
 with the committed ones; at the time of the opening they were identical byte for byte.
 

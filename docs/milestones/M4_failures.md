@@ -7,6 +7,11 @@ cross-subject template with **no calibration**, pipeline B2, 1 s window, leave-o
 with 95 % bootstrap intervals over people; **no p-value**: the tests of H5 are reserved for the lockbox. Every
 number below is recomputed by `scripts/m4_summary.py` (`logs/m4_summary.log`).*
 
+> **Note added on 14 Nov 2026, after M5.** One saturated trial of one development person (S067, dry headband,
+> block 4, target 4) dominates the dry population template for the 9.75 Hz target used in this report. On the
+> development people, leaving it out raises the dry accuracy of the template from 0.578 to 0.590. This
+> explains why 9.75 Hz is the worst target with dry electrodes in this report. Nothing below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+
 ## Result in short
 
 1. **Accuracy hardly changes over the ten blocks of a headband.** Slope: -0.004 per block with the dry

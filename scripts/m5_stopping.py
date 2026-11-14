@@ -111,7 +111,8 @@ def report(settings, trials, by_window, people):
           f"updates every {sm.PIECE_S} s from {TIMES[0]} s to {TIMES[-1]} s; {sm.GAZE_S} s added for moving the eyes")
     print("\n== 1. chosen on the validation people of each fold (theta of the stopping rule; best fixed window)")
     print(settings[["fold", "electrode", "decoder", "theta", "fixed_window_s", "validation_itr_stopping", "validation_itr_fixed"]]
-          .round(1).to_string(index=False))
+          .round({"validation_itr_stopping": 1, "validation_itr_fixed": 1}).to_string(index=False))
+    print("theta, how often chosen:", settings.groupby(["decoder", "electrode"]).theta.apply(lambda s: sorted(s)).to_dict())
     print("scale b_T (median over folds) at 0.3, 1.0 and 2.0 s:")
     print(settings.groupby(["decoder", "electrode"])[["b_0.3", "b_1.0", "b_2.0"]].median().round(1).to_string())
 
@@ -159,6 +160,21 @@ def report(settings, trials, by_window, people):
         rho = sps.spearmanr(p.fixed_accuracy, d)[0]
         print(f"  {el}: min {d.min():+.1f}, median {d.median():+.1f}, max {d.max():+.1f}; Spearman with the fixed-window accuracy {rho:+.2f}; "
               f"people with ITR 0 under both rules: {int(((p.itr == 0) & (p.fixed_itr == 0)).sum())}")
+
+    print("\n== 8. is the confidence too high for the people who are hard to decode? (template; thirds of the people by accuracy)")
+    t = trials[trials.decoder == "template"].assign(right=lambda d: d.decided == d.target)
+    g = t.groupby(["electrode", "subject"]).agg(confidence=("confidence", "mean"), accuracy=("right", "mean"), time_s=("time_s", "mean")).reset_index()
+    g["gap"] = g.confidence - g.accuracy
+    for el in NAMES:
+        p = g[g.electrode == el].sort_values(["accuracy", "subject"])
+        n = len(p) // 3
+        parts = [("hardest", p.head(n)), ("middle", p.iloc[n:len(p) - n]), ("easiest", p.tail(n))]
+        text = "; ".join(f"{name} third: accuracy {q.accuracy.mean():.2f}, confidence minus accuracy {q.gap.mean():+.3f}, mean time {q.time_s.mean():.2f} s"
+                         for name, q in parts)
+        print(f"  {el}: {text}; Spearman of the gap with accuracy {sps.spearmanr(p.accuracy, p.gap)[0]:+.2f}")
+    slower = people[(people.decoder == "template") & (people.itr <= people.fixed_itr)]
+    print("people not faster with the stopping rule (template):")
+    print(slower[["subject", "electrode", "accuracy", "fixed_accuracy", "itr", "fixed_itr"]].round(2).to_string(index=False))
 
 
 def main():

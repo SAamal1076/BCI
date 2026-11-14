@@ -2,9 +2,13 @@
 
 **Status: finished, 14 Nov 2026. Every choice was made on 68 development people; the 34 lockbox people were
 then decoded once, by a plan and code committed beforehand. Seven of the 15 pre-specified tests are supported
-after the Holm correction, the seven that were expected in writing before the opening.**
+after the Holm correction, the seven that were expected in writing before the opening. A streaming replay
+(M5) was added afterwards on the development people.**
 
 <p align="center"><img src="figures/graphical_abstract.png" width="1000" alt="Graphical abstract: a new user, an 8-channel headband and 12 flickering targets; accuracy at 1 s against calibration time for dry and wet electrodes on the 34 lockbox people; the hypotheses that hold and those that do not"></p>
+
+<p align="center"><img src="figures/m5/replay.gif" width="620" alt="Animation: recorded trials of one person replayed at the speed of the recording; the decoder's probability for each of the 12 targets grows until it decides"></p>
+<p align="center"><em>Replay of recorded trials (development person, dry electrodes, no calibration): the decoder decides when it is confident.</em></p>
 
 | Read it in | |
 |---|---|
@@ -47,6 +51,10 @@ stated; estimates with 95 % intervals over people; one-sided tests, familywise l
 The outcome is the one written down before the opening (H1, H2 dry and H6 supported; H2 wet uncertain; H3
 and H5 not supported).
 
+**Found after the tests (M5):** one saturated trial of one development person spoiled one entry of the dry
+template that these tests used. On the development people it costs about 0.01 of accuracy. The results above
+are those of the method as it was frozen; see [`M5_realtime.md`](docs/milestones/M5_realtime.md), section F.
+
 <p align="center"><img src="figures/final/01_tests.png" width="900" alt="The 15 pre-specified tests on the 34 lockbox people: estimates with 95 % intervals, seven supported after the Holm correction"></p>
 
 ## Reproduce
@@ -59,7 +67,7 @@ WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 
 Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
 M2 about fifteen, M3 about an hour (24 small networks are trained on the processor; PyTorch 2.15), M4 about four, and the
-rehearsal and preparation of the final evaluation about thirty (12 more networks). `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+rehearsal and preparation of the final evaluation about thirty (12 more networks), M5 about twelve. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
 
 The lockbox was opened once. `run_all.sh` does not open it again: it recomputes the numbers of the opening into a
 separate folder and reports whether they are identical to the committed ones.
@@ -81,7 +89,7 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M3 | Small network and test-time adaptation; model size and compute | [`M3_plan.md`](docs/milestones/M3_plan.md) | [`M3_network.md`](docs/milestones/M3_network.md) |
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
 | Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
-| M5 | Streaming replay, latency, stopping when confident (short version) | [`M5_plan.md`](docs/milestones/M5_plan.md) | Skipped on 13 Nov 2026; taken up again after M6, not run yet |
+| M5 | Streaming replay, latency, stopping when confident (short version; done after M6) | [`M5_plan.md`](docs/milestones/M5_plan.md) | [`M5_realtime.md`](docs/milestones/M5_realtime.md) |
 | M6 | Report, graphical abstract, presentation | [`M6_plan.md`](docs/milestones/M6_plan.md) | [`REPORT.md`](REPORT.md), [`presentation.pdf`](docs/presentation.pdf), [`M6_note.md`](docs/milestones/M6_note.md) |
 
 The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
@@ -91,7 +99,7 @@ until the final evaluation their recordings were used only for label-free checks
 (`results/final/LOCKBOX_OPENED.txt`). All method development uses
 the other 68 people. The rule was fixed before any data file was opened.
 
-The five sections below summarise the milestones in the order they were done. Their numbers are from the development people and are descriptive; the tested results are above.
+The six sections below summarise the milestones. Their numbers are from the development people and are descriptive; the tested results are above.
 
 ## M0: data check
 
@@ -182,6 +190,27 @@ other people, no calibration, 1 s.
 4. **The template makes no systematic confusion;** FBCCA confuses targets 0.5 Hz apart 1.3 to 1.4 times more
    often than an even spread of errors would.
 
+## M5: on a stream (68 development people, added after the tests)
+
+Full report: [`docs/milestones/M5_realtime.md`](docs/milestones/M5_realtime.md). Descriptive, no test; the
+lockbox was not used.
+
+1. **Fed by a stream, the decoder gives exactly the numbers of the fixed-window code:** 29 376 updates of
+   1 632 replayed trials, largest difference 0.
+2. **One update takes 15 ms** (median; 95th percentile 23 ms) on one processor core in Python, for the 100 ms
+   between two updates.
+3. **Stopping when confident is about a third faster than the best fixed window:** 79.4 against 58.1 bits/min
+   with dry electrodes, 104.9 against 79.0 with wet ones (template, no calibration); faster for 65 and 68 of
+   68 people.
+4. **The confidence is not reliable for everybody:** 0.21 too high for the third of the people who are hardest
+   to decode (dry).
+5. **A flaw was found in the earlier steps:** one saturated trial (S067, dry) spoiled the dry template of the
+   9.75 Hz target in M2 to M4 and in the final evaluation. On the development people, leaving it out raises
+   the dry accuracy from 0.578 to 0.590 (at 9.75 Hz from 0.35 to 0.53). The lockbox people were not decoded
+   again.
+
+<p align="center"><img src="figures/m5/01_speed_accuracy.png" width="900" alt="Accuracy against the time of the decision for fixed windows and for the rule that stops when confident, dry and wet headband"></p>
+
 ## Repository layout
 
 ```
@@ -209,7 +238,8 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m4_decode.py (decision of every trial), m4_summary.py, m4_figures.py
                 final_evaluation.py (the 15 tests for new people given a population; rehearsal and lockbox),
                 final_figures.py, final_summary.py (descriptive numbers, written after the opening)
-                m6_graphical_abstract.py
+                m5_scores.py, m5_stopping.py, m5_stream.py (streaming replay), m5_template_check.py (diagnostic),
+                m5_figures.py, m6_graphical_abstract.py
 tests/          unit tests on synthetic signals (python -m pytest -q tests)
 REPORT.md       the final report
 docs/           analysis_plan.md, milestones/ (one plan and one report per milestone), presentation.pptx and .pdf

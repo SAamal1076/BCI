@@ -51,9 +51,10 @@ def fig_speed(people, by_window):
             ax.plot(TIMES, [x.mean() for x in v], color=color, ls=ls, lw=2.2 if decoder == "template" else 1.6)
             p = people[(people.electrode == el) & (people.decoder == decoder)]
             ax.scatter([p.time_s.mean()], [p.accuracy.mean()], marker="D", s=95, color=color, edgecolor=pl.SURFACE, linewidth=1.2, zorder=4)
-            ax.annotate(f"{label}, stops when confident\n{p.accuracy.mean():.2f} after {p.time_s.mean():.2f} s on average",
-                        (p.time_s.mean(), p.accuracy.mean()), xytext=(10, -8) if decoder == "template" else (10, -26), textcoords="offset points",
-                        va="top", fontsize=8.8, color=pl.INK)
+            y = 0.21 if decoder == "template" else 0.11
+            ax.scatter([0.45], [y], marker="D", s=60, color=color, edgecolor=pl.SURFACE, linewidth=1.0, transform=ax.transAxes, clip_on=False)
+            ax.text(0.48, y, f"{label}, stopping rule: {p.accuracy.mean():.2f} after {p.time_s.mean():.2f} s",
+                    transform=ax.transAxes, va="center", fontsize=8.8, color=pl.INK)
         ax.set(title=f"{el.capitalize()} headband", xlabel="Signal used for the decision (s)", xlim=(0.25, 2.05), xticks=[0.3, 0.5, 1.0, 1.5, 2.0])
     axes[0].set(ylabel="Accuracy, 12 targets, no calibration")
     handles = [plt.Line2D([], [], color=pl.INK2, ls="-", lw=2.2, label="cross-subject template, fixed window"),
@@ -86,7 +87,7 @@ def fig_people(people):
 
 
 def fig_reliability(rel):
-    fig, ax = plt.subplots(figsize=(6.6, 5.6))
+    fig, ax = plt.subplots(figsize=(7.2, 6.0))
     ax.plot([0, 1], [0, 1], color=pl.INK2, lw=0.9, ls=(0, (1, 2)))
     gap = {}
     for el in NAMES:
@@ -97,10 +98,10 @@ def fig_reliability(rel):
     ax.set(xlabel="Confidence at the decision", ylabel="Share of right decisions", xlim=(0, 1), ylim=(0, 1))
     ax.set_aspect("equal")
     ax.legend(loc="lower right")
-    fig.subplots_adjust(left=0.13, right=0.97, bottom=0.12, top=0.86)
-    word = lambda g: "matches the accuracy" if abs(g) < 0.02 else (f"is {abs(g):.2f} too high" if g > 0 else f"is {abs(g):.2f} too low")   # noqa: E731
-    return fig, f"The confidence {word(gap['dry'])} (dry) and {word(gap['wet'])} (wet)", \
-        "Decisions of the 68 test people, cross-subject template, grouped by confidence (below 0.5: decided at 2.0 s without reaching the threshold)."
+    fig.subplots_adjust(left=0.13, right=0.97, bottom=0.15, top=0.88)
+    word = lambda g: f"{abs(g):.2f} too {'high' if g > 0 else 'low'}"   # noqa: E731
+    return fig, f"The confidence is {word(gap['dry'])} with dry electrodes, {word(gap['wet'])} with wet ones", \
+        "Decisions of the 68 test people (template), grouped by confidence.\nBelow 0.5: decided at 2.0 s without reaching the threshold."
 
 
 def fig_latency(lat):
@@ -113,8 +114,22 @@ def fig_latency(lat):
     ax.legend(loc="center right")
     fig.subplots_adjust(left=0.1, right=0.97, bottom=0.14, top=0.86)
     worst = lat.total_p95_ms.max()
-    return fig, f"One update takes at most {worst:.0f} ms (95th percentile), {100 / worst:.0f} times less than the time between two updates", \
+    return fig, f"An update takes at most {worst:.0f} ms (95th percentile) of the 100 ms it has", \
         "Python and NumPy on the analysis machine, one core; 1 632 replayed trials. A measurement of this code, not of a device."
+
+
+def shrink(path, colours=48):
+    """Rewrite the animation with one small palette for all frames (about a quarter of the size)."""
+    from PIL import Image
+    im = Image.open(path)
+    frames, durations = [], []
+    for k in range(im.n_frames):                                      # equal frames were merged by the writer: keep their durations
+        im.seek(k)
+        frames.append(im.convert("RGB"))
+        durations.append(im.info.get("duration", 100))
+    palette = frames[len(frames) // 2].quantize(colours, method=Image.Quantize.MEDIANCUT)
+    small = [f.quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
+    small[0].save(path, save_all=True, append_images=small[1:], duration=durations, loop=0, optimize=True)
 
 
 def median_person(people):
@@ -187,8 +202,9 @@ def replay_gif(cache, people, settings, out, hold=6):
             tally.set_text(f"right so far: {done['right']} of {done['n']}\nmean time of a decision: {done['seconds'] / done['n']:.2f} s")
         return keys + marks + [bar, cbar, head, tally]
 
-    FuncAnimation(fig, draw, frames=frames, blit=False).save(out, writer=PillowWriter(fps=10))
+    FuncAnimation(fig, draw, frames=frames, blit=False).save(out, writer=PillowWriter(fps=10), dpi=90)
     plt.close(fig)
+    shrink(out)
     right = int(sum(prob[stop[t], t].argmax() == t for t in range(12)))
     return sid, theta, right, float(TIMES[stop].mean()), len(frames)
 

@@ -6,6 +6,11 @@ development people were loaded; the 34 lockbox people were not. Every person is 
 people; **no p-value**: the tests of H3 are reserved for the lockbox. Every number below is recomputed by
 `scripts/m3_summary.py` (`logs/m3_summary.log`).*
 
+> **Note added on 14 Nov 2026, after M5.** One saturated trial of one development person (S067, dry headband,
+> block 4, target 4) dominates the dry population template for the 9.75 Hz target used in this report. On the
+> development people, leaving it out raises the dry accuracy of the template from 0.578 to 0.590. Nothing
+> below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+
 ## Result in short
 
 1. **The small network does not beat the template built from other people.** Network 0.53 (dry) and 0.62

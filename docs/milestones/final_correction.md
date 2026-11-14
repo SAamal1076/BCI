@@ -98,7 +98,7 @@ The split of the first rehearsal: 23 development people as new people, 45 as pop
 
 - The other 11 targets change by 0.009 at most.
 - The gain of the adaptation (H6 dry) becomes smaller, as the plan suspected: part of it was the adaptation
-  repairing the spoiled entry.
+  repairing the spoiled entry. *(Written before the run. On the lockbox people this did not hold: see B4.)*
 - The reproduction mode was run on the rehearsal set: the five result files are identical.
 
 ![Rehearsal of the correction](../../figures/final/rehearsal/03_correction.png)

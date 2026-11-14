@@ -47,7 +47,8 @@ Raw data are not in the repository; [`DATA.md`](DATA.md) gives the sources, lice
 ## 2. How the evaluation was kept honest
 
 1. **Lockbox.** Before any file was opened, every third person (34 people) was set aside. Their trials were
-   decoded once, at the end.
+   decoded once, at the end, for the tests. They were decoded once more for the correction of section 8,
+   which is labelled as computed afterwards and is not a test.
 2. **Plan, code, result, in that order.** Each milestone has a plan committed before its code was run, and a
    report committed after. The order can be read in the commit history.
 3. **No test on the people used for choices.** On the 68 development people only estimates with intervals
@@ -297,8 +298,9 @@ WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 ```
 
 Python 3.13; under three hours on two processor cores, most of it for 36 small networks. The
-lockbox step of `run_all.sh` recomputes the numbers of the opening into a separate folder and compares them
-with the committed ones; at the time of the opening they were identical byte for byte.
+lockbox steps of `run_all.sh` open nothing again: they recompute the numbers of the opening and of the
+corrected analysis into separate folders and compare them with the committed ones. At the time of the opening
+its numbers were identical byte for byte.
 
 ## References
 

@@ -34,10 +34,10 @@ neither written nor looked at.** Every number below is in `logs/final_rehearsal.
 | H1 | FBCCA 1 s | dry minus wet accuracy (crossover estimate) | -0.179 [-0.251, -0.111] |
 | H1 | FBCCA 2 s | | -0.115 [-0.196, -0.042] |
 | H1 | eTRCA 1 s | | -0.280 [-0.389, -0.181] |
-| H1 | eTRCA 2 s | | -0.161 [-0.270, -0.070] |
-| H2 | dry | template + 2 blocks minus eTRCA + 6 blocks (margin -0.05) | +0.133 [+0.044, +0.227] |
+| H1 | eTRCA 2 s | | -0.161 [-0.269, -0.070] |
+| H2 | dry | template + 2 blocks minus eTRCA + 6 blocks (margin -0.05) | +0.133 [+0.044, +0.226] |
 | H2 | wet | | -0.040 [-0.065, -0.015] |
-| H3 | dry | network: A2 minus A0 | +0.000 [-0.009, +0.010] |
+| H3 | dry | network: A2 minus A0 | +0.000 [-0.008, +0.010] |
 | H3 | wet | | -0.004 [-0.012, +0.005] |
 | H3 | dry minus wet | | +0.004 [-0.008, +0.016] |
 | H5a | dry | slope of accuracy per block | -0.0014 [-0.0082, +0.0056] |
@@ -48,6 +48,10 @@ neither written nor looked at.** Every number below is in `logs/final_rehearsal.
 | H6 | wet | | +0.061 [+0.021, +0.104] |
 
 These are 23 development people: the table shows that the code computes what the plan says, nothing more.
+
+> **Corrected on 14 Nov 2026:** three interval bounds of this table had been rounded twice (from the four
+> decimals of the log to three): -0.269 (it read -0.270), +0.226 (+0.227) and -0.008 (-0.009). The result file
+> and the log were right.
 
 ## B. Accuracy of the 23 rehearsal people, next to M2 to M4 for the same people
 

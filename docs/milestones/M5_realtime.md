@@ -160,6 +160,12 @@ the worst target with dry electrodes (0.35) because its template entry was spoil
   found afterwards, the original and the corrected result are both reported. Doing so means decoding the
   lockbox people a second time, with a correction decided after their results were seen. That is the
   author's decision; until then the tested results stand as the results of the frozen method.
+
+  > **Added later on 14 Nov 2026.** The author approved a correction plan, and the corrected analysis was run
+  > once: [`final_correction.md`](final_correction.md). No decision changes; the same seven tests are supported.
+  > The suspicion about H6 above was not borne out: on the lockbox people its estimate goes from +0.040 to
+  > +0.045.
+
 - The numbers of M5 with the dry template (for example 0.604 at 1.0 s) cannot be compared with those of M2 to
   M4 (0.578): the templates differ.
 

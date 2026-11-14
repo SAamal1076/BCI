@@ -10,8 +10,23 @@ Every number below is in `logs/final_lockbox.log` (tests and tables) or `logs/fi
 > **Note added on 14 Nov 2026, after M5.** One saturated trial of one development person (S067, dry headband,
 > block 4, target 4) dominates the dry population template for the 9.75 Hz target used in this report. On the
 > development people, leaving it out raises the dry accuracy of the template from 0.578 to 0.590. The
-> tests that use the dry template are H2, H5 and H6 with dry electrodes. The lockbox people were not decoded
-> again; the results below are those of the method as frozen. Nothing below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+> tests that use the dry template are H2, H5 and H6 with dry electrodes. The results below are those of the
+> method as frozen; nothing below was changed. Details: [`M5_realtime.md`](M5_realtime.md), section F.
+>
+> **Corrected result, added on 14 Nov 2026** (plan approved by the author; computed after the opening, so it is
+> not a second test). The same analysis was run once more with that one trial left out of the template.
+> Everything that does not use the dry template is identical. **No decision changes: the same seven tests are
+> supported.** Original and corrected, for the four tests that use the dry template:
+>
+> | Test | Original (pre-specified, below) | Corrected (after the opening) |
+> |---|---|---|
+> | H2 dry | +0.145 [+0.081, +0.211], p after Holm 1.5e-05, supported | +0.151 [+0.088, +0.216], 1.4e-05, supported |
+> | H5a dry | -0.0027 [-0.0087, +0.0036], 0.85, not supported | -0.0039 [-0.0098, +0.0022], 0.85, not supported |
+> | H5b dry | -0.355 [-0.580, -0.079], 0.15, not supported | -0.350 [-0.577, -0.074], 0.17, not supported |
+> | H6 dry | +0.040 [+0.020, +0.059], 0.0038, supported | +0.045 [+0.025, +0.063], 0.00087, supported |
+>
+> Dry accuracy of the template with no calibration: 0.567 originally, 0.577 corrected. Full account:
+> [`final_correction.md`](final_correction.md).
 
 ## Result in short
 
@@ -22,12 +37,12 @@ opening.**
    -0.16 (FBCCA, 2 s), -0.33 (ensemble TRCA, 1 s), -0.27 (ensemble TRCA, 2 s). A longer window narrows the
    gap and does not close it.
 2. **With dry electrodes, other people's data and 2 calibration blocks (96 s) are enough (H2 dry,
-   supported):** +0.145 [+0.082, +0.211] against ensemble TRCA with 6 blocks (288 s).
+   supported):** +0.145 [+0.081, +0.211] against ensemble TRCA with 6 blocks (288 s).
 3. **With wet electrodes they are not (H2 wet, not supported):** -0.053 [-0.076, -0.031]. With good signals and
    6 blocks of the user's own data, ensemble TRCA is better than the template with 2 blocks, by slightly more
    than the margin of 0.05.
 4. **Updating the template with its own decisions, without labels, helps (H6, supported, 2 of 2):**
-   +0.040 [+0.020, +0.060] dry and +0.069 [+0.048, +0.090] wet. H6 was written after this effect was seen on
+   +0.040 [+0.020, +0.059] dry and +0.069 [+0.048, +0.090] wet. H6 was written after this effect was seen on
    the development people; the lockbox confirms it.
 5. **Entropy adaptation of the small network does not help (H3, not supported, 0 of 3):** +0.007 dry, +0.002
    wet.
@@ -51,7 +66,7 @@ procedure stops at the first failure. 34 people in every test (18 wore the dry h
 | 2 | | FBCCA, 2 s | -0.160 [-0.224, -0.104] | 6.3e-06 | 6.3e-05 | **yes** |
 | 3 | | ensemble TRCA, 1 s | -0.333 [-0.422, -0.246] | 1.0e-06 | 1.5e-05 | **yes** |
 | 4 | | ensemble TRCA, 2 s | -0.272 [-0.362, -0.187] | 1.0e-06 | 1.5e-05 | **yes** |
-| 5 | H2 template + 2 blocks within 0.05 of eTRCA + 6 blocks | dry | +0.145 [+0.082, +0.211] | 1.1e-06 | 1.5e-05 | **yes** |
+| 5 | H2 template + 2 blocks within 0.05 of eTRCA + 6 blocks | dry | +0.145 [+0.081, +0.211] | 1.1e-06 | 1.5e-05 | **yes** |
 | 6 | | wet | -0.053 [-0.076, -0.031] | 0.45 | 0.90 | no |
 | 7 | H3 entropy adaptation helps the network | dry | +0.007 [-0.001, +0.015] | 0.059 | 0.41 | no |
 | 8 | | wet | +0.002 [-0.005, +0.009] | 0.27 | 0.85 | no |
@@ -60,7 +75,7 @@ procedure stops at the first failure. 34 people in every test (18 wore the dry h
 | 11 | | wet | +0.0021 [-0.0037, +0.0080] | 0.69 | 0.90 | no |
 | 12 | H5b higher impedance, lower accuracy (Spearman) | dry | -0.35 [-0.58, -0.08] | 0.019 | 0.15 | no |
 | 13 | | wet | -0.19 [-0.48, +0.14] | 0.14 | 0.85 | no |
-| 14 | H6 adapted template better | dry | +0.040 [+0.020, +0.060] | 0.00043 | 0.0038 | **yes** |
+| 14 | H6 adapted template better | dry | +0.040 [+0.020, +0.059] | 0.00043 | 0.0038 | **yes** |
 | 15 | | wet | +0.069 [+0.048, +0.090] | 3.5e-06 | 3.8e-05 | **yes** |
 
 H1 uses the crossover test (the order of wearing is taken into account); H2, H3, H5a and H6 the Wilcoxon
@@ -175,6 +190,8 @@ in the tests. H6 was formulated after its effect had been seen on the developmen
 | D1 | The tag `pre-lockbox` exists in the repository used for the analysis. Pushing tags from that machine was refused, so on GitHub the locked commit is identified by its hash, `6006614`, pushed before the opening and recorded in `results/final/LOCKBOX_OPENED.txt`; the tag is pushed from the author's machine. | None on the results. |
 | D2 | `scripts/final_summary.py` (section C and the table of expectations) was written **after** the opening. It reads result files only and runs no test. | Section C is descriptive. |
 | D3 | The four points settled while the code was written, before any run, are listed in `final_rehearsal.md` (C1 to C4). | None on the tests. |
+| D4 | **Corrected on 14 Nov 2026:** two interval bounds in this report had been rounded twice (from the four decimals of the log to three). The lower bound of H2 dry is +0.081 (it read +0.082) and the upper bound of H6 dry is +0.059 (it read +0.060). | None: the result files and the log were right, and no decision depends on an interval. Also corrected in the report, the README, the analysis plan and the slides. |
+| D5 | **Found on 14 Nov 2026:** the Wilcoxon p-values of H2, H3 and H6 depend a little on ties. The tested differences are counts of correct trials divided by 48; two differences that are equal as fractions are not always equal as floating point numbers, so the code does not see every tie. Recomputed from the integer counts (`scripts/final_ties_check.py`, `logs/final_ties_check.log`): for example H6 dry 0.00034 instead of 0.00043, H3 wet 0.23 instead of 0.27. | **No decision changes:** the same seven tests are supported, here and in the corrected analysis. No p-value is near its threshold. The p-values of this report stay those of the pre-specified code, which the reproduction gives identically. |
 
 Nothing else differs from the plan: no method, setting, test or exclusion was changed, and no person was
 excluded.

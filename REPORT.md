@@ -16,7 +16,7 @@ was made on 68 people, and 15 pre-specified tests were then run once on the othe
 - **Dry electrodes cost accuracy:** 0.16 to 0.33 below wet ones, depending on method and window.
 - **With dry electrodes, other people's data replace most of the calibration:** a template built from other
   people plus 96 s of the user's own data reaches 0.62, against 0.48 for the standard per-person method with
-  288 s (difference +0.145, 95 % interval +0.082 to +0.211).
+  288 s (difference +0.145, 95 % interval +0.081 to +0.211).
 - **With wet electrodes they do not:** 288 s of the user's own data stay better (0.89 against 0.84).
 - **A template updated with its own decisions, without labels, gains** 0.04 (dry) and 0.07 (wet).
 - **Three things did not hold:** entropy adaptation of a small network, a loss of accuracy with time on task,
@@ -29,9 +29,10 @@ Two things were added after the tests, on the development people only and withou
 
 - **On a stream** (replayed recordings), the decoder gives the same decisions, updates in 15 ms, and gains
   about a third in bits per minute when it stops as soon as it is confident instead of waiting a fixed time.
-- **A flaw was found:** one saturated trial of one person spoiled one entry of the dry template that all the
-  earlier steps used. It costs about 0.01 of accuracy on the development people. The tested results are those
-  of the method as it was frozen.
+- **A flaw was found and corrected:** one saturated trial of one person spoiled one entry of the dry template
+  that all the earlier steps used. Leaving it out raises the dry accuracy of the template by about 0.01 and
+  **changes none of the 15 test decisions**. The numbers of this report are those of the method as it was
+  frozen; the corrected ones are given next to them (sections 4 and 8).
 
 ## 1. Data
 
@@ -89,13 +90,24 @@ from a commit pushed beforehand ([`final_evaluation.md`](docs/milestones/final_e
 | Hypothesis | Outcome | Estimate [95 % interval] |
 |---|---|---|
 | H1 Dry electrodes give lower accuracy | **supported, 4 of 4** | -0.21 (FBCCA, 1 s), -0.16 (FBCCA, 2 s), -0.33 (ensemble TRCA, 1 s), -0.27 (ensemble TRCA, 2 s) |
-| H2 Template + 2 blocks is within 0.05 of ensemble TRCA + 6 blocks | **dry: supported** | +0.145 [+0.082, +0.211] |
+| H2 Template + 2 blocks is within 0.05 of ensemble TRCA + 6 blocks | **dry: supported** | +0.145 [+0.081, +0.211] |
 | | wet: not supported | -0.053 [-0.076, -0.031] |
 | H3 Entropy adaptation helps the network, more with dry electrodes | not supported, 0 of 3 | +0.007 dry, +0.002 wet |
 | H5 Accuracy falls over the session; higher impedance, lower accuracy | not supported, 0 of 4 | slope per block -0.003 dry, +0.002 wet; correlation -0.35 dry, -0.19 wet |
-| H6 The template adapted without labels is better | **supported, 2 of 2** | +0.040 [+0.020, +0.060] dry, +0.069 [+0.048, +0.090] wet |
+| H6 The template adapted without labels is better | **supported, 2 of 2** | +0.040 [+0.020, +0.059] dry, +0.069 [+0.048, +0.090] wet |
 
-Three remarks belong with this table.
+**Corrected analysis** (computed after the opening, so it is not a second test; section 8, point 5). Four of
+the 15 tests use the dry template. With the saturated trial left out of it, the other 11 tests are identical
+and these four keep their outcome:
+
+| Test | Original (pre-specified) | Corrected (after the opening) |
+|---|---|---|
+| H2 dry | +0.145 [+0.081, +0.211], supported | +0.151 [+0.088, +0.216], supported |
+| H5 dry, slope per block | -0.003 [-0.009, +0.004], not supported | -0.004 [-0.010, +0.002], not supported |
+| H5 dry, correlation with impedance | -0.35 [-0.58, -0.08], not supported | -0.35 [-0.58, -0.07], not supported |
+| H6 dry | +0.040 [+0.020, +0.059], supported | +0.045 [+0.025, +0.063], supported |
+
+Three remarks belong with the table of the hypotheses.
 
 - **H6 was formulated after its effect had been seen** on the development people. The lockbox confirms it, but
   it is not a prediction made in advance like the others.
@@ -216,8 +228,19 @@ Five findings changed the work. Each was reported when it was found.
    4 times too large and mostly artefact, in M2, M3, M4 and in the final evaluation. On the development people,
    leaving that one trial out raises the dry accuracy from 0.578 to 0.590, and at 9.75 Hz from 0.35 to 0.53; wet
    is not affected. The tests that use the dry template (H2, H5 and H6 with dry electrodes) were therefore run
-   with a slightly handicapped template. The lockbox people were not decoded again: the tested results stand
-   as the results of the method as frozen, and the flaw is reported next to them.
+   with a slightly handicapped template.
+
+   The plan of the final evaluation says that an error found afterwards is reported with the original and the
+   corrected result. So, by a plan approved before any code was written, the same analysis was run **once**
+   more on the lockbox people with that one trial left out of the template
+   ([`final_correction.md`](docs/milestones/final_correction.md)). Everything that does not use the dry
+   template came out identical to the opening. The four tests that use it keep their outcome (section 4), so
+   **the same seven tests are supported in both analyses**. With dry electrodes the template with no
+   calibration goes from 0.567 to 0.577, and at 9.75 Hz from 0.39 to 0.59. The corrected numbers were computed
+   after the lockbox results had been seen: they are reported next to the original ones and are not a second
+   test.
+
+   ![Original and corrected](figures/final/03_correction.png)
 
 ## 9. Recommendations for a product team
 
@@ -233,7 +256,7 @@ Each line says what it rests on: **tested** (34 lockbox people, once) or **descr
 | Do not use one confidence scale for everybody; adapt it to the person. | Descriptive (M5: 0.21 too high for the hardest third) |
 | Do not count on a small network with entropy adaptation instead of the template at this amount of data. | Tested for the adaptation (H3 not supported); descriptive for the comparison (the network is 0.06 to 0.09 below the template); one network, one training recipe |
 | Treat the dry contact as the bottleneck, and judge it from the signal: impedance did not predict decoding. | Tested (H1: -0.16 to -0.33; H5b not supported) |
-| Protect a template shared between users against one bad recording. | Descriptive (one saturated trial: 0.53 to 0.35 on one target) |
+| Protect a template shared between users against one bad recording. | Descriptive (one saturated trial of one person: 0.59 to 0.39 on one target for the lockbox people, 0.53 to 0.35 for the development people) |
 | Computing is not the constraint. | Descriptive (15 ms per update in Python on one core) |
 
 ## 10. Limits
@@ -247,7 +270,11 @@ Each line says what it rests on: **tested** (34 lockbox people, once) or **descr
 - The stream of section 6 is a replay of recordings on development people: nobody reacts to the decisions,
   the decoder is told when the flicker starts, and the times are those of Python code on one machine. It is
   not a claim about a person using a device.
-- The dry template used in the tests had one spoiled entry (section 8, point 5).
+- The dry template used in the tests had one spoiled entry (section 8, point 5). The corrected analysis
+  changes no decision, but it was made after the results had been seen.
+- The Wilcoxon p-values depend a little on how tied differences are represented in floating point (for
+  example 0.00034 instead of 0.00043 for H6 dry). No decision is near its threshold, and none changes
+  ([`final_evaluation.md`](docs/milestones/final_evaluation.md), section E).
 - **Not done:** the exploratory hypothesis H4 (graph-based denoising).
 
 ## 11. What I would do next

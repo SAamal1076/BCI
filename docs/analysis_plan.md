@@ -255,11 +255,11 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 | Hypothesis | Tests supported | Estimates |
 |---|---|---|
 | H1 dry below wet | 4 of 4 | -0.211 (FBCCA 1 s), -0.160 (FBCCA 2 s), -0.333 (eTRCA 1 s), -0.272 (eTRCA 2 s) |
-| H2 template + 2 blocks within 0.05 of eTRCA + 6 blocks | dry: yes; wet: no | dry +0.145 [+0.082, +0.211]; wet -0.053 [-0.076, -0.031] |
+| H2 template + 2 blocks within 0.05 of eTRCA + 6 blocks | dry: yes; wet: no | dry +0.145 [+0.081, +0.211]; wet -0.053 [-0.076, -0.031] |
 | H3 entropy adaptation of the network | 0 of 3 | dry +0.007, wet +0.002, dry minus wet +0.005 |
 | H5a accuracy falls over the blocks | 0 of 2 | slope per block: dry -0.0027, wet +0.0021 |
 | H5b higher impedance, lower accuracy | 0 of 2 | Spearman: dry -0.35 (p 0.019 before the correction, 0.15 after), wet -0.19 |
-| H6 template adapted without labels (post hoc) | 2 of 2 | dry +0.040 [+0.020, +0.060]; wet +0.069 [+0.048, +0.090] |
+| H6 template adapted without labels (post hoc) | 2 of 2 | dry +0.040 [+0.020, +0.059]; wet +0.069 [+0.048, +0.090] |
 
 - The outcome is the expectation written in the plan before the opening.
 - No method, setting, test or exclusion was changed after the opening. Descriptive numbers computed
@@ -294,3 +294,13 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 - Code, unit tests and the rehearsal on the development people were committed before the corrected run
   (`docs/milestones/final_correction.md`, part A). In the rehearsal everything that does not use the dry
   template is identical to the first rehearsal.
+- **The corrected analysis was run once on the 34 lockbox people on 14 Nov 2026**, from commit `ab7d7d6`
+  (`results/final/LOCKBOX_CORRECTION.txt`). Built-in check passed: everything that does not use the dry
+  template is identical to the opening. The four tests that use it keep their outcome (H2 dry and H6 dry
+  supported, H5a dry and H5b dry not), so **7 of 15 tests are supported in both analyses, the same seven**.
+  Dry accuracy of the template with no calibration: 0.567 originally, 0.577 corrected. The original analysis
+  stays the pre-specified one and gives the headline numbers; the corrected one is labelled as computed after
+  the opening. A second corrected run is refused by the script.
+- Found while the correction was checked, and corrected or recorded (14 Nov 2026): five interval bounds in
+  earlier documents had been rounded twice (third decimal); and the Wilcoxon p-values depend a little on ties
+  in floating point (`scripts/final_ties_check.py`). Neither concerns an estimate or a decision.

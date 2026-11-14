@@ -1,0 +1,26 @@
+== Wilcoxon tests of the final evaluation: pre-specified code against exact ties (integer counts)
+written after the opening; result files only; the reported p-values stay those of the pre-specified code
+
+original (the opening)
+ test hypothesis          case p, pre-specified code p, exact ties threshold (Holm)  supported  supported, exact ties
+    5         H2           dry              1.13e-06      1.12e-06          0.00385       True                   True
+    6         H2           wet                 0.449         0.449            0.025      False                  False
+    7         H3           dry                 0.059        0.0607          0.00714      False                  False
+    8         H3           wet                 0.272         0.229           0.0167      False                  False
+    9         H3 dry minus wet                 0.163           0.2             0.01      False                  False
+   14         H6           dry              0.000425      0.000345          0.00556       True                   True
+   15         H6           wet              3.48e-06      3.84e-06          0.00455       True                   True
+supported tests, pre-specified code: [1, 2, 3, 4, 5, 14, 15]; with exact ties: [1, 2, 3, 4, 5, 14, 15]; decisions that differ: []
+
+corrected (after the opening)
+ test hypothesis          case p, pre-specified code p, exact ties threshold (Holm)  supported  supported, exact ties
+    5         H2           dry              9.46e-07       9.4e-07          0.00333       True                   True
+    6         H2           wet                 0.449         0.449            0.025      False                  False
+    7         H3           dry                 0.059        0.0607          0.00714      False                  False
+    8         H3           wet                 0.272         0.229           0.0167      False                  False
+    9         H3 dry minus wet                 0.163           0.2           0.0125      False                  False
+   14         H6           dry              9.71e-05      0.000138          0.00556       True                   True
+   15         H6           wet              3.48e-06      3.84e-06          0.00455       True                   True
+supported tests, pre-specified code: [1, 2, 3, 4, 5, 14, 15]; with exact ties: [1, 2, 3, 4, 5, 14, 15]; decisions that differ: []
+
+Not recomputed: H1 (crossover rank-sum test), H5a (slopes, not counts) and H5b (permutation test).

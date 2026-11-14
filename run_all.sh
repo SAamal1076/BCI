@@ -91,6 +91,13 @@ python scripts/final_correction.py evaluate --set rehearsal --raw "$WEARABLE_DIR
 python scripts/final_correction_figures.py --set rehearsal
 echo "Final  correction: repaired template for the lockbox people, built from the 68 development people only"
 python scripts/final_correction.py prepare --set lockbox --raw "$WEARABLE_DIR" | tee logs/final_correction_lockbox_prepare.log
+# The corrected analysis was run once on the lockbox people, on 14 Nov 2026, from commit ab7d7d6
+# (results/final/LOCKBOX_CORRECTION.txt, logs/final_correction_lockbox.log). A second run is refused. This
+# recomputes the same numbers into results/final/lockbox_corrected_reproduction and compares them with that run.
+echo "Final  correction: reproduction of the corrected run (compared with it), figure"
+python scripts/final_correction.py evaluate --set lockbox --raw "$WEARABLE_DIR" --correct-lockbox --reproduce | tee logs/final_correction_lockbox_reproduction.log
+python scripts/final_correction_figures.py --set lockbox
+python scripts/final_ties_check.py | tee logs/final_ties_check.log
 
 echo "M5  streaming replay on the development people: scores at 18 lengths of signal, stopping rule, latency (about 12 minutes)"
 python scripts/m5_scores.py --raw "$WEARABLE_DIR" | tee logs/m5_scores.log

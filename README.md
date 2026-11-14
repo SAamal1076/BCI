@@ -3,7 +3,8 @@
 **Status: finished, 14 Nov 2026. Every choice was made on 68 development people; the 34 lockbox people were
 then decoded once, by a plan and code committed beforehand. Seven of the 15 pre-specified tests are supported
 after the Holm correction, the seven that were expected in writing before the opening. A streaming replay
-(M5) was added afterwards on the development people.**
+(M5) was added afterwards on the development people. A flaw found there was corrected in a second, labelled
+analysis that changes none of the 15 decisions.**
 
 <p align="center"><img src="figures/graphical_abstract.png" width="1000" alt="Graphical abstract: a new user, an 8-channel headband and 12 flickering targets; accuracy at 1 s against calibration time for dry and wet electrodes on the 34 lockbox people; the hypotheses that hold and those that do not"></p>
 
@@ -37,7 +38,7 @@ stated; estimates with 95 % intervals over people; one-sided tests, familywise l
 1. **Dry electrodes cost accuracy (H1, supported):** dry minus wet -0.21 (FBCCA) and -0.33 (ensemble TRCA) at
    1 s, -0.16 and -0.27 at 2 s.
 2. **With dry electrodes, other people's data plus 96 s of calibration are enough (H2 dry, supported):**
-   +0.145 [+0.082, +0.211] against ensemble TRCA with 288 s of calibration.
+   +0.145 [+0.081, +0.211] against ensemble TRCA with 288 s of calibration.
 3. **With wet electrodes they are not (H2 wet, not supported):** -0.053 [-0.076, -0.031], around the margin of
    0.05.
 4. **A template updated with its own decisions, without labels, gains accuracy (H6, supported):** +0.040 dry,
@@ -51,12 +52,21 @@ stated; estimates with 95 % intervals over people; one-sided tests, familywise l
 The outcome is the one written down before the opening (H1, H2 dry and H6 supported; H2 wet uncertain; H3
 and H5 not supported).
 
-**Found after the tests (M5):** one saturated trial of one development person spoiled one entry of the dry
-template that these tests used. On the development people it costs about 0.01 of accuracy. The results above
-are those of the method as it was frozen; see [`M5_realtime.md`](docs/milestones/M5_realtime.md), section F.
-A corrected analysis, to be reported next to the original, is planned
-([`final_correction_plan.md`](docs/milestones/final_correction_plan.md), approved); its code and rehearsal are
-done, the run is not ([`final_correction.md`](docs/milestones/final_correction.md)).
+**Found after the tests (M5), and corrected:** one saturated trial of one development person spoiled one
+entry of the dry template that these tests used ([`M5_realtime.md`](docs/milestones/M5_realtime.md),
+section F). The results above are those of the method as it was frozen. By a plan approved beforehand, the
+same analysis was run once more with that trial left out
+([`final_correction.md`](docs/milestones/final_correction.md)); it was computed after the opening, so it is
+reported next to the original and is not a second test.
+
+| | Original (pre-specified, above) | Corrected (after the opening) |
+|---|---|---|
+| Tests supported after Holm | 7 of 15 | 7 of 15, the same seven |
+| What does not use the dry template (11 tests, all wet results, FBCCA, ensemble TRCA, networks) | | identical |
+| H2 dry | +0.145 [+0.081, +0.211] | +0.151 [+0.088, +0.216] |
+| H6 dry | +0.040 [+0.020, +0.059] | +0.045 [+0.025, +0.063] |
+| Dry template, no calibration | 0.567 | 0.577 |
+| Dry template at 9.75 Hz, the spoiled entry | 0.39 | 0.59 |
 
 <p align="center"><img src="figures/final/01_tests.png" width="900" alt="The 15 pre-specified tests on the 34 lockbox people: estimates with 95 % intervals, seven supported after the Holm correction"></p>
 
@@ -70,10 +80,11 @@ WEARABLE_DIR=/path/to/13560281 BETA_DIR=/path/to/12264401 ./run_all.sh
 
 Python 3.13. On two cores M0 takes about two minutes, M1 about fifteen, its BETA part about twenty-five more,
 M2 about fifteen, M3 about an hour (24 small networks are trained on the processor; PyTorch 2.15), M4 about four, and the
-rehearsal and preparation of the final evaluation about thirty (12 more networks), M5 about twelve. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
+rehearsal and preparation of the final evaluation about thirty (12 more networks), M5 about twelve, the correction about four. `BETA_DIR` is optional and may hold the original files or the reduced ones (see `DATA.md`).
 
-The lockbox was opened once. `run_all.sh` does not open it again: it recomputes the numbers of the opening into a
-separate folder and reports whether they are identical to the committed ones.
+The lockbox was opened once, and the corrected analysis was run once. `run_all.sh` repeats neither: it
+recomputes the numbers of both into separate folders and reports whether they are identical to the committed
+ones.
 
 ## Data
 
@@ -93,13 +104,15 @@ Each milestone has a plan that is committed **before** it is run, and a report c
 | M4 | Interpretation and failure cases: time on task, impedance, confusions | [`M4_plan.md`](docs/milestones/M4_plan.md) | [`M4_failures.md`](docs/milestones/M4_failures.md) |
 | Final | Single opening of the lockbox: the 15 tests of H1, H2, H3, H5 and H6 | [`final_evaluation_plan.md`](docs/milestones/final_evaluation_plan.md) | [`final_rehearsal.md`](docs/milestones/final_rehearsal.md) (rehearsal and lock), [`final_evaluation.md`](docs/milestones/final_evaluation.md) (results) |
 | M5 | Streaming replay, latency, stopping when confident (short version; done after M6) | [`M5_plan.md`](docs/milestones/M5_plan.md) | [`M5_realtime.md`](docs/milestones/M5_realtime.md) |
+| Correction | The final evaluation with the saturated trial left out of the template: original and corrected side by side | [`final_correction_plan.md`](docs/milestones/final_correction_plan.md) | [`final_correction.md`](docs/milestones/final_correction.md) |
 | M6 | Report, graphical abstract, presentation | [`M6_plan.md`](docs/milestones/M6_plan.md) | [`REPORT.md`](REPORT.md), [`presentation.pdf`](docs/presentation.pdf), [`M6_note.md`](docs/milestones/M6_note.md) |
 
 The hypotheses and the evaluation rules are in [`docs/analysis_plan.md`](docs/analysis_plan.md).
 
 **Development and lockbox subjects.** Every third subject (S003, S006, ..., S102; 34 people) is a lockbox:
 until the final evaluation their recordings were used only for label-free checks, and they were decoded once
-(`results/final/LOCKBOX_OPENED.txt`). All method development uses
+(`results/final/LOCKBOX_OPENED.txt`), then once more for the correction, labelled as after the opening
+(`results/final/LOCKBOX_CORRECTION.txt`). All method development uses
 the other 68 people. The rule was fixed before any data file was opened.
 
 The six sections below summarise the milestones. Their numbers are from the development people and are descriptive; the tested results are above.
@@ -209,8 +222,8 @@ lockbox was not used.
    to decode (dry).
 5. **A flaw was found in the earlier steps:** one saturated trial (S067, dry) spoiled the dry template of the
    9.75 Hz target in M2 to M4 and in the final evaluation. On the development people, leaving it out raises
-   the dry accuracy from 0.578 to 0.590 (at 9.75 Hz from 0.35 to 0.53). The lockbox people were not decoded
-   again.
+   the dry accuracy from 0.578 to 0.590 (at 9.75 Hz from 0.35 to 0.53). The corrected analysis on the lockbox
+   people followed, by its own plan: see the tested results above.
 
 <p align="center"><img src="figures/m5/01_speed_accuracy.png" width="900" alt="Accuracy against the time of the decision for fixed windows and for the rule that stops when confident, dry and wet headband"></p>
 
@@ -241,6 +254,8 @@ scripts/        m0_inventory.py (label-free checks, all subjects), m0_signal_che
                 m4_decode.py (decision of every trial), m4_summary.py, m4_figures.py
                 final_evaluation.py (the 15 tests for new people given a population; rehearsal and lockbox),
                 final_figures.py, final_summary.py (descriptive numbers, written after the opening)
+                final_correction.py (the same analysis without the saturated trial in the template; run once),
+                final_correction_figures.py, final_ties_check.py (the Wilcoxon tests against exact ties; result files only)
                 m5_scores.py, m5_stopping.py, m5_stream.py (streaming replay), m5_template_check.py (diagnostic),
                 m5_figures.py, m6_graphical_abstract.py
 tests/          unit tests on synthetic signals (python -m pytest -q tests)

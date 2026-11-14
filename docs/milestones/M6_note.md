@@ -8,6 +8,12 @@ committed.*
 > **Note added on 14 Nov 2026, after M5.** The report, the README and the slides were updated with M5: the
 > slides now have 9 slides, the report 12 sections. See [`M5_realtime.md`](M5_realtime.md). The checks below
 > describe the state before M5.
+>
+> **Second note of 14 Nov 2026, after the correction of the final evaluation**
+> ([`final_correction.md`](final_correction.md)). The report and the README give the corrected results next
+> to the original ones. On the slides, one sentence of slide 8 and its speaker note were changed, and one
+> interval bound on slide 4 was corrected (+0.081; it read +0.082, a rounding slip). The other numbers on the
+> slides and the graphical abstract are unchanged: they are those of the opening.
 
 ## Produced
 

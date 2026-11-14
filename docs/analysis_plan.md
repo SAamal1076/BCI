@@ -275,6 +275,6 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 ## After M6 (14 Nov 2026)
 
 - The author asked for a **short version of M5** (streaming replay, latency, stopping when confident). Plan
-  proposed and waiting for approval: `docs/milestones/M5_plan.md`. It uses the development people only, changes
+  approved on 14 Nov 2026 before anything was run: `docs/milestones/M5_plan.md`. It uses the development people only, changes
   no method, runs no test, and leaves the lockbox opened once.
 - Until M5 has been run, the statements "real-time replay not done" in the report and the slides stay true.

@@ -1,6 +1,6 @@
 # M5 plan (short version): streaming replay, latency, stopping when confident
 
-*14 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run.** On 13 Nov the author
+*14 Nov 2026. **Approved by the author the same day, with the three defaults (Q1 to Q3), before anything below was run.** On 13 Nov the author
 decided to skip M5; on 14 Nov, after M6, he asked for a short version. Anything done differently will be
 listed under "Deviations" in the M5 report.*
 

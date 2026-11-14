@@ -54,6 +54,8 @@ and H5 not supported).
 **Found after the tests (M5):** one saturated trial of one development person spoiled one entry of the dry
 template that these tests used. On the development people it costs about 0.01 of accuracy. The results above
 are those of the method as it was frozen; see [`M5_realtime.md`](docs/milestones/M5_realtime.md), section F.
+A corrected analysis, to be reported next to the original, is planned and not run:
+[`final_correction_plan.md`](docs/milestones/final_correction_plan.md).
 
 <p align="center"><img src="figures/final/01_tests.png" width="900" alt="The 15 pre-specified tests on the 34 lockbox people: estimates with 95 % intervals, seven supported after the Holm correction"></p>
 

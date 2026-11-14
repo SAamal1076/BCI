@@ -285,4 +285,5 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
   the dry entry of the 9.75 Hz target. Effect on the development people: dry accuracy 0.578 to 0.590.
 - **Open, for the author to decide:** the plan of the final evaluation says that an error found afterwards is
   reported with the original and the corrected result. The corrected result needs the lockbox people to be
-  decoded a second time with the repaired template; it has not been done.
+  decoded a second time with the repaired template; it has not been done. The author asked for a plan on
+  14 Nov 2026: `docs/milestones/final_correction_plan.md` (proposed, waiting for approval, nothing run).

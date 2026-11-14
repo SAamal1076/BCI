@@ -8,3 +8,5 @@ __pycache__/
 results/**/cache/
 # recomputed copy of the lockbox results (compared with the opening by the script)
 results/final/lockbox_reproduction/
+# recomputed copies of the corrected results (compared with the corrected run by the script)
+results/final/*_corrected_reproduction/

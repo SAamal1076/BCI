@@ -1,0 +1,16 @@
+test,hypothesis,case,quantity,n,estimate,ci_low,ci_high,p_computed
+1,H1,fbcca 1 s,dry minus wet accuracy (crossover estimate),23,-0.178846,-0.251315,-0.111379,True
+2,H1,fbcca 2 s,dry minus wet accuracy (crossover estimate),23,-0.114776,-0.196199,-0.0418269,True
+3,H1,etrca 1 s,dry minus wet accuracy (crossover estimate),23,-0.280096,-0.38882,-0.181185,True
+4,H1,etrca 2 s,dry minus wet accuracy (crossover estimate),23,-0.160897,-0.26949,-0.0697115,True
+5,H2,dry,template k=2 minus eTRCA k=6 (margin -0.05),23,0.138587,0.0461957,0.236413,True
+6,H2,wet,template k=2 minus eTRCA k=6 (margin -0.05),23,-0.0398551,-0.0652174,-0.0153986,True
+7,H3,dry,network: A2 minus A0,23,0.000301932,-0.00846165,0.0102657,True
+8,H3,wet,network: A2 minus A0,23,-0.00362319,-0.0120773,0.00452899,True
+9,H3,dry minus wet,network: A2 minus A0,23,0.00392512,-0.00815217,0.0160024,True
+10,H5a,dry,slope of accuracy per block,23,-0.00142732,-0.00720356,0.00463384,True
+11,H5a,wet,slope of accuracy per block,23,-0.00166886,-0.00801713,0.00430556,True
+12,H5b,dry,Spearman of log10 impedance with accuracy,23,0.0311419,-0.402259,0.495148,True
+13,H5b,wet,Spearman of log10 impedance with accuracy,23,-0.0499382,-0.458599,0.352331,True
+14,H6,dry,adapted template minus template,23,0.0172101,-0.0190217,0.0588768,True
+15,H6,wet,adapted template minus template,23,0.0606884,0.0208333,0.104167,True

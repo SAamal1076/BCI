@@ -1,9 +1,9 @@
 # Correction plan: the lockbox results with the repaired dry template
 
-*14 Nov 2026. **Proposed, waiting for the author's approval. Nothing below has been run, and no lockbox person
-has been decoded again.** Written after M5 found a flaw in the population template
-([`M5_realtime.md`](M5_realtime.md), section F). Anything done differently will be listed under "Deviations"
-in the correction report.*
+*14 Nov 2026. **Approved by the author on 14 Nov 2026, with the two defaults of the table at the end, before any
+code was written.** Written after M5 found a flaw in the population template
+([`M5_realtime.md`](M5_realtime.md), section F). Anything done differently is listed under "Deviations"
+in the correction report ([`final_correction.md`](final_correction.md)). The text below is unchanged.*
 
 ## Why
 

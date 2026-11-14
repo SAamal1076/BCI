@@ -285,5 +285,12 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
   the dry entry of the 9.75 Hz target. Effect on the development people: dry accuracy 0.578 to 0.590.
 - **Open, for the author to decide:** the plan of the final evaluation says that an error found afterwards is
   reported with the original and the corrected result. The corrected result needs the lockbox people to be
-  decoded a second time with the repaired template; it has not been done. The author asked for a plan on
-  14 Nov 2026: `docs/milestones/final_correction_plan.md` (proposed, waiting for approval, nothing run).
+  decoded a second time with the repaired template. The author asked for a plan on 14 Nov 2026:
+  `docs/milestones/final_correction_plan.md`.
+- **The correction plan was approved by the author on 14 Nov 2026**, with its two defaults, before any code was
+  written. One rule: a trial that M0 flagged as saturated is not used to build the population template (one
+  trial). Same analysis otherwise; not a second test; original and corrected reported side by side; a
+  hypothesis is called supported only if it is supported in both.
+- Code, unit tests and the rehearsal on the development people were committed before the corrected run
+  (`docs/milestones/final_correction.md`, part A). In the rehearsal everything that does not use the dry
+  template is identical to the first rehearsal.

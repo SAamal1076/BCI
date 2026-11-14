@@ -1,0 +1,8 @@
+set lockbox: population 68 development people; rule: A trial that M0 flagged as reaching the limit of the converter is not used to build the population template.
+trials flagged as saturated in M0 (all 102 people): [{'subject': 67, 'electrode': 'dry', 'block': 4, 'target': 4}]
+of these, inside the population: [{'subject': 67, 'electrode': 'dry', 'block': 4, 'target': 4}]
+  S067, dry, block 4, target 4 (9.75 Hz): size (rms after preprocessing) 2900; the person's 9 other trials of the target: median 10.5
+dry template: entries that changed: targets [4] (expected [4]); checksum changed
+  target 4 (9.75 Hz): size of the entry 4.27 -> 0.91; the other targets: median 1.01
+wet template: entries that changed: targets [] (expected []); checksum unchanged
+networks: the 6 files of the original run, checksums unchanged; checksums written to results/final/lockbox_corrected/frozen.json

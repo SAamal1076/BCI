@@ -85,6 +85,13 @@ python scripts/final_evaluation.py evaluate --set lockbox --raw "$WEARABLE_DIR" 
 python scripts/final_figures.py --set lockbox
 python scripts/final_summary.py | tee logs/final_summary.log
 
+echo "Final  correction (after the opening): the same analysis without the saturated trial in the template; rehearsal on development people"
+python scripts/final_correction.py prepare --set rehearsal --raw "$WEARABLE_DIR" | tee logs/final_correction_rehearsal_prepare.log
+python scripts/final_correction.py evaluate --set rehearsal --raw "$WEARABLE_DIR" | tee logs/final_correction_rehearsal.log
+python scripts/final_correction_figures.py --set rehearsal
+echo "Final  correction: repaired template for the lockbox people, built from the 68 development people only"
+python scripts/final_correction.py prepare --set lockbox --raw "$WEARABLE_DIR" | tee logs/final_correction_lockbox_prepare.log
+
 echo "M5  streaming replay on the development people: scores at 18 lengths of signal, stopping rule, latency (about 12 minutes)"
 python scripts/m5_scores.py --raw "$WEARABLE_DIR" | tee logs/m5_scores.log
 python scripts/m5_stopping.py --raw "$WEARABLE_DIR" | tee logs/m5_stopping.log

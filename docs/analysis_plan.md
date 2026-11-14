@@ -272,4 +272,9 @@ Details: `docs/milestones/final_evaluation.md`. One-sided tests, Holm at familyw
 - M6 (report, graphical abstract, presentation) contains no new analysis. Plan: `docs/milestones/M6_plan.md`;
   done on 14 Nov 2026 (`docs/milestones/M6_note.md`), with a fresh-clone check in which no tracked file changed.
 
-Nothing is left to be fixed: every milestone that needed a rule has been run, and M6 has no analysis.
+## After M6 (14 Nov 2026)
+
+- The author asked for a **short version of M5** (streaming replay, latency, stopping when confident). Plan
+  proposed and waiting for approval: `docs/milestones/M5_plan.md`. It uses the development people only, changes
+  no method, runs no test, and leaves the lockbox opened once.
+- Until M5 has been run, the statements "real-time replay not done" in the report and the slides stay true.

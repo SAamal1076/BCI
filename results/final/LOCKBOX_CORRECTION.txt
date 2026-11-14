@@ -1,0 +1,8 @@
+The lockbox people were decoded a second time, AFTER THE OPENING, for the correction of the
+population template (docs/milestones/final_correction_plan.md). Not a second test.
+started: 2026-11-14T11:30:22+00:00
+commit: ab7d7d6650aa93b062de81ac11c16df08846d670
+status: started
+built-in check against the opening: passed
+finished: 2026-11-14T11:31:31+00:00
+status: complete

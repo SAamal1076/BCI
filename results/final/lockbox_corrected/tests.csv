@@ -1,0 +1,16 @@
+test,hypothesis,case,quantity,n,estimate,ci_low,ci_high,p,holm_threshold,p_holm,supported
+1,H1,fbcca 1 s,dry minus wet accuracy (crossover estimate),34,-0.210909,-0.277664,-0.150133,2.62201e-06,0.00416667,3.14642e-05,True
+2,H1,fbcca 2 s,dry minus wet accuracy (crossover estimate),34,-0.159664,-0.223908,-0.103639,6.3175e-06,0.005,6.3175e-05,True
+3,H1,etrca 1 s,dry minus wet accuracy (crossover estimate),34,-0.333131,-0.422369,-0.245945,1.04666e-06,0.00384615,1.43412e-05,True
+4,H1,etrca 2 s,dry minus wet accuracy (crossover estimate),34,-0.271991,-0.361893,-0.187087,1.02437e-06,0.00357143,1.43412e-05,True
+5,H2,dry,template k=2 minus eTRCA k=6 (margin -0.05),34,0.150735,0.0876225,0.216314,9.45729e-07,0.00333333,1.41859e-05,True
+6,H2,wet,template k=2 minus eTRCA k=6 (margin -0.05),34,-0.0526961,-0.0759804,-0.03125,0.448905,0.025,0.89781,False
+7,H3,dry,network: A2 minus A0,34,0.00694444,-0.00142974,0.0153186,0.0589549,0.00714286,0.412684,False
+8,H3,wet,network: A2 minus A0,34,0.00224673,-0.00490196,0.00857843,0.271672,0.0166667,0.854315,False
+9,H3,dry minus wet,network: A2 minus A0,34,0.00469771,-0.00571895,0.0149101,0.162812,0.0125,0.854315,False
+10,H5a,dry,slope of accuracy per block,34,-0.00390671,-0.00978944,0.00216912,0.142636,0.01,0.854315,False
+11,H5a,wet,slope of accuracy per block,34,0.00209447,-0.00368427,0.00800728,0.685257,0.05,0.89781,False
+12,H5b,dry,Spearman of log10 impedance with accuracy,34,-0.350118,-0.577325,-0.0739685,0.0211979,0.00625,0.169583,False
+13,H5b,wet,Spearman of log10 impedance with accuracy,34,-0.191328,-0.478238,0.140361,0.142386,0.00833333,0.854315,False
+14,H6,dry,adapted template minus template,34,0.0447304,0.0245098,0.0631127,9.71481e-05,0.00555556,0.000874332,True
+15,H6,wet,adapted template minus template,34,0.0686275,0.0483915,0.0900735,3.47753e-06,0.00454545,3.82528e-05,True

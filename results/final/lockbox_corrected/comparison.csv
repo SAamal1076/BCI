@@ -1,0 +1,16 @@
+test,hypothesis,case,quantity,n,uses_dry_template,estimate_original,estimate_corrected,ci_low_original,ci_low_corrected,ci_high_original,ci_high_corrected,p_original,p_corrected,p_holm_original,p_holm_corrected,supported_original,supported_corrected,supported_in_both
+1,H1,fbcca 1 s,dry minus wet accuracy (crossover estimate),34,False,-0.210909,-0.210909,-0.277664,-0.277664,-0.150133,-0.150133,2.62201e-06,2.62201e-06,3.14642e-05,3.14642e-05,True,True,True
+2,H1,fbcca 2 s,dry minus wet accuracy (crossover estimate),34,False,-0.159664,-0.159664,-0.223908,-0.223908,-0.103639,-0.103639,6.3175e-06,6.3175e-06,6.3175e-05,6.3175e-05,True,True,True
+3,H1,etrca 1 s,dry minus wet accuracy (crossover estimate),34,False,-0.333131,-0.333131,-0.422369,-0.422369,-0.245945,-0.245945,1.04666e-06,1.04666e-06,1.53656e-05,1.43412e-05,True,True,True
+4,H1,etrca 2 s,dry minus wet accuracy (crossover estimate),34,False,-0.271991,-0.271991,-0.361893,-0.361893,-0.187087,-0.187087,1.02437e-06,1.02437e-06,1.53656e-05,1.43412e-05,True,True,True
+5,H2,dry,template k=2 minus eTRCA k=6 (margin -0.05),34,True,0.145221,0.150735,0.0814951,0.0876225,0.211397,0.216314,1.12718e-06,9.45729e-07,1.53656e-05,1.41859e-05,True,True,True
+6,H2,wet,template k=2 minus eTRCA k=6 (margin -0.05),34,False,-0.0526961,-0.0526961,-0.0759804,-0.0759804,-0.03125,-0.03125,0.448905,0.448905,0.89781,0.89781,False,False,False
+7,H3,dry,network: A2 minus A0,34,False,0.00694444,0.00694444,-0.00142974,-0.00142974,0.0153186,0.0153186,0.0589549,0.0589549,0.412684,0.412684,False,False,False
+8,H3,wet,network: A2 minus A0,34,False,0.00224673,0.00224673,-0.00490196,-0.00490196,0.00857843,0.00857843,0.271672,0.271672,0.854315,0.854315,False,False,False
+9,H3,dry minus wet,network: A2 minus A0,34,False,0.00469771,0.00469771,-0.00571895,-0.00571895,0.0149101,0.0149101,0.162812,0.162812,0.854315,0.854315,False,False,False
+10,H5a,dry,slope of accuracy per block,34,True,-0.00265894,-0.00390671,-0.00866013,-0.00978944,0.00361074,0.00216912,0.191617,0.142636,0.854315,0.854315,False,False,False
+11,H5a,wet,slope of accuracy per block,34,False,0.00209447,0.00209447,-0.00368427,-0.00368427,0.00800728,0.00800728,0.685257,0.685257,0.89781,0.89781,False,False,False
+12,H5b,dry,Spearman of log10 impedance with accuracy,34,True,-0.354812,-0.350118,-0.579826,-0.577325,-0.078918,-0.0739685,0.0189981,0.0211979,0.151985,0.169583,False,False,False
+13,H5b,wet,Spearman of log10 impedance with accuracy,34,False,-0.191328,-0.191328,-0.478238,-0.478238,0.140361,0.140361,0.142386,0.142386,0.854315,0.854315,False,False,False
+14,H6,dry,adapted template minus template,34,True,0.0404412,0.0447304,0.0202053,0.0245098,0.0594516,0.0631127,0.000425441,9.71481e-05,0.00382897,0.000874332,True,True,True
+15,H6,wet,adapted template minus template,34,False,0.0686275,0.0686275,0.0483915,0.0483915,0.0900735,0.0900735,3.47753e-06,3.47753e-06,3.82528e-05,3.82528e-05,True,True,True
